@@ -1,38 +1,97 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author JulenB
+ * @author Haizea
+ * Entity that contains the information of a plate.
  */
 @Entity
+@Table(name = "plate", schema = "myhealthydietdb")
+@XmlRootElement
 public class Plate implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * Identifier of the plate.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-        private Integer plate_id;
-    private String plateName;
-    private Float calories;
-    private Float carbohydrates;
-    private Float lipids;
-    private Float proteins;
-    private MealEnum mealType;
+    private Integer plate_id;
 
+    /**
+     * Name of the plate.
+     */
+    @NotNull
+    private String plateName;
+
+    /**
+     * Calories in the plate.
+     */
+    @NotNull
+    private Float calories;
+
+    /**
+     * Carbohydrates in the plate.
+     */
+    @NotNull
+    private Float carbohydrates;
+
+    /**
+     * Lipids in the plate.
+     */
+    @NotNull
+    private Float lipids;
+
+    /**
+     * Proteins in the plate.
+     */
+    @NotNull
+    private Float proteins;
+
+    /**
+     * What meal of the day is.
+     */
+    @NotNull
+    @Enumerated(EnumType.ORDINAL)
+    private MealEnum mealType;
+    
+    /**
+     * Defines if the plate is vegetarian or not.
+     */
+    @NotNull
+    private Boolean isVegetarian;
+
+    /**
+     * List of the ingredients the plate has.
+     */
+    @ManyToMany(mappedBy = "plates")
+    private List<Ingredient> ingredients;
+    
+    /**
+     * List of the diets the plate is on.
+     */
+    @ManyToMany
+    @JoinTable(schema="myhealthydietdb", name = "DietPlate")
+    // @XmlTransient
+    private List<Diet> diets;
 
     public Plate(Integer plate_id, String plateName, Float calories, Float carbohydrates, Float lipids, Float proteins,
-                 MealEnum mealType, List<Ingredient> ingredients, Boolean isVegetarian, List<Diet> diets) {
+            MealEnum mealType, List<Ingredient> ingredients, Boolean isVegetarian, List<Diet> diets) {
         this.plate_id = plate_id;
         this.plateName = plateName;
         this.calories = calories;
@@ -44,20 +103,9 @@ public class Plate implements Serializable {
         this.isVegetarian = isVegetarian;
         this.diets = diets;
     }
-    
+
     public Plate() {
     }
-
-    /**
-     * @associates <{client.Ingredient}>
-     */
-    private List<Ingredient> ingredients;
-    private Boolean isVegetarian;
-
-    /**
-     * @associates <{client.Diet}>
-     */
-    private List<Diet> diets;
 
     public void setPlate_id(Integer plate_id) {
         this.plate_id = plate_id;
@@ -95,6 +143,23 @@ public class Plate implements Serializable {
         this.lipids = lipids;
     }
 
+    public Boolean getIsVegetarian() {
+        return isVegetarian;
+    }
+
+    public void setIsVegetarian(Boolean isVegetarian) {
+        this.isVegetarian = isVegetarian;
+    }
+
+    @XmlTransient
+    public List<Diet> getDiets() {
+        return diets;
+    }
+
+    public void setDiets(List<Diet> diets) {
+        this.diets = diets;
+    }
+
     public Float getLipids() {
         return lipids;
     }
@@ -119,6 +184,7 @@ public class Plate implements Serializable {
         this.ingredients = ingredients;
     }
 
+    @XmlTransient
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
@@ -129,7 +195,7 @@ public class Plate implements Serializable {
         hash += (plate_id != null ? plate_id.hashCode() : 0);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -145,7 +211,7 @@ public class Plate implements Serializable {
 
     @Override
     public String toString() {
-       return super.toString();
+        return super.toString();
     }
-    
+
 }
