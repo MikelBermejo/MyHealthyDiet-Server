@@ -9,22 +9,34 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author JulenB
+ * @author Sendoa
  */
 @Entity
+@Table(name="client",schema="myhealthydietdb")
 public class Client extends User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @GeneratedValue(strategy = GenerationType.AUTO)
-        private Integer age;
+    @NotNull
+    private Integer age;
+    @NotNull
     private Float height;
+    @Enumerated(EnumType.ORDINAL)
     private GenreEnum genre;
+    @Enumerated(EnumType.ORDINAL)
     private GoalEnum goal;
+    /**
+     * @associates <{client.Weight}>
+     */
+    @OneToMany
+    private List<Weight> weights;
 
 
     public Client(Integer user_id, String login, String email, String fullName, StatusEnum status,
@@ -42,12 +54,6 @@ public class Client extends User implements Serializable {
 
     public Client() {
     }
-
-    /**
-     * @associates <{client.Weight}>
-     */
-    private List<Weight> weights;
-
 
     public void setAge(Integer age) {
         this.age = age;
