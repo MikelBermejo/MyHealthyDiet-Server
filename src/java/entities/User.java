@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("privilege")
-@Table(name="user",schema="myhealthydiet")
+@Table(name="user",schema="myhealthydietdb")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
