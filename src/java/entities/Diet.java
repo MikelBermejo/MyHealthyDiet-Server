@@ -1,36 +1,69 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author JulenB
+ * @author Julen
+ * Class that saves the information about a Diet.
  */
 @Entity
+@Table(name="diet",schema="myhealthydietdb")
 public class Diet implements Serializable {
+    
+    //VARIABLES
 
     private static final long serialVersionUID = 1L;
+    //Id of the Diet thats generated automatically
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-        private Integer diet_id;
+    private Integer diet_id;
+    @NotNull
     private String dietName;
+    @NotNull
     private String description;
+    @NotNull
     private Float calories;
+    @NotNull
     private Float proteins;
+    @NotNull
     private Float lipids;
+    @NotNull
+    @Enumerated(EnumType.ORDINAL)
     private GoalEnum type;
+    @NotNull
     private Float carbohydrates;
+    
+    //RELATIONS
+    
+    /**
+     * @associates <{entities.Plate}>
+     */
+    
+    //List with plates that we want to get it fast(fetcb)
+    @ManyToMany(mappedBy = "diets")
+    private List<Plate> plates;
+    
+    /**
+     * @associates <{entities.Tip}>
+     */
+    
+    //List with tips in one diet
+    @OneToMany
+    private List<Tip> tips;
 
+    //CONSTRUCTORS
 
     public Diet(Integer diet_id, String dietName, String description, Float calories, Float proteins, Float lipids,
                 GoalEnum type, Float carbohydrates, List<Plate> plates, List<Tip> tips) {
@@ -49,18 +82,7 @@ public class Diet implements Serializable {
     public Diet() {
     }
 
-
-    /**
-     * @associates <{client.Plate}>
-     */
-    private List<Plate> plates;
-
-
-    /**
-     * @associates <{client.Tip}>
-     */
-    private List<Tip> tips;
-
+    //GETTERS AND SETTERS
 
     public void setDiet_id(Integer diet_id) {
         this.diet_id = diet_id;
