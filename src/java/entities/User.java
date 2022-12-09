@@ -7,28 +7,47 @@ package entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author JulenB
+ * @author Sendoa
  */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("privilege")
+@Table(name="user",schema="myhealthydiet")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
+    @NotNull
     private String login;
+    @NotNull
     private String email;
+    @NotNull
     private String fullName;
+    @Enumerated(EnumType.ORDINAL)
     private StatusEnum status;
+    @Enumerated(EnumType.ORDINAL)
     private PrivilegeEnum privilege;
+    @NotNull
     private Integer password;
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp lastPasswordChange;
 
     public User(Integer user_id, String login, String email, String fullName, StatusEnum status,
