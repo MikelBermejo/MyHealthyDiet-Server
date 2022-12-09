@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
  * @author Sendoa
  */
 @Entity
-@Table(name="client",schema="myhealthydiet")
+@Table(name="client",schema="myhealthydietdb")
 public class Client extends User implements Serializable {
 
     private static final long serialVersionUID = 1L;
