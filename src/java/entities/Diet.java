@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 /**
  *
  * @author Julen
- * Class that saves the information about a Diet.
+ * Entity that saves the information about a Diet.
  */
 @Entity
 @Table(name="diet",schema="myhealthydietdb")
