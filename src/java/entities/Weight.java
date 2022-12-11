@@ -11,19 +11,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author JulenB
+ * @author Mikel
  */
 @Entity
+@Table(name="weight",schema="myhealthydietdb")
 public class Weight implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer weight_id;
-        private Float weight;
+    
+    /**
+     * Weight of the client in kg
+     */
+    @NotNull
+    private Float weight;
+    
+    /**
+     * Date that the client saved his weight
+     */
+    @NotNull
     private LocalDate date;
     
 
