@@ -6,29 +6,42 @@
 package entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author JulenB
+ * @author Mikel
  */
 @Entity
+@Table(name="weight",schema="myhealthydietdb")
 public class Weight implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer weight_id;
-        private Float weight;
-    private LocalDate date;
+    
+    /**
+     * Weight of the client in kg
+     */
+    @NotNull
+    private Float weight;
+    
+    /**
+     * Date that the client saved his weight
+     */
+    @NotNull
+    private Date date;
     
 
 
-    public Weight(Float weight, LocalDate date, Integer weight_id) {
+    public Weight(Float weight, Date date, Integer weight_id) {
         this.weight_id = weight_id;
         this.weight = weight;
         this.date = date;
@@ -54,11 +67,11 @@ public class Weight implements Serializable {
         return weight;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
