@@ -6,7 +6,7 @@
 package entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,11 +37,11 @@ public class Weight implements Serializable {
      * Date that the client saved his weight
      */
     @NotNull
-    private LocalDate date;
+    private Date date;
     
 
 
-    public Weight(Float weight, LocalDate date, Integer weight_id) {
+    public Weight(Float weight, Date date, Integer weight_id) {
         this.weight_id = weight_id;
         this.weight = weight;
         this.date = date;
@@ -67,11 +67,11 @@ public class Weight implements Serializable {
         return weight;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
