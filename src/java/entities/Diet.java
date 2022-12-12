@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -29,20 +28,20 @@ public class Diet implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer diet_id;
-    @NotNull
+    
     private String dietName;
-    @NotNull
+    
     private String description;
-    @NotNull
+    
     private Float calories;
-    @NotNull
+    
     private Float proteins;
-    @NotNull
+    
     private Float lipids;
-    @NotNull
+    
     @Enumerated(EnumType.ORDINAL)
     private GoalEnum type;
-    @NotNull
+    
     private Float carbohydrates;
     
     //RELATIONS

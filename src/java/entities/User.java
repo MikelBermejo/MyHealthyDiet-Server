@@ -19,7 +19,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -35,17 +34,17 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
-    @NotNull
+
     private String login;
-    @NotNull
+
     private String email;
-    @NotNull
+
     private String fullName;
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status;
     @Enumerated(EnumType.ORDINAL)
     private PrivilegeEnum privilege;
-    @NotNull
+
     private Integer password;
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp lastPasswordChange;

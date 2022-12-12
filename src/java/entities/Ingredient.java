@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -38,13 +37,13 @@ public class Ingredient implements Serializable {
     /**
      * Name of the ingredient
      */
-    @NotNull
+
     private String ingredientName;
     
     /**
      * Enumeration for the type of food
      */
-    @NotNull
+
     @Enumerated(EnumType.ORDINAL)
     private FoodTypeEnum foodType;
     
@@ -58,7 +57,7 @@ public class Ingredient implements Serializable {
     /**
      * Boolean that shows if it is in season or if is not
      */
-    @NotNull
+
     private Boolean isInSeason;
     
     public Ingredient(Integer ingredient_id, String ingredientName, FoodTypeEnum foodType,

@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,44 +35,44 @@ public class Plate implements Serializable {
     /**
      * Name of the plate.
      */
-    @NotNull
+
     private String plateName;
 
     /**
      * Calories in the plate.
      */
-    @NotNull
+
     private Float calories;
 
     /**
      * Carbohydrates in the plate.
      */
-    @NotNull
+
     private Float carbohydrates;
 
     /**
      * Lipids in the plate.
      */
-    @NotNull
+
     private Float lipids;
 
     /**
      * Proteins in the plate.
      */
-    @NotNull
+
     private Float proteins;
 
     /**
      * What meal of the day is.
      */
-    @NotNull
+
     @Enumerated(EnumType.ORDINAL)
     private MealEnum mealType;
     
     /**
      * Defines if the plate is vegetarian or not.
      */
-    @NotNull
+
     private Boolean isVegetarian;
 
     /**

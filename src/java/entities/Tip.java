@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -27,7 +26,7 @@ public class Tip implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer tip_id;
-    @NotNull
+
     private String tipText;
     @Enumerated(EnumType.ORDINAL)
     private TipTypeEnum type;

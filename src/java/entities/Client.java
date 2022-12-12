@@ -13,7 +13,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
 
 /**
  *
@@ -24,9 +24,8 @@ import javax.validation.constraints.NotNull;
 public class Client extends User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @NotNull
     private Integer age;
-    @NotNull
+    
     private Float height;
     @Enumerated(EnumType.ORDINAL)
     private GenreEnum genre;
