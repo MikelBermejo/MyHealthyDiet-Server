@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.io.Serializable;
@@ -15,7 +10,29 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class ClientDietId implements Serializable{
-    private Integer client_id;
+    //VARIABLES
     
-    private Integer diet_id;
+    public Integer client_id;
+    
+    public Integer diet_id;
+    
+    //GETTERS AND SETTERS
+
+    public Integer getClient_id() {
+        return client_id;
+    }
+
+    public void setClient_id(Integer client_id) {
+        this.client_id = client_id;
+    }
+
+    public Integer getDiet_id() {
+        return diet_id;
+    }
+
+    public void setDiet_id(Integer diet_id) {
+        this.diet_id = diet_id;
+    }
+    
+    
 }

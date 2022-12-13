@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,6 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ingredient", schema = "myhealthydietdb")
+@XmlRootElement
 public class Ingredient implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +55,7 @@ public class Ingredient implements Serializable {
      */
     @ManyToMany
     @JoinTable(schema="myhealthydietdb", name = "PlateIngredient")
+    @XmlTransient
     private List<Plate> plates;
     
     /**
@@ -71,38 +75,50 @@ public class Ingredient implements Serializable {
     
     public Ingredient() {
     }
-    
-    public void setIngredient_id(Integer ingredient_id) {
-        this.ingredient_id = ingredient_id;
-    }
 
     public Integer getIngredient_id() {
         return ingredient_id;
     }
 
-    public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
+    public void setIngredient_id(Integer ingredient_id) {
+        this.ingredient_id = ingredient_id;
     }
 
     public String getIngredientName() {
         return ingredientName;
     }
 
-    public void setFoodType(FoodTypeEnum foodType) {
-        this.foodType = foodType;
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
     }
 
     public FoodTypeEnum getFoodType() {
         return foodType;
     }
 
+    public void setFoodType(FoodTypeEnum foodType) {
+        this.foodType = foodType;
+    }
+
+
+    @XmlTransient
+    public List<Plate> getPlates() {
+        return plates;
+    }
+
     public void setPlates(List<Plate> plates) {
         this.plates = plates;
     }
 
-    public List<Plate> getPlates() {
-        return plates;
+    public Boolean getIsInSeason() {
+        return isInSeason;
     }
+
+    public void setIsInSeason(Boolean isInSeason) {
+        this.isInSeason = isInSeason;
+    }
+    
+    
 
     @Override
     public int hashCode() {

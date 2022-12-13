@@ -6,7 +6,7 @@
 package entities;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,6 +19,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,6 +29,7 @@ import javax.persistence.TemporalType;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("privilege")
 @Table(name="user",schema="myhealthydietdb")
+@XmlRootElement
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,12 +47,12 @@ public class User implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private PrivilegeEnum privilege;
 
-    private Integer password;
+    private String password;
     @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp lastPasswordChange;
+    private Date lastPasswordChange;
 
     public User(Integer user_id, String login, String email, String fullName, StatusEnum status,
-                PrivilegeEnum privilege, Integer password, Timestamp lastPasswordChange) {
+                PrivilegeEnum privilege, String password, Date lastPasswordChange) {
         this.user_id = user_id;
         this.login = login;
         this.email = email;
@@ -113,19 +115,19 @@ public class User implements Serializable {
         return privilege;
     }
 
-    public void setPassword(Integer password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setLastPasswordChange(Timestamp lastPasswordChange) {
+    public void setLastPasswordChange(Date lastPasswordChange) {
         this.lastPasswordChange = lastPasswordChange;
     }
 
-    public Timestamp getLastPasswordChange() {
+    public Date getLastPasswordChange() {
         return lastPasswordChange;
     }
 

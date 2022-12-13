@@ -5,14 +5,15 @@
  */
 package entities;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -21,7 +22,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="client",schema="myhealthydietdb")
-public class Client extends User implements Serializable {
+@XmlRootElement
+public class Client extends User{
 
     private static final long serialVersionUID = 1L;
     private Integer age;
@@ -32,14 +34,14 @@ public class Client extends User implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private GoalEnum goal;
     /**
-     * @associates <{client.Weight}>
+     * @associates <{entities.Weight}>
      */
     @OneToMany
     private List<Weight> weights;
 
 
     public Client(Integer user_id, String login, String email, String fullName, StatusEnum status,
-                  PrivilegeEnum privilege, Integer password, Timestamp lastPasswordChange, Integer age, Float height, 
+                  PrivilegeEnum privilege, String password, Date lastPasswordChange, Integer age, Float height, 
                   GenreEnum genre, GoalEnum goal, List<Weight> weights) {
         // TODO Implement this method
         super(user_id, login, email, fullName, status, privilege, password, lastPasswordChange);
@@ -90,6 +92,8 @@ public class Client extends User implements Serializable {
         this.weights = weights;
     }
 
+
+    @XmlTransient
     public List<Weight> getWeights() {
         return weights;
     }

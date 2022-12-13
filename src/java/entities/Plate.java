@@ -86,7 +86,7 @@ public class Plate implements Serializable {
      */
     @ManyToMany
     @JoinTable(schema="myhealthydietdb", name = "DietPlate")
-    // @XmlTransient
+    @XmlTransient
     private List<Diet> diets;
 
     public Plate(Integer plate_id, String plateName, Float calories, Float carbohydrates, Float lipids, Float proteins,
@@ -150,6 +150,7 @@ public class Plate implements Serializable {
         this.isVegetarian = isVegetarian;
     }
 
+
     @XmlTransient
     public List<Diet> getDiets() {
         return diets;
@@ -182,6 +183,8 @@ public class Plate implements Serializable {
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
+
+
 
     @XmlTransient
     public List<Ingredient> getIngredients() {

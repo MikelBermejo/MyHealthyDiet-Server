@@ -8,9 +8,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,6 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="diet",schema="myhealthydietdb")
+@XmlRootElement
 public class Diet implements Serializable {
     
     //VARIABLES
@@ -60,6 +64,7 @@ public class Diet implements Serializable {
     
     //List with tips in one diet
     @OneToMany
+    @JoinColumn()
     private List<Tip> tips;
 
     //CONSTRUCTORS
@@ -151,6 +156,9 @@ public class Diet implements Serializable {
         this.plates = plates;
     }
 
+
+
+    @XmlTransient
     public List<Plate> getPlates() {
         return plates;
     }
