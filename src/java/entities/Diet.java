@@ -64,7 +64,7 @@ public class Diet implements Serializable {
     
     //List with tips in one diet
     @OneToMany
-    @JoinColumn()
+    @JoinColumn(name = "diet_id")
     private List<Tip> tips;
 
     //CONSTRUCTORS

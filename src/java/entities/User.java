@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.DiscriminatorFormula;
 
 /**
  *
@@ -27,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorValue("privilege")
+@DiscriminatorFormula("privilege")
+@DiscriminatorValue("0")
 @Table(name="user",schema="myhealthydietdb")
 @XmlRootElement
 public class User implements Serializable {

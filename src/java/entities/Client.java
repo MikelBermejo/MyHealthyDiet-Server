@@ -7,9 +7,11 @@ package entities;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,6 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name="client",schema="myhealthydietdb")
+@DiscriminatorValue("1")
 @XmlRootElement
 public class Client extends User{
 
@@ -37,6 +40,7 @@ public class Client extends User{
      * @associates <{entities.Weight}>
      */
     @OneToMany
+    @JoinColumn(name = "user_id")
     private List<Weight> weights;
 
 
