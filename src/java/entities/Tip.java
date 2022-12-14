@@ -13,13 +13,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Sendoa
  */
 @Entity
-@Table(name="tip",schema="myhealtydietdb")
+@Table(name="tip",schema="myhealthydietdb")
+@XmlRootElement
 public class Tip implements Serializable {
 
     private static final long serialVersionUID = 1L;

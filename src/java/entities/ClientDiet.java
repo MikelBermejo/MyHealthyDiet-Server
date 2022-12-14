@@ -5,6 +5,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -12,6 +14,8 @@ import javax.persistence.MapsId;
  * and saves the information of them.
  */
 @Entity
+@Table(name="clientdiet",schema="myhealthydietdb")
+@XmlRootElement
 public class ClientDiet implements Serializable {
     
     //VARIABLES
@@ -20,7 +24,7 @@ public class ClientDiet implements Serializable {
     
     //EmbeddedId composed by the client and the diet.
     @EmbeddedId
-    private ClientDiet clientDietId;
+    private ClientDietId clientDietId;
     
     private Boolean isActive;
     
@@ -42,7 +46,7 @@ public class ClientDiet implements Serializable {
 
     //CONSTRUCTORS
 
-    public ClientDiet(ClientDiet clientDietId, Client client, Diet diet, Boolean isActive) {
+    public ClientDiet(ClientDietId clientDietId, Client client, Diet diet, Boolean isActive) {
         this.client = client;
         this.diet = diet;
         this.clientDietId = clientDietId;
@@ -54,11 +58,11 @@ public class ClientDiet implements Serializable {
     
     //GETTERS AND SETTERS
 
-    public ClientDiet getClientDietId() {
+    public ClientDietId getClientDietId() {
         return clientDietId;
     }
 
-    public void setClientDietId(ClientDiet clientDietId) {
+    public void setClientDietId(ClientDietId clientDietId) {
         this.clientDietId = clientDietId;
     }
 
