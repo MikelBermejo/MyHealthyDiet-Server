@@ -85,7 +85,7 @@ public class Plate implements Serializable {
      * List of the diets the plate is on.
      */
     @ManyToMany
-    @JoinTable(schema="myhealthydietdb", name = "DietPlate")
+    @JoinTable(schema="myhealthydietdb", name = "dietplate")
     @XmlTransient
     private List<Diet> diets;
 
