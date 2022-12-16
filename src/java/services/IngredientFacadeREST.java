@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 @Path("entities.ingredient")
 public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
 
-    @PersistenceContext(unitName = "JavaFX-WebApplicationUD5ExamplePU")
+    @PersistenceContext(unitName = "MyHealthyDietPU")
     private EntityManager em;
 
     public IngredientFacadeREST() {

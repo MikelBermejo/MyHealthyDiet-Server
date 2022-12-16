@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 @Path("entities.weight")
 public class WeightFacadeREST extends AbstractFacade<Weight> {
 
-    @PersistenceContext(unitName = "JavaFX-WebApplicationUD5ExamplePU")
+    @PersistenceContext(unitName = "MyHealthyDietPU")
     private EntityManager em;
 
     public WeightFacadeREST() {
