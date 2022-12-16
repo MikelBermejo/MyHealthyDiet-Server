@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 @Path("entities.tip")
 public class TipFacadeREST extends AbstractFacade<Tip> {
 
-    @PersistenceContext(unitName = "JavaFX-WebApplicationUD5ExamplePU")
+    @PersistenceContext(unitName = "MyHealthyDietPU")
     private EntityManager em;
 
     public TipFacadeREST() {

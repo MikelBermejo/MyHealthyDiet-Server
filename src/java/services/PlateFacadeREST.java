@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 @Path("entities.plate")
 public class PlateFacadeREST extends AbstractFacade<Plate> {
 
-    @PersistenceContext(unitName = "JavaFX-WebApplicationUD5ExamplePU")
+    @PersistenceContext(unitName = "MyHealthyDietPU")
     private EntityManager em;
 
     public PlateFacadeREST() {

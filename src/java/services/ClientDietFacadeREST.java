@@ -30,7 +30,7 @@ import javax.ws.rs.core.PathSegment;
 @Path("entities.clientdiet")
 public class ClientDietFacadeREST extends AbstractFacade<ClientDiet> {
 
-    @PersistenceContext(unitName = "JavaFX-WebApplicationUD5ExamplePU")
+    @PersistenceContext(unitName = "MyHealthyDietPU")
     private EntityManager em;
 
     private ClientDietId getPrimaryKey(PathSegment pathSegment) {
