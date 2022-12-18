@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -21,6 +23,18 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "plate", schema = "myhealthydietdb")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(
+        name="findPlateByName", query="SELECT p FROM Plate p WHERE p.plateName LIKE '%NAME%'"),
+    @NamedQuery(
+        name="findAllPlates", query="SELECT p FROM Plate p ORDER BY p.plateName ASC"),
+    @NamedQuery(
+        name="findPlatesByIngredient", query="SELECT p FROM Plate p WHERE p.ingredients.ingredient_id = :idIngredient"),
+    @NamedQuery(
+        name="findPlatesByMealType", query="SELECT p FROM Plate p WHERE p.mealType = :mealType"),
+    @NamedQuery(
+        name="findPlatesIfVegetarian", query="SELECT p FROM Plate p WHERE p.isVegetarian = 1")
+})
 public class Plate implements Serializable {
 
     private static final long serialVersionUID = 1L;
