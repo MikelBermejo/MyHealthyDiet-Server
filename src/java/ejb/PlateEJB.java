@@ -52,18 +52,18 @@ public class PlateEJB implements PlateInterface{
     }
 
     @Override
-    public List<Plate> findPlatesByName(String PlateName) {
-        return em.createNamedQuery("findPlatesByName").getResultList();
+    public List<Plate> findPlatesByName(String plateName) {
+        return em.createNamedQuery("findPlatesByName").setParameter("name", "%" + plateName + "%").getResultList();
     }
 
     @Override
     public List<Plate> findPlatesByIngredient(Integer ingredient_id) {
-        return em.createNamedQuery("findPlatesByIngredient").getResultList();
+        return em.createNamedQuery("findPlatesByIngredient").setParameter("idIngredient", ingredient_id).getResultList();
     }
 
     @Override
     public List<Plate> findPlatesByMealType(MealEnum mealType) {
-        return em.createNamedQuery("findPlatesByMealType").getResultList();
+        return em.createNamedQuery("findPlatesByMealType").setParameter("mealType", mealType).getResultList();
     }
 
     @Override

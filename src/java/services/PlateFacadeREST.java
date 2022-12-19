@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 public class PlateFacadeREST {
     
     @EJB
-    PlateInterface ejb;
+    private PlateInterface ejb;
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -63,27 +63,28 @@ public class PlateFacadeREST {
     }
     
     @GET
-    @Path("{plateName}")
+    @Path("/name/{plateName}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Plate> findPlatesByName(@PathParam("plateName") String name) {
         return ejb.findPlatesByName(name);
     }
     
     @GET
-    @Path("{ingredients.ingredient_id}")
+    @Path("/id/{ingredients.ingredient_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Plate> findPlatesByIngredient(@PathParam("ingredients.ingredient_id") Integer ingredient_id) {
         return ejb.findPlatesByIngredient(ingredient_id);
     }
     
     @GET
-    @Path("{mealType}")
+    @Path("/type/{mealType}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Plate> findPlatesByIngredient(@PathParam("mealType") MealEnum mealType) {
         return ejb.findPlatesByMealType(mealType);
     }
     
     @GET
+    @Path("/")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Plate> findPlatesIfVegetarian() {
         return ejb.findPlatesIfVegetarian();
