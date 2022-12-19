@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author User
+ * @author Mikel
  */
 @Local
 public interface IngredientInterface {

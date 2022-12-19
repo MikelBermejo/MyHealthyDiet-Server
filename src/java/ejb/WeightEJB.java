@@ -5,62 +5,89 @@
  */
 package ejb;
 
-import services.*;
+
+import entities.Weight;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
- * @author JulenB
+ * Ejb of the entity weight that implements his own interface WeightInterface
+ * @author Mikel
  */
-public class WeightEJB<Weight> {
+@Stateless
+public class WeightEJB implements WeightInterface{
 
-    private Class<Weight> entityClass;
     @PersistenceContext(unitName = "MyHealthyDietPU")
     private EntityManager em;
 
-    public WeightEJB(Class<Weight> entityClass) {
-        this.entityClass = entityClass;
-    }
-
-    public void create(Weight entity) {
+    /**
+     * 
+     * @param entity 
+     */
+    public void createWeight(Weight entity) {
         em.persist(entity);
     }
-
-    public void edit(Weight entity) {
+    
+    /**
+     * 
+     * @param entity 
+     */
+    public void editWeight(Weight entity) {
         em.merge(entity);
     }
-
-    public void remove(Weight entity) {
+    
+    /**
+     * 
+     * @param entity 
+     */
+    public void removeWeight(Weight entity) {
         em.remove(em.merge(entity));
     }
-
-    public Weight find(Object id) {
-        return em.find(entityClass, id);
+    
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    public Weight findWeight(Object id) {
+        return em.find(Weight.class, id);
     }
-
-    public List<Weight> findAll() {
+    
+    /**
+     * 
+     * @return 
+     */
+    public List<Weight> findAllWeights() {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
+        cq.select(cq.from(Weight.class));
         return em.createQuery(cq).getResultList();
     }
 
-    public List<Weight> findRange(int[] range) {
+    /**
+     * 
+     * @param range
+     * @return 
+     */
+    public List<Weight> findRangeOfWeight(int[] range) {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
+        cq.select(cq.from(Weight.class));
         javax.persistence.Query q = em.createQuery(cq);
         q.setMaxResults(range[1] - range[0] + 1);
         q.setFirstResult(range[0]);
         return q.getResultList();
     }
 
-    public int count() {
+    /**
+     * 
+     * @return 
+     */
+    public int countWeights() {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        javax.persistence.criteria.Root<Weight> rt = cq.from(entityClass);
+        javax.persistence.criteria.Root<Weight> rt = cq.from(Weight.class);
         cq.select(em.getCriteriaBuilder().count(rt));
         javax.persistence.Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
 }

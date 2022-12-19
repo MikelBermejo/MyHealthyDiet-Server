@@ -11,22 +11,22 @@ import javax.ejb.Local;
 
 /**
  *
- * @author User
+ * @author Mikel
  */
 @Local
 public interface WeightInterface {
     
-    public void create(Weight entity);
+    public void createWeight(Weight entity);
 
-    public void edit(Weight entity);
+    public void editWeight(Weight entity);
 
-    public void remove(Weight entity);
+    public void removeWeight(Weight entity);
 
-    public Weight find(Object id);
+    public Weight findWeight(Object id);
 
-    public List<Weight> findAll();
+    public List<Weight> findAllWeights();
 
-    public List<Weight> findRange(int[] range);
+    public List<Weight> findRangeOfWeight(int[] range);
 
-    public int count();
+    public int countWeights();
 }

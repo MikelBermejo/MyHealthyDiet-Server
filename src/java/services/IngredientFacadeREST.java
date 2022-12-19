@@ -5,11 +5,10 @@
  */
 package services;
 
+import ejb.IngredientEJB;
 import entities.Ingredient;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,70 +21,59 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author JulenB
+ * @author Mikel
  */
-@Stateless
 @Path("entities.ingredient")
-public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
+public class IngredientFacadeREST {
 
-    @PersistenceContext(unitName = "MyHealthyDietPU")
-    private EntityManager em;
-
-    public IngredientFacadeREST() {
-        super(Ingredient.class);
-    }
+    
+    @EJB
+    private IngredientEJB ejb;
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Ingredient entity) {
-        super.create(entity);
+        ejb.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Ingredient entity) {
-        super.edit(entity);
+        ejb.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+        ejb.remove(ejb.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Ingredient find(@PathParam("id") Integer id) {
-        return super.find(id);
+        return ejb.find(id);
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Ingredient> findAll() {
-        return super.findAll();
+        return ejb.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Ingredient> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+        return ejb.findRange(new int[]{from, to});
     }
 
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+        return String.valueOf(ejb.count());
     }
     
 }
