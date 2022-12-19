@@ -5,11 +5,14 @@
  */
 package services;
 
+import ejb.TipEJB;
+import ejb.TipInterface;
 import entities.Tip;
+import entities.TipTypeEnum;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,68 +27,60 @@ import javax.ws.rs.core.MediaType;
  *
  * @author JulenB
  */
-@Stateless
 @Path("entities.tip")
-public class TipFacadeREST extends AbstractFacade<Tip> {
+public class TipFacadeREST {
 
-    @PersistenceContext(unitName = "MyHealthyDietPU")
-    private EntityManager em;
+    /**
+     * EJB object implementing business logic.
+     */
+    @EJB
+    private TipInterface ejb;
 
-    public TipFacadeREST() {
-        super(Tip.class);
-    }
+    private Logger LOGGER=Logger.getLogger(TipFacadeREST.class.getName());
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Tip entity) {
-        super.create(entity);
+        LOGGER.log(Level.INFO, "Creating tip {0}", entity.getTip_id());
+        ejb.createTip(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Tip entity) {
-        super.edit(entity);
+        LOGGER.log(Level.INFO, "Updating tip {0}", id);
+        ejb.updateTip(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+    public void remove(Tip entity) {
+        LOGGER.log(Level.INFO, "Removing tip {0}", entity.getTip_id());
+        ejb.removeTip(entity);
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Tip find(@PathParam("id") Integer id) {
-        return super.find(id);
+        LOGGER.log(Level.INFO, "Finding tip by id");
+        return ejb.findTipById(id);
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Tip> findAll() {
-        return super.findAll();
+        LOGGER.log(Level.INFO, "Finding all tips");
+        return ejb.findAllTip();
     }
 
     @GET
-    @Path("{from}/{to}")
+    @Path("{type}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Tip> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    public List<Tip> findByType(TipTypeEnum type){
+        LOGGER.log(Level.INFO, "Finding find tips by type");
+        return ejb.findTipByType(type);
     }
     
 }

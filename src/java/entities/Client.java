@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,6 +24,19 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Sendoa
  */
+@NamedQueries({
+    
+    @NamedQuery(
+            name="findAllClient",query="SELECT u FROM User u WHERE privilege=1"
+    ),
+    @NamedQuery(
+            name="findClientBySearch",query="SELECT u FROM User u WHERE privilege=1 AND (login LIKE :usrValue OR email LIKE :usrValue OR fullName LIKE :usrValue)"
+    ),
+    @NamedQuery(
+            name="findClientByStatus",query="SELECT u FROM User u WHERE privilege=1 AND satus=:usrStatus"
+    ),
+    
+})
 @Entity
 @Table(name="client",schema="myhealthydietdb")
 @DiscriminatorValue("1")
