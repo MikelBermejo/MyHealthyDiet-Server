@@ -15,8 +15,6 @@ public class ClientDietId implements Serializable{
     public Integer client_id;
     
     public Integer diet_id;
-    
-    //GETTERS AND SETTERS
 
     public Integer getClient_id() {
         return client_id;
@@ -33,6 +31,10 @@ public class ClientDietId implements Serializable{
     public void setDiet_id(Integer diet_id) {
         this.diet_id = diet_id;
     }
+    
+    
+    
+    
     
     
 }

@@ -5,12 +5,10 @@
  */
 package services;
 
+import ejb.ClientDietEJB;
 import entities.ClientDiet;
-import entities.ClientDietId;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,97 +18,66 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.PathSegment;
+
 
 /**
  *
  * @author JulenB
  */
-@Stateless
-@Path("entities.clientdiet")
-public class ClientDietFacadeREST extends AbstractFacade<ClientDiet> {
+@Path("clientdiet")
+public class ClientDietFacadeREST {
 
-    @PersistenceContext(unitName = "MyHealthyDietPU")
-    private EntityManager em;
-
-    private ClientDietId getPrimaryKey(PathSegment pathSegment) {
-        /*
-         * pathSemgent represents a URI path segment and any associated matrix parameters.
-         * URI path part is supposed to be in form of 'somePath;client_id=client_idValue;diet_id=diet_idValue'.
-         * Here 'somePath' is a result of getPath() method invocation and
-         * it is ignored in the following code.
-         * Matrix parameters are used as field names to build a primary key instance.
-         */
-        entities.ClientDietId key = new entities.ClientDietId();
-        javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
-        java.util.List<String> client_id = map.get("client_id");
-        if (client_id != null && !client_id.isEmpty()) {
-            key.setClient_id(new java.lang.Integer(client_id.get(0)));
-        }
-        java.util.List<String> diet_id = map.get("diet_id");
-        if (diet_id != null && !diet_id.isEmpty()) {
-            key.setDiet_id(new java.lang.Integer(diet_id.get(0)));
-        }
-        return key;
-    }
-
-    public ClientDietFacadeREST() {
-        super(ClientDiet.class);
-    }
+    /**
+     * EJB object implementing business logic.
+     */
+    @EJB
+    private ClientDietEJB ejb;
+    
 
     @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(ClientDiet entity) {
-        super.create(entity);
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public void create(ClientDiet clientDiet) {
+        try {
+            ejb.insertClientDiet(clientDiet);
+        } catch (Exception e) {
+        }
     }
 
     @PUT
-    @Path("{id}")
+    @Path("editById/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") PathSegment id, ClientDiet entity) {
-        super.edit(entity);
+    public void edit(ClientDiet clientDiet) {
+        ejb.updateClientDiet(clientDiet);
     }
 
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") PathSegment id) {
-        entities.ClientDietId key = getPrimaryKey(id);
-        super.remove(super.find(key));
+    @Path("removeById/{id}")
+    public void remove(ClientDiet clientDiet) {
+        try {
+            ejb.removeClientDiet(clientDiet);
+        } catch (Exception e) {
+        }
     }
 
     @GET
-    @Path("{id}")
+    @Path("findClientDietById/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ClientDiet find(@PathParam("id") PathSegment id) {
-        entities.ClientDietId key = getPrimaryKey(id);
-        return super.find(key);
-    }
-
-    @GET
-    @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<ClientDiet> findAll() {
-        return super.findAll();
-    }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<ClientDiet> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    public ClientDiet find(@PathParam("id") Integer id) {
+        return ejb.findClientDietById(id);
     }
     
+    
+    @GET
+    @Path("findClientDietsForYou/{client_user_id}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public List<ClientDiet> findAll(@PathParam("client_user_id") Integer client_user_id) {
+        return ejb.findClientDietsForYou(client_user_id);
+    }
+
+    
+    @GET
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public List<ClientDiet> findAll() {
+        return ejb.findAllClientDiets();
+    }
 }
