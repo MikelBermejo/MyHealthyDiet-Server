@@ -61,10 +61,10 @@ public class TipEJB implements TipInterface{
     }
 
     @Override
-    public List<Tip> findTipByType(TipTypeEnum type) {
+    public List<Tip> findTipByType(TipTypeEnum tipType) {
         List<Tip> tips;
         
-        tips = em.createNamedQuery("findTipByType").setParameter("tipType", type).getResultList();
+        tips = em.createNamedQuery("findTipByType").setParameter("tipType", tipType).getResultList();
         
         return tips;
     }

@@ -27,6 +27,6 @@ public interface TipInterface {
     
     public Tip findTipById(Integer id);
     
-    public List<Tip> findTipByType(TipTypeEnum type);
+    public List<Tip> findTipByType(TipTypeEnum tipType);
     
 }

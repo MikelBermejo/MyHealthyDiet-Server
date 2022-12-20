@@ -9,12 +9,10 @@ import entities.User;
 
 /**
  *
- * @author 2dam
+ * @author Sendoa
  */
 public interface UserInterface {
     
     public User signIn(String login, String password);
-    
-    public void lastSignIn(Integer id);
     
 }

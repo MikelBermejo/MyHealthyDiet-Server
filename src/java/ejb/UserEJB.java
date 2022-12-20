@@ -31,10 +31,5 @@ public class UserEJB implements UserInterface{
         
         return user;
     }
-
-    @Override
-    public void lastSignIn(Integer id) {
-        em.createNamedQuery("lastSignIn");
-    }
     
 }

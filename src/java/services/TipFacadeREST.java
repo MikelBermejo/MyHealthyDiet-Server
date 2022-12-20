@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author JulenB
+ * @author Sendoa
  */
 @Path("entities.tip")
 public class TipFacadeREST {
@@ -46,15 +46,15 @@ public class TipFacadeREST {
     }
 
     @PUT
-    @Path("{id}")
+    @Path("{entity}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Tip entity) {
-        LOGGER.log(Level.INFO, "Updating tip {0}", id);
+    public void edit(Tip entity) {
+        LOGGER.log(Level.INFO, "Updating tip {0}", entity.getTip_id());
         ejb.updateTip(entity);
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("{entity}")
     public void remove(Tip entity) {
         LOGGER.log(Level.INFO, "Removing tip {0}", entity.getTip_id());
         ejb.removeTip(entity);
@@ -76,11 +76,11 @@ public class TipFacadeREST {
     }
 
     @GET
-    @Path("{type}")
+    @Path("/type/{type}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Tip> findByType(TipTypeEnum type){
+    public List<Tip> findByType(@PathParam("type") TipTypeEnum tipType){
         LOGGER.log(Level.INFO, "Finding find tips by type");
-        return ejb.findTipByType(type);
+        return ejb.findTipByType(tipType);
     }
     
 }

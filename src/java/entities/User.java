@@ -33,9 +33,6 @@ import org.hibernate.annotations.DiscriminatorFormula;
     @NamedQuery(
             name="signIn",query="SELECT u FROM User u WHERE login = :loginUsr AND password = :passUsr"
     ),
-    //@NamedQuery(
-    //        name="lastSignIn",query="CALL lastSignIn(:idUser)"
-    //),
     
 })
 @Entity

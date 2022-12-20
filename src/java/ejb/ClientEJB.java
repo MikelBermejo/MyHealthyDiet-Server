@@ -61,10 +61,10 @@ public class ClientEJB implements ClientInterface{
     }
 
     @Override
-    public List<Client> findClientBySearch(String value) {
+    public List<Client> findClientBySearch(String usrValue) {
         List<Client> clients;
         
-        clients= em.createNamedQuery("findClientBySearch").setParameter("usrValue", value).getResultList();
+        clients= em.createNamedQuery("findClientBySearch").setParameter("usrValue", usrValue).getResultList();
         
         return clients;
     }
