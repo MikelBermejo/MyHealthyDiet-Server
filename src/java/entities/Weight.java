@@ -22,6 +22,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Mikel
  */
+@NamedQueries({
+    @NamedQuery(
+            name ="findAllWeights", query="SELECT w FROM Weight w ORDER BY w.date ASC"
+    )
+})
 @Entity
 @Table(name="weight",schema="myhealthydietdb")
 @XmlRootElement

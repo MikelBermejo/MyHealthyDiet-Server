@@ -7,6 +7,7 @@ package ejb;
 
 import entities.Ingredient;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Local;
 
 /**
@@ -16,17 +17,15 @@ import javax.ejb.Local;
 @Local
 public interface IngredientInterface {
     
-    public void create(Ingredient entity);
+    public void createIngredient(Ingredient entity);
 
-    public void edit(Ingredient entity);
+    public void editIngredient(Ingredient entity);
 
-    public void remove(Ingredient entity);
+    public void removeIngredient(Ingredient entity);
 
-    public Ingredient find(Object id);
+    public Ingredient findIngredient(Object id);
 
-    public List<Ingredient> findAll();
-
-    public List<Ingredient> findRange(int[] range);
-
-    public int count();
+    public List<Ingredient> findAllIngredients();
+    
+    public List<Ingredient> findIngredientsByName(String ingredientName);
 }

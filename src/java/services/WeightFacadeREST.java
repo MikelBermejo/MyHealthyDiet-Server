@@ -6,6 +6,7 @@
 package services;
 
 import ejb.WeightEJB;
+import ejb.WeightInterface;
 import entities.Weight;
 import java.util.List;
 import javax.ejb.EJB;
@@ -27,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 public class WeightFacadeREST {
 
     @EJB
-    private WeightEJB ejb;
+    private WeightInterface ejb;
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -59,20 +60,6 @@ public class WeightFacadeREST {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Weight> findAllWeights() {
         return ejb.findAllWeights();
-    }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Weight> findRangeOfWeight(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return ejb.findRangeOfWeight(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(ejb.countWeights());
     }
     
 }

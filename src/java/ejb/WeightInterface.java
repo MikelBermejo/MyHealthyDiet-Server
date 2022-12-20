@@ -25,8 +25,4 @@ public interface WeightInterface {
     public Weight findWeight(Object id);
 
     public List<Weight> findAllWeights();
-
-    public List<Weight> findRangeOfWeight(int[] range);
-
-    public int countWeights();
 }

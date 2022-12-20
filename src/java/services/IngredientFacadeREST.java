@@ -6,6 +6,7 @@
 package services;
 
 import ejb.IngredientEJB;
+import ejb.IngredientInterface;
 import entities.Ingredient;
 import java.util.List;
 import javax.ejb.EJB;
@@ -28,52 +29,44 @@ public class IngredientFacadeREST {
 
     
     @EJB
-    private IngredientEJB ejb;
+    private IngredientInterface ejb;
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Ingredient entity) {
-        ejb.create(entity);
+        ejb.createIngredient(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Ingredient entity) {
-        ejb.edit(entity);
+        ejb.editIngredient(entity);
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        ejb.remove(ejb.find(id));
+        ejb.removeIngredient(ejb.findIngredient(id));
     }
 
     @GET
-    @Path("{id}")
+    @Path("/ingredient/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Ingredient find(@PathParam("id") Integer id) {
-        return ejb.find(id);
+        return ejb.findIngredient(id);
     }
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Ingredient> findAll() {
-        return ejb.findAll();
-    }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Ingredient> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return ejb.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(ejb.count());
+        return ejb.findAllIngredients();
     }
     
+    @GET
+    @Path("{ingredientName}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public List<Ingredient> findIngredientsByName(@PathParam("ingredientName") String ingredientName) {
+        return ejb.findIngredientsByName(ingredientName);    
+    }
 }

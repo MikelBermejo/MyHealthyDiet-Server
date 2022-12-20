@@ -26,7 +26,7 @@ public class IngredientEJB implements IngredientInterface{
      * 
      * @param entity 
      */
-    public void create(Ingredient entity) {
+    public void createIngredient(Ingredient entity) {
         em.persist(entity);
     }
 
@@ -34,7 +34,7 @@ public class IngredientEJB implements IngredientInterface{
      * 
      * @param entity 
      */
-    public void edit(Ingredient entity) {
+    public void editIngredient(Ingredient entity) {
         em.merge(entity);
     }
 
@@ -42,7 +42,7 @@ public class IngredientEJB implements IngredientInterface{
      * 
      * @param entity 
      */
-    public void remove(Ingredient entity) {
+    public void removeIngredient(Ingredient entity) {
         em.remove(em.merge(entity));
     }
 
@@ -51,7 +51,7 @@ public class IngredientEJB implements IngredientInterface{
      * @param id
      * @return 
      */
-    public Ingredient find(Object id) {
+    public Ingredient findIngredient(Object id) {
         return em.find(Ingredient.class, id);
     }
 
@@ -59,37 +59,15 @@ public class IngredientEJB implements IngredientInterface{
      * 
      * @return 
      */
-    public List<Ingredient> findAll() {
-        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Ingredient.class));
-        return em.createQuery(cq).getResultList();
+    public List<Ingredient> findAllIngredients() {
+        return em.createNamedQuery("findAllIngredients").getResultList();
     }
-
     /**
      * 
-     * @param range
+     * @param ingredientName
      * @return 
      */
-    public List<Ingredient> findRange(int[] range) {
-        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Ingredient.class));
-        javax.persistence.Query q = em.createQuery(cq);
-        q.setMaxResults(range[1] - range[0] + 1);
-        q.setFirstResult(range[0]);
-        return q.getResultList();
+    public List<Ingredient> findIngredientsByName(String ingredientName){
+        return em.createNamedQuery("findIngredientsByName").setParameter("ingredientName", ingredientName).getResultList();
     }
-
-    /**
-     * 
-     * @return 
-     */
-    public int count() {
-        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        javax.persistence.criteria.Root<Ingredient> rt = cq.from(Ingredient.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        javax.persistence.Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
-    }
-    
-    
 }

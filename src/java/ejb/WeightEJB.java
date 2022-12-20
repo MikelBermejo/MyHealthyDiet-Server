@@ -60,34 +60,6 @@ public class WeightEJB implements WeightInterface{
      * @return 
      */
     public List<Weight> findAllWeights() {
-        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Weight.class));
-        return em.createQuery(cq).getResultList();
-    }
-
-    /**
-     * 
-     * @param range
-     * @return 
-     */
-    public List<Weight> findRangeOfWeight(int[] range) {
-        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Weight.class));
-        javax.persistence.Query q = em.createQuery(cq);
-        q.setMaxResults(range[1] - range[0] + 1);
-        q.setFirstResult(range[0]);
-        return q.getResultList();
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public int countWeights() {
-        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        javax.persistence.criteria.Root<Weight> rt = cq.from(Weight.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        javax.persistence.Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+        return em.createNamedQuery("findAllWeights").getResultList();
     }
 }

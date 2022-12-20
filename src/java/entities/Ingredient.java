@@ -25,6 +25,14 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Mikel
  */
+@NamedQueries({
+    @NamedQuery(
+            name ="findAllIngredients", query="SELECT i FROM Ingredient i ORDER BY i.ingredientName ASC"
+    ),
+    @NamedQuery(
+            name="findIngredientsByName", query="SELECT i FROM Ingredient i WHERE i.ingredientName like :ingredientName ORDER BY i.ingredientName ASC"
+    )
+})
 @Entity
 @Table(name = "ingredient", schema = "myhealthydietdb")
 @XmlRootElement
