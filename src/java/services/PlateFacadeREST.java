@@ -63,28 +63,28 @@ public class PlateFacadeREST {
     }
     
     @GET
-    @Path("/name/{plateName}")
+    @Path("findByName/{plateName}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Plate> findPlatesByName(@PathParam("plateName") String name) {
         return ejb.findPlatesByName(name);
     }
     
     @GET
-    @Path("/id/{ingredients.ingredient_id}")
+    @Path("findByIngredient/{ingredients.ingredient_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Plate> findPlatesByIngredient(@PathParam("ingredients.ingredient_id") Integer ingredient_id) {
         return ejb.findPlatesByIngredient(ingredient_id);
     }
     
     @GET
-    @Path("/type/{mealType}")
+    @Path("findByMealType/{mealType}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Plate> findPlatesByIngredient(@PathParam("mealType") MealEnum mealType) {
         return ejb.findPlatesByMealType(mealType);
     }
     
     @GET
-    @Path("/")
+    @Path("findVegetarians")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Plate> findPlatesIfVegetarian() {
         return ejb.findPlatesIfVegetarian();

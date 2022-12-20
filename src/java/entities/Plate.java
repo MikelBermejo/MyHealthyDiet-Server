@@ -29,11 +29,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(
         name="findAllPlates", query="SELECT p FROM Plate p ORDER BY p.plateName ASC"),
     @NamedQuery(
-        name="findPlatesByIngredient", query="SELECT p FROM Plate p JOIN p.ingredients ingredient JOIN ingredient.plates p WHERE ingredient.ingredient_id = :idIngredient"),
+        name="findPlatesByIngredient", query="SELECT p FROM Plate p JOIN p.ingredients ingredient JOIN ingredient.plates p WHERE ingredient.ingredient_id = :idIngredient ORDER BY p.plateName ASC"),
     @NamedQuery(
-        name="findPlatesByMealType", query="SELECT p FROM Plate p WHERE p.mealType = :mealType"),
+        name="findPlatesByMealType", query="SELECT p FROM Plate p WHERE p.mealType = :mealType ORDER BY p.plateName ASC"),
     @NamedQuery(
-        name="findPlatesIfVegetarian", query="SELECT p FROM Plate p WHERE p.isVegetarian = TRUE")
+        name="findPlatesIfVegetarian", query="SELECT p FROM Plate p WHERE p.isVegetarian = TRUE ORDER BY p.plateName ASC")
 })
 public class Plate implements Serializable {
 
