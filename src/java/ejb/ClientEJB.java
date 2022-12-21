@@ -64,7 +64,7 @@ public class ClientEJB implements ClientInterface{
     public List<Client> findClientBySearch(String usrValue) {
         List<Client> clients;
         
-        clients= em.createNamedQuery("findClientBySearch").setParameter("usrValue", usrValue).getResultList();
+        clients= em.createNamedQuery("findClientBySearch").setParameter("usrValue", "%"+usrValue+"%").getResultList();
         
         return clients;
     }
