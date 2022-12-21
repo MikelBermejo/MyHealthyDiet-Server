@@ -35,7 +35,10 @@ public class IngredientEJB implements IngredientInterface{
      * @param entity 
      */
     public void editIngredient(Ingredient entity) {
-        em.merge(entity);
+       if(!em.contains(entity)) {
+                em.merge(entity);
+        }
+            em.flush();
     }
 
     /**
