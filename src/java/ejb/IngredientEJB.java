@@ -68,6 +68,6 @@ public class IngredientEJB implements IngredientInterface{
      * @return 
      */
     public List<Ingredient> findIngredientsByName(String ingredientName){
-        return em.createNamedQuery("findIngredientsByName").setParameter("ingredientName", ingredientName).getResultList();
+        return em.createNamedQuery("findIngredientsByName").setParameter("ingredientName", "%"+ingredientName+"%").getResultList();
     }
 }
