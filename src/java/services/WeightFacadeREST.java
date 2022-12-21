@@ -5,11 +5,11 @@
  */
 package services;
 
+import ejb.WeightEJB;
+import ejb.WeightInterface;
 import entities.Weight;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,70 +22,44 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author JulenB
+ * @author Mikel
  */
-@Stateless
 @Path("entities.weight")
-public class WeightFacadeREST extends AbstractFacade<Weight> {
+public class WeightFacadeREST {
 
-    @PersistenceContext(unitName = "MyHealthyDietPU")
-    private EntityManager em;
-
-    public WeightFacadeREST() {
-        super(Weight.class);
-    }
+    @EJB
+    private WeightInterface ejb;
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Weight entity) {
-        super.create(entity);
+    public void createWeight(Weight entity) {
+        ejb.createWeight(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Weight entity) {
-        super.edit(entity);
+    public void editWeight(@PathParam("id") Integer id, Weight entity) {
+        ejb.editWeight(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+    public void removeWeight(@PathParam("id") Integer id) {
+        ejb.removeWeight(ejb.findWeight(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Weight find(@PathParam("id") Integer id) {
-        return super.find(id);
+    public Weight findWeight(@PathParam("id") Integer id) {
+        return ejb.findWeight(id);
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Weight> findAll() {
-        return super.findAll();
-    }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Weight> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    public List<Weight> findAllWeights() {
+        return ejb.findAllWeights();
     }
     
 }
