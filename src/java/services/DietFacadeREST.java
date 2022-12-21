@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
+import ejb.DietInterface;
 import entities.Diet;
+import entities.GoalEnum;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,68 +19,58 @@ import javax.ws.rs.core.MediaType;
  *
  * @author JulenB
  */
-@Stateless
 @Path("entities.diet")
-public class DietFacadeREST extends AbstractFacade<Diet> {
+public class DietFacadeREST {
 
-    @PersistenceContext(unitName = "MyHealthyDietPU")
-    private EntityManager em;
-
-    public DietFacadeREST() {
-        super(Diet.class);
-    }
+    /**
+     * EJB object implementing business logic.
+     */
+    @EJB
+    private DietInterface ejb;
 
     @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Diet entity) {
-        super.create(entity);
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public void create(Diet diet) {
+        try {
+            ejb.createDiet(diet);
+        } catch (Exception e) {
+        }
     }
 
     @PUT
-    @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Diet entity) {
-        super.edit(entity);
+    @Path("editById/{id}")
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public void edit(Diet entity) {
+        ejb.updateDiet(entity);
     }
 
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+    @Path("removeById/{id}")
+    public void remove(Diet entity) {
+        try {
+            ejb.removeDiet(entity);
+        } catch (Exception e) {
+        }
     }
 
     @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Path("findDietById/{id}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Diet find(@PathParam("id") Integer id) {
-        return super.find(id);
+        return ejb.findDietById(id);
     }
 
     @GET
-    @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Diet> findAll() {
-        return super.findAll();
-    }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Diet> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    @Path("findAllByName/{name}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public List<Diet> findAll(@PathParam("name") String name) {
+        return ejb.findDietByName(name);
     }
     
+    @GET
+    @Path("findAllByGoal/{goal}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public List<Diet> findAll(@PathParam("goal") GoalEnum goal) {
+        return ejb.findDietByGoal(goal);
+    }
 }

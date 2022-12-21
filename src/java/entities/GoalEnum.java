@@ -1,16 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 /**
- *
+ * Diet goal types: increase, decrease or maintain type.
  * @author JulenB
  */
 public enum GoalEnum {
+    /**
+     * Type of goal used by diets to know what the goal has the diet
+     * This type has the purpouse to increase weight.
+     */
     INCREASE,
+    
+    
+    /**
+     * Type of goal used by diets to know what the goal has the diet
+     * This type has the purpouse to decrease weight.
+     */
     DECREASE,
+    
+    
+    /**
+     * Type of goal used by diets to know what the goal has the diet
+     * This type has the purpouse to maintain weight.
+     */
     MAINTAIN
 }
