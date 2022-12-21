@@ -35,7 +35,10 @@ public class WeightEJB implements WeightInterface{
      * @param entity 
      */
     public void editWeight(Weight entity) {
-        em.merge(entity);
+        if (!em.contains(entity)) {
+                em.merge(entity);
+            }
+            em.flush();
     }
     
     /**
