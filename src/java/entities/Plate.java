@@ -10,17 +10,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * @author Haizea
+ * @author HaizeaF
  * Entity that contains the information of a plate.
  */
 @Entity
 @Table(name = "plate", schema = "myhealthydietdb")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(
+        name="findPlatesByName", query="SELECT p FROM Plate p WHERE p.plateName LIKE :name ORDER BY p.plateName ASC"),
+    @NamedQuery(
+        name="findAllPlates", query="SELECT p FROM Plate p ORDER BY p.plateName ASC"),
+    @NamedQuery(
+        name="findPlatesByIngredient", query="SELECT p FROM Plate p JOIN p.ingredients ingredient JOIN ingredient.plates p WHERE ingredient.ingredient_id = :idIngredient ORDER BY p.plateName ASC"),
+    @NamedQuery(
+        name="findPlatesByMealType", query="SELECT p FROM Plate p WHERE p.mealType = :mealType ORDER BY p.plateName ASC"),
+    @NamedQuery(
+        name="findPlatesIfVegetarian", query="SELECT p FROM Plate p WHERE p.isVegetarian = TRUE ORDER BY p.plateName ASC")
+})
 public class Plate implements Serializable {
 
     private static final long serialVersionUID = 1L;
