@@ -5,8 +5,13 @@
  */
 package services;
 
+import ejb.ClientInterface;
+import ejb.TipInterface;
 import entities.Client;
+import entities.StatusEnum;
 import java.util.List;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,70 +27,65 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author JulenB
+ * @author Sendoa
  */
-@Stateless
 @Path("entities.client")
-public class ClientFacadeREST extends AbstractFacade<Client> {
+public class ClientFacadeREST {
 
-    @PersistenceContext(unitName = "MyHealthyDietPU")
-    private EntityManager em;
+    /**
+     * EJB object implementing business logic.
+     */
+    @EJB
+    private ClientInterface ejb;
 
-    public ClientFacadeREST() {
-        super(Client.class);
-    }
+    private Logger LOGGER=Logger.getLogger(TipFacadeREST.class.getName());
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Client entity) {
-        super.create(entity);
+        ejb.createClient(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Client entity) {
-        super.edit(entity);
+    public void edit(Client entity) {
+        ejb.updateClient(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+    public void remove(Client entity) {
+        ejb.removeClient(entity);
     }
 
     @GET
-    @Path("{id}")
+    @Path("/client/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Client find(@PathParam("id") Integer id) {
-        return super.find(id);
+    public Client findClientById(@PathParam("id") Integer id) {
+        return ejb.findClientById(id);
+    }
+    
+    @GET
+    @Path("{status}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Client> findClientByStatus(@PathParam("status") StatusEnum status) {
+        return ejb.findClientByStatus(status);
+    }
+    
+    @GET
+    @Path("/search/{usrValue}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Client> findClientBySearch(@PathParam("usrValue") String usrValue) {
+        return ejb.findClientBySearch(usrValue);
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Client> findAll() {
-        return super.findAll();
+        return ejb.findAllClient();
     }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Client> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+    
+    
     
 }

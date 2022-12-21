@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,6 +28,13 @@ import org.hibernate.annotations.DiscriminatorFormula;
  *
  * @author Sendoa
  */
+@NamedQueries({
+    
+    @NamedQuery(
+            name="signIn",query="SELECT u FROM User u WHERE login = :loginUsr AND password = :passUsr"
+    ),
+    
+})
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorFormula("privilege")

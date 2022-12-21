@@ -12,6 +12,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -19,6 +21,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Sendoa
  */
+@NamedQueries({
+    
+    @NamedQuery(
+            name="findAllTip",query="SELECT t FROM Tip t"
+    ),
+    @NamedQuery(
+            name="findTipByType",query="SELECT t FROM Tip t WHERE type = :tipType"
+    ),
+    
+})
 @Entity
 @Table(name="tip",schema="myhealthydietdb")
 @XmlRootElement
