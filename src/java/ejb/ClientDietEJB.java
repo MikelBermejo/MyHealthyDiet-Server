@@ -49,7 +49,7 @@ public class ClientDietEJB implements ClientDietInterface {
     
     
     @Override
-    public List<ClientDiet> findClientDietById(Integer client_id) {
+    public List<ClientDiet> findClientDietsById(Integer client_id) {
         List<ClientDiet> clientDiets = null;
         try {
             clientDiets = em.createNamedQuery("findAllCientDiets").setParameter("id", client_id).getResultList();
