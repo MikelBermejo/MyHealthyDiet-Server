@@ -55,8 +55,8 @@ public class ClientFacadeREST {
 
     @DELETE
     @Path("{id}")
-    public void remove(Client entity) {
-        ejb.removeClient(entity);
+    public void remove(@PathParam("id") Integer id) {
+        ejb.removeClient(ejb.findClientById(id));
     }
 
     @GET

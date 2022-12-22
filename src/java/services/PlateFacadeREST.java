@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
 import ejb.PlateInterface;
@@ -44,9 +39,13 @@ public class PlateFacadeREST {
     }
 
     @DELETE
-    @Path("{id}")
-    public void remove(Plate entity) {
-        ejb.removePlate(entity);
+    @Path("delete/{id}")
+    public void remove(@PathParam("id") Integer id) {
+        try {
+            ejb.removePlate(ejb.findPlate(id));
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
     }
 
     @GET

@@ -12,9 +12,9 @@ import javax.persistence.Embeddable;
 public class ClientDietId implements Serializable{
     //VARIABLES
     
-    public Integer client_id;
+    private Integer client_id;
     
-    public Integer diet_id;
+    private Integer diet_id;
 
     public Integer getClient_id() {
         return client_id;
