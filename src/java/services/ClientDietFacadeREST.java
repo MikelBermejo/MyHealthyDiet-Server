@@ -52,9 +52,9 @@ public class ClientDietFacadeREST {
 
     @DELETE
     @Path("removeById/{id}")
-    public void remove(ClientDiet clientDiet) {
+    public void remove(@PathParam("id") Integer id) {
         try {
-            ejb.removeClientDiet(clientDiet);
+            ejb.removeClientDiet(ejb.findClientDietById(id));
         } catch (Exception e) {
         }
     }

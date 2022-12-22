@@ -54,10 +54,10 @@ public class TipFacadeREST {
     }
 
     @DELETE
-    @Path("{entity}")
-    public void remove(Tip entity) {
-        LOGGER.log(Level.INFO, "Removing tip {0}", entity.getTip_id());
-        ejb.removeTip(entity);
+    @Path("{id}")
+    public void remove(@PathParam("id") Integer id) {
+        LOGGER.log(Level.INFO, "Removing tip {0}", id);
+        ejb.removeTip(ejb.findTipById(id));
     }
 
     @GET
