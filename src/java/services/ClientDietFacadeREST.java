@@ -5,8 +5,9 @@
  */
 package services;
 
-import ejb.ClientDietEJB;
+import ejb.ClientDietInterface;
 import entities.ClientDiet;
+import entities.GenreEnum;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -31,7 +32,7 @@ public class ClientDietFacadeREST {
      * EJB object implementing business logic.
      */
     @EJB
-    private ClientDietEJB ejb;
+    private ClientDietInterface ejb;
     
 
     @POST
@@ -60,22 +61,23 @@ public class ClientDietFacadeREST {
     }
 
     @GET
-    @Path("findClientDietById/{id}")
+    @Path("findClientDietById/{client_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ClientDiet find(@PathParam("id") Integer id) {
-        return ejb.findClientDietById(id);
+    public List<ClientDiet> find(@PathParam("client_id") Integer client_id) {
+        return ejb.findClientDietById(client_id);
     }
     
     
     @GET
-    @Path("findClientDietsForYou/{client_user_id}")
+    @Path("findClientDietsForYou/{genre}/{height}/{weight}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public List<ClientDiet> findAll(@PathParam("client_user_id") Integer client_user_id) {
-        return ejb.findClientDietsForYou(client_user_id);
+    public List<ClientDiet> findAll(@PathParam("genre") GenreEnum genre,@PathParam("height") Float height,@PathParam("weight") Float weight) {
+        return ejb.findClientDietsForYou(genre,height,weight);
     }
 
     
     @GET
+    @Path("findAll")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public List<ClientDiet> findAll() {
         return ejb.findAllClientDiets();

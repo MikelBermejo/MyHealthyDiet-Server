@@ -1,6 +1,8 @@
 package ejb;
 
 import entities.ClientDiet;
+import entities.Client;
+import entities.GenreEnum;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -47,19 +49,25 @@ public class ClientDietEJB implements ClientDietInterface {
     
     
     @Override
-    public ClientDiet findClientDietById(Integer id) {
-        ClientDiet clientDiet = null;
+    public List<ClientDiet> findClientDietById(Integer client_id) {
+        List<ClientDiet> clientDiets = null;
         try {
-            clientDiet = em.find(ClientDiet.class, id);
+            clientDiets = em.createNamedQuery("findAllCientDiets").setParameter("id", client_id).getResultList();
         } catch (Exception e) {
         }
-        return clientDiet;   
+        return clientDiets;   
     }
     
 
     @Override
-    public List<ClientDiet> findClientDietsForYou(Integer client_user_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<ClientDiet> findClientDietsForYou(GenreEnum genre,Float height,Float weight) {
+        List<ClientDiet> diets = null;
+        try {
+            diets = em.createNamedQuery("findClientDietsForYou").setParameter("genre", genre).setParameter("height", height).setParameter("weight", weight).getResultList();
+        } catch (Exception e) {
+        }
+        return diets;
+        
     }
     
 
@@ -67,7 +75,7 @@ public class ClientDietEJB implements ClientDietInterface {
     public List<ClientDiet> findAllClientDiets() {
         List<ClientDiet> diets = null;
         try{
-        diets = em.createNamedQuery("findAllClientDiets").getResultList();
+        diets = em.createNamedQuery("findAll").getResultList();
         }catch(Exception e){
             
         }

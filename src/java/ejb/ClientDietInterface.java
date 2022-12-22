@@ -1,6 +1,8 @@
 package ejb;
 
+import entities.Client;
 import entities.ClientDiet;
+import entities.GenreEnum;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -35,17 +37,17 @@ public interface ClientDietInterface {
     
     /**
      * This method obtains a diet from the DB using its id.
-     * @param id A id used for the JPQL query
+     * @param user_id A user_id used for the JPQL query
      * @return A diet entity containing diet data.
      */
-    public ClientDiet findClientDietById (Integer id);
+    public List<ClientDiet> findClientDietById (Integer user_id);
     
     
     /**
      * This method obtains a list of diets of a client from the DB using.
      * @return A list of clients containing client diets data.
      */
-    public List<ClientDiet> findClientDietsForYou (Integer client_user_id);
+    public List<ClientDiet> findClientDietsForYou (GenreEnum genre,Float height,Float weight);
     
     
     /**

@@ -19,11 +19,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "clientdiet", schema = "myhealthydietdb")
 @NamedQueries({
     @NamedQuery(
-            name = "findAllClientDiets",
-            query = "SELECT c FROM ClientDiet c ORDER BY NEWID()"
-    ),@NamedQuery(
-            name = "findClientDietsForYou",
+            name = "findAll",
             query = "SELECT c FROM ClientDiet c"
+    ),@NamedQuery(
+            name = "findAllCientDiets",
+            query = "SELECT cd.diet FROM ClientDiet cd WHERE cd.clientDietId.client_id = :id"
     )
 })
 @XmlRootElement

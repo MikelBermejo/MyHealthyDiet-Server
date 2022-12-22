@@ -46,10 +46,11 @@ public class DietFacadeREST {
 
     @DELETE
     @Path("removeById/{id}")
-    public void remove(Diet entity) {
+    public void remove(@PathParam("id") Integer id) {
         try {
-            ejb.removeDiet(entity);
+            ejb.removeDiet(ejb.findDietById(id));
         } catch (Exception e) {
+            e.getStackTrace();
         }
     }
 
