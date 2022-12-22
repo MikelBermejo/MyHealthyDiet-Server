@@ -96,8 +96,7 @@ public class Diet implements Serializable {
      * @associates <{entities.Tip}>
      */
     //List with tips in one diet.
-    @OneToMany
-    @JoinColumn(name = "diet_id")
+    @OneToMany(mappedBy = "diet")
     private List<Tip> tips;
 
     //CONSTRUCTORS
@@ -120,8 +119,8 @@ public class Diet implements Serializable {
 
     
     //GETTERS AND SETTERS
-    
-    
+
+ 
     
     
     /**
@@ -275,6 +274,13 @@ public class Diet implements Serializable {
         this.plates = plates;
     }
     
+    public List<Tip> getTips() {
+        return tips;
+    }
+
+    public void setTips(List<Tip> tips) {
+        this.tips = tips;
+    }
     
     /**
      * Get the list of plates for this diet.

@@ -37,9 +37,9 @@ public class WeightFacadeREST {
     }
 
     @PUT
-    @Path("{id}")
+    @Path("{entity}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void editWeight(@PathParam("id") Integer id, Weight entity) {
+    public void editWeight(Weight entity) {
         ejb.editWeight(entity);
     }
 

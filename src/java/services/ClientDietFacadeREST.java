@@ -51,7 +51,7 @@ public class ClientDietFacadeREST {
     }
 
     @DELETE
-    @Path("removeById/{id}")
+    @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         try {
             ejb.removeClientDiet(ejb.findClientDietById(id));

@@ -7,16 +7,19 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -48,7 +51,8 @@ public class Weight implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)    
     private Date date;
     
-
+    @ManyToOne
+    private Client client;
 
     public Weight(Float weight, Date date, Integer weight_id) {
         this.weight_id = weight_id;
@@ -82,6 +86,15 @@ public class Weight implements Serializable {
 
     public Date getDate() {
         return date;
+    }
+
+    @XmlTransient
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override

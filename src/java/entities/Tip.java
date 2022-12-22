@@ -6,16 +6,19 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -44,6 +47,9 @@ public class Tip implements Serializable {
     private String tipText;
     @Enumerated(EnumType.ORDINAL)
     private TipTypeEnum type;
+    
+    @ManyToOne
+    private Diet diet;
 
     public Tip(Integer tip_id, String tipText, TipTypeEnum type) {
         this.tip_id = tip_id;
@@ -79,6 +85,17 @@ public class Tip implements Serializable {
         return type;
     }
 
+    @XmlTransient
+    public Diet getDiet() {
+        return diet;
+    }
+
+    public void setDiet(Diet diet) {
+        this.diet = diet;
+    }
+
+    
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
