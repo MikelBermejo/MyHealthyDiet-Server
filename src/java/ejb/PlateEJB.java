@@ -33,12 +33,12 @@ public class PlateEJB implements PlateInterface{
         if(!em.contains(plate)) {
                 em.merge(plate);
         }
-            em.flush();
+        em.flush();
     }
 
     @Override
     public void removePlate(Plate plate) {
-        em.remove(plate);
+        em.remove(em.merge(plate));
     }
 
     @Override
