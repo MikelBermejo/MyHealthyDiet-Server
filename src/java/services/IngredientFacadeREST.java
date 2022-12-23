@@ -38,7 +38,6 @@ public class IngredientFacadeREST {
     }
 
     @PUT
-    @Path("{entity}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(Ingredient entity) {
         ejb.editIngredient(entity);

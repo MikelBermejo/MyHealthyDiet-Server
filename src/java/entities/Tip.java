@@ -84,6 +84,17 @@ public class Tip implements Serializable {
     public TipTypeEnum getType() {
         return type;
     }
+    
+    @XmlTransient
+    public Diet getDiet() {
+        return diet;
+    }
+
+    public void setDiet(Diet diet) {
+        this.diet = diet;
+    }
+    
+    
 
     @XmlTransient
     public Diet getDiet() {

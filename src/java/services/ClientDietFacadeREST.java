@@ -6,6 +6,7 @@
 package services;
 
 import ejb.ClientDietEJB;
+import ejb.ClientDietInterface;
 import entities.ClientDiet;
 import java.util.List;
 import javax.ejb.EJB;
@@ -31,7 +32,7 @@ public class ClientDietFacadeREST {
      * EJB object implementing business logic.
      */
     @EJB
-    private ClientDietEJB ejb;
+    private ClientDietInterface ejb;
     
 
     @POST
@@ -44,40 +45,38 @@ public class ClientDietFacadeREST {
     }
 
     @PUT
-    @Path("editById/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(ClientDiet clientDiet) {
         ejb.updateClientDiet(clientDiet);
     }
 
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
+    @Path("findClientDietsRelation/{client_id}")
+    public void remove(@PathParam("client_id") Integer client_id) {
         try {
-            ejb.removeClientDiet(ejb.findClientDietById(id));
+            ejb.removeClientDiet(ejb.findClientDietsRelation(client_id));
         } catch (Exception e) {
         }
     }
 
     @GET
-    @Path("findClientDietById/{id}")
+    @Path("findAllClientDiets/{client_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ClientDiet find(@PathParam("id") Integer id) {
-        return ejb.findClientDietById(id);
+    public List<ClientDiet> find(@PathParam("client_id") Integer client_id) {
+        return ejb.findAllClientDiets(client_id);
     }
     
-    
     @GET
-    @Path("findClientDietsForYou/{client_user_id}")
-    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public List<ClientDiet> findAll(@PathParam("client_user_id") Integer client_user_id) {
-        return ejb.findClientDietsForYou(client_user_id);
-    }
-
-    
-    @GET
-    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<ClientDiet> findAll() {
-        return ejb.findAllClientDiets();
+        return ejb.findAll_C_D();
+    }
+    
+    
+    @GET
+    @Path("findClientDietsRelation/{client_id}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<ClientDiet> findClientDietsRelation(@PathParam("client_id") Integer client_id) {
+        return ejb.findClientDietsRelation(client_id);
     }
 }

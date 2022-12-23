@@ -38,39 +38,57 @@ public class ClientDietEJB implements ClientDietInterface {
     
     
     @Override
-    public void removeClientDiet(ClientDiet clientDiet) {
+    public void removeClientDiet(List<ClientDiet> clientDiets) {
         try {
-            em.remove(em.merge(clientDiet));
+            for (int i = 0; i < clientDiets.size(); i++) {
+                em.remove(em.merge(clientDiets.get(i)));
+            }
         } catch (Exception e) {
         }
     }
     
-    
-    @Override
-    public ClientDiet findClientDietById(Integer id) {
-        ClientDiet clientDiet = null;
-        try {
-            clientDiet = em.find(ClientDiet.class, id);
-        } catch (Exception e) {
-        }
-        return clientDiet;   
-    }
-    
 
     @Override
-    public List<ClientDiet> findClientDietsForYou(Integer client_user_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-
-    @Override
-    public List<ClientDiet> findAllClientDiets() {
+    public List<ClientDiet> findAllClientDiets(Integer client_id) {
         List<ClientDiet> diets = null;
         try{
-        diets = em.createNamedQuery("findAllClientDiets").getResultList();
+        diets = em.createNamedQuery("findAllClientDiets").setParameter("client_id", client_id).getResultList();
         }catch(Exception e){
             
         }
         return diets;
+    }
+
+    @Override
+    public List<ClientDiet> findAll_C_D() {
+        List<ClientDiet> diets = null;
+        try{
+        diets = em.createNamedQuery("findAll_C_D").getResultList();
+        }catch(Exception e){
+        }
+        return diets;
+    }
+
+    @Override
+    public List<ClientDiet> findClientDietsRelation(Integer client_id) {
+        List<ClientDiet> diets = null;
+        try{
+        diets = em.createNamedQuery("findClientDietsRelation").setParameter("client_id", client_id).getResultList();
+        }catch(Exception e){
+            
+        }
+        return diets;
+    }
+    
+    
+    @Override
+    public ClientDiet findClientDietsRelationActive(Integer client_id) {
+        ClientDiet diet = null;
+        try{
+        diet = (ClientDiet) em.createNamedQuery("findClientDietsRelationActive").setParameter("client_id", client_id).getSingleResult();
+        }catch(Exception e){
+            
+        }
+        return diet;
     }
 }

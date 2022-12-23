@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -92,13 +93,13 @@ public class Plate implements Serializable {
     /**
      * List of the ingredients the plate has.
      */
-    @ManyToMany(mappedBy = "plates")
+    @ManyToMany(mappedBy = "plates", fetch = FetchType.EAGER)
     private List<Ingredient> ingredients;
     
     /**
      * List of the diets the plate is on.
      */
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(schema="myhealthydietdb", name = "dietplate")
     @XmlTransient
     private List<Diet> diets;

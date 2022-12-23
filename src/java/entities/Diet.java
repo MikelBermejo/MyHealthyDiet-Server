@@ -5,10 +5,10 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -89,14 +89,14 @@ public class Diet implements Serializable {
      * @associates <{entities.Plate}>
      */
     //List with plates that we want to get it fast.
-    @ManyToMany(mappedBy = "diets")
+    @ManyToMany(mappedBy = "diets", fetch = FetchType.EAGER)
     private List<Plate> plates;
 
     /**
      * @associates <{entities.Tip}>
      */
     //List with tips in one diet.
-    @OneToMany(mappedBy = "diet")
+    @OneToMany(mappedBy = "diet", fetch = FetchType.EAGER)
     private List<Tip> tips;
 
     //CONSTRUCTORS
@@ -120,9 +120,7 @@ public class Diet implements Serializable {
     
     //GETTERS AND SETTERS
 
- 
-    
-    
+
     /**
      * Set the diet ID for this diet.
      * @param diet_id the diet ID to set.
@@ -263,6 +261,16 @@ public class Diet implements Serializable {
      */
     public Float getCarbohydrates() {
         return carbohydrates;
+    }
+    
+    
+    public List<Tip> getTips() {
+        return tips;
+    }
+    
+    
+    public void setTips(List<Tip> tips) {
+        this.tips = tips;
     }
 
     
