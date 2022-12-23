@@ -32,7 +32,6 @@ public class PlateFacadeREST {
     }
 
     @PUT
-    @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(Plate entity) {
         ejb.updatePlate(entity);

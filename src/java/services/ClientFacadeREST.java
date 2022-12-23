@@ -47,7 +47,6 @@ public class ClientFacadeREST {
     }
 
     @PUT
-    @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(Client entity) {
         ejb.updateClient(entity);

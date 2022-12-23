@@ -20,10 +20,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(
             name = "findAllClientDiets",
-            query = "SELECT c FROM ClientDiet c ORDER BY NEWID()"
+            query = "SELECT cd.diet FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id"
     ),@NamedQuery(
-            name = "findClientDietsForYou",
-            query = "SELECT c FROM ClientDiet c"
+            name = "findAll_C_D",
+            query = "SELECT cd FROM ClientDiet cd"
+    ),@NamedQuery(
+            name = "findClientDietsRelation",
+            query = "SELECT cd FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id AND cd.isActive = false"
+    ),@NamedQuery(
+            name = "findClientDietsRelationActive",
+            query = "SELECT cd FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id AND cd.isActive = true"
     )
 })
 @XmlRootElement

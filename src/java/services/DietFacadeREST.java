@@ -38,10 +38,9 @@ public class DietFacadeREST {
     }
 
     @PUT
-    @Path("editById/{id}")
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public void edit(Diet entity) {
-        ejb.updateDiet(entity);
+    public void edit(Diet diet) {
+        ejb.updateDiet(diet);
     }
 
     @DELETE
@@ -52,25 +51,31 @@ public class DietFacadeREST {
         } catch (Exception e) {
         }
     }
+    
+    @GET
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public List<Diet> findAllDiets() {
+        return ejb.findAllDiets();
+    }
 
     @GET
     @Path("findDietById/{id}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Diet find(@PathParam("id") Integer id) {
+    public Diet findById(@PathParam("id") Integer id) {
         return ejb.findDietById(id);
     }
 
     @GET
     @Path("findAllByName/{name}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public List<Diet> findAll(@PathParam("name") String name) {
+    public List<Diet> findAllDietsByName(@PathParam("name") String name) {
         return ejb.findDietByName(name);
     }
     
     @GET
     @Path("findAllByGoal/{goal}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public List<Diet> findAll(@PathParam("goal") GoalEnum goal) {
+    public List<Diet> findAllDietsByGoal(@PathParam("goal") GoalEnum goal) {
         return ejb.findDietByGoal(goal);
     }
 }

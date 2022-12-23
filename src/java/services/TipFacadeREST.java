@@ -46,7 +46,6 @@ public class TipFacadeREST {
     }
 
     @PUT
-    @Path("{entity}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(Tip entity) {
         LOGGER.log(Level.INFO, "Updating tip {0}", entity.getTip_id());
