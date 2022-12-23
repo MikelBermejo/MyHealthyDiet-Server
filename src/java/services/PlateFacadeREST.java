@@ -38,7 +38,7 @@ public class PlateFacadeREST {
     }
 
     @DELETE
-    @Path("delete/{id}")
+    @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         try {
             ejb.removePlate(ejb.findPlate(id));
