@@ -55,8 +55,8 @@ public class Client extends User{
     /**
      * @associates <{entities.Weight}>
      */
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    //@JoinColumn(name = "user_id")
     private List<Weight> weights;
 
 
@@ -111,8 +111,7 @@ public class Client extends User{
     public void setWeights(List<Weight> weights) {
         this.weights = weights;
     }
-
-
+    
     @XmlTransient
     public List<Weight> getWeights() {
         return weights;

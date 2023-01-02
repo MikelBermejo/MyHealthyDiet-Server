@@ -6,6 +6,7 @@
 package ejb;
 
 import entities.User;
+import exceptions.ReadException;
 
 /**
  *
@@ -13,6 +14,6 @@ import entities.User;
  */
 public interface UserInterface {
     
-    public User signIn(String login, String password);
+    public User signIn(String login, String password) throws ReadException;
     
 }
