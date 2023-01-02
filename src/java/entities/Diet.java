@@ -282,14 +282,6 @@ public class Diet implements Serializable {
         this.plates = plates;
     }
     
-    public List<Tip> getTips() {
-        return tips;
-    }
-
-    public void setTips(List<Tip> tips) {
-        this.tips = tips;
-    }
-    
     /**
      * Get the list of plates for this diet.
      * @return the list of plates for this diet.

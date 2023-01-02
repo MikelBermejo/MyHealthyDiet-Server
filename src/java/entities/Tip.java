@@ -93,17 +93,6 @@ public class Tip implements Serializable {
     public void setDiet(Diet diet) {
         this.diet = diet;
     }
-    
-    
-
-    @XmlTransient
-    public Diet getDiet() {
-        return diet;
-    }
-
-    public void setDiet(Diet diet) {
-        this.diet = diet;
-    }
 
     
     
