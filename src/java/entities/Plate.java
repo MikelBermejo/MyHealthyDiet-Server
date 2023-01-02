@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import static javax.persistence.CascadeType.MERGE;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
         name="findPlatesByMealType", query="SELECT p FROM Plate p WHERE p.mealType = :mealType ORDER BY p.plateName ASC"),
     @NamedQuery(
         name="findPlatesIfVegetarian", query="SELECT p FROM Plate p WHERE p.isVegetarian = TRUE ORDER BY p.plateName ASC")
+        
 })
 public class Plate implements Serializable {
 
@@ -54,7 +56,7 @@ public class Plate implements Serializable {
     private String plateName;
 
     /**
-     * Calories in the plate.
+     * KiloCalories in the plate.
      */
 
     private Float calories;
@@ -93,7 +95,7 @@ public class Plate implements Serializable {
     /**
      * List of the ingredients the plate has.
      */
-    @ManyToMany(mappedBy = "plates", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "plates", cascade=MERGE, fetch = FetchType.EAGER)
     private List<Ingredient> ingredients;
     
     /**
@@ -199,9 +201,6 @@ public class Plate implements Serializable {
         this.ingredients = ingredients;
     }
 
-
-
-    @XmlTransient
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
