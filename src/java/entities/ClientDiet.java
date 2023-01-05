@@ -26,10 +26,10 @@ import javax.xml.bind.annotation.XmlRootElement;
             query = "SELECT cd FROM ClientDiet cd"
     ),@NamedQuery(
             name = "findClientDietsRelation",
-            query = "SELECT cd FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id AND cd.isActive = false"
+            query = "SELECT cd.diet FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id AND cd.isActive = false"
     ),@NamedQuery(
-            name = "findClientDietsRelationActive",
-            query = "SELECT cd FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id AND cd.isActive = true"
+            name = "findClientDietRelationIsActive",
+            query = "SELECT cd.diet FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id AND cd.isActive = true"
     )
 })
 @XmlRootElement
