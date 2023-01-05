@@ -112,7 +112,6 @@ public class Client extends User{
         this.weights = weights;
     }
     
-    @XmlTransient
     public List<Weight> getWeights() {
         return weights;
     }
