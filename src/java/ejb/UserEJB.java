@@ -6,30 +6,45 @@
 package ejb;
 
 import entities.User;
+import exceptions.ReadException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
+ * This is the stateless EJB that implements the UserInterface
  *
- * @author 2dam
+ * @author Sendoa
  */
 @Stateless
-public class UserEJB implements UserInterface{
+public class UserEJB implements UserInterface {
 
     /**
      * EntityManager for MyHealthyDietPU persistence unit.
      */
     @PersistenceContext(unitName = "MyHealthyDietPU")
     private EntityManager em;
-    
+
+    /**
+     * This method finds a user using the login and password
+     *
+     * @param login the login of the user
+     * @param password the password of the user
+     * @return the user if it finds one
+     * @throws ReadException Exception thrown when any error ocurrs during the
+     * query
+     */
     @Override
-    public User signIn(String login, String password) {
+    public User signIn(String login, String password) throws ReadException {
         User user;
-        
-        user = (User) em.createNamedQuery("signIn").setParameter("loginUsr", login).setParameter("passUsr", password).getSingleResult();
-        
+
+        try {
+            user = (User) em.createNamedQuery("signIn").setParameter("loginUsr", login).setParameter("passUsr", password).getSingleResult();
+        } catch (Exception e) {
+            throw new ReadException(e.getMessage());
+        }
+
         return user;
     }
-    
+
 }

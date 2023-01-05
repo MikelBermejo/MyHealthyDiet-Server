@@ -7,26 +7,30 @@ package ejb;
 
 import entities.Tip;
 import entities.TipTypeEnum;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.Local;
 
 /**
  *
- * @author 2dam
+ * @author Sendoa
  */
 @Local
 public interface TipInterface {
     
-    public void createTip(Tip tip);
+    public void createTip(Tip tip) throws CreateException;
     
-    public void updateTip(Tip tip);
+    public void updateTip(Tip tip) throws UpdateException;
     
-    public void removeTip(Tip tip);
+    public void removeTip(Tip tip) throws DeleteException;
     
-    public List<Tip> findAllTip();
+    public List<Tip> findAllTip() throws ReadException;
     
-    public Tip findTipById(Integer id);
+    public Tip findTipById(Integer id) throws ReadException;
     
-    public List<Tip> findTipByType(TipTypeEnum tipType);
+    public List<Tip> findTipByType(TipTypeEnum tipType) throws ReadException;
     
 }
