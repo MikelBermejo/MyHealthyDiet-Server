@@ -31,7 +31,11 @@ public class IngredientEJB implements IngredientInterface{
      * @param entity 
      */
     public void createIngredient(Ingredient entity) throws CreateException {
-        em.persist(entity);
+        try{
+            em.persist(entity);
+        }catch(Exception e){
+            throw new CreateException(e.getMessage());
+        }   
     }
 
     /**
@@ -39,10 +43,14 @@ public class IngredientEJB implements IngredientInterface{
      * @param entity 
      */
     public void editIngredient(Ingredient entity) throws UpdateException {
-       if(!em.contains(entity)) {
-                em.merge(entity);
-        }
-            em.flush();
+        try{
+            if(!em.contains(entity)) {
+                     em.merge(entity);
+             }
+                 em.flush();
+        }catch(Exception e){
+            throw new UpdateException(e.getMessage());
+        } 
     }
 
     /**
@@ -50,7 +58,11 @@ public class IngredientEJB implements IngredientInterface{
      * @param entity 
      */
     public void removeIngredient(Ingredient entity) throws DeleteException {
-        em.remove(em.merge(entity));
+        try{
+            em.remove(em.merge(entity));
+        }catch(Exception e){
+            throw new DeleteException(e.getMessage());
+        } 
     }
 
     /**
@@ -59,7 +71,11 @@ public class IngredientEJB implements IngredientInterface{
      * @return 
      */
     public Ingredient findIngredient(Object id) throws ReadException {
-        return em.find(Ingredient.class, id);
+        try{
+            return em.find(Ingredient.class, id);
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        } 
     }
 
     /**
@@ -67,7 +83,11 @@ public class IngredientEJB implements IngredientInterface{
      * @return 
      */
     public List<Ingredient> findAllIngredients() throws ReadException {
-        return em.createNamedQuery("findAllIngredients").getResultList();
+        try{
+            return em.createNamedQuery("findAllIngredients").getResultList();
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        } 
     }
     /**
      * 
@@ -75,6 +95,10 @@ public class IngredientEJB implements IngredientInterface{
      * @return 
      */
     public List<Ingredient> findIngredientsByName(String ingredientName) throws ReadException {
-        return em.createNamedQuery("findIngredientsByName").setParameter("ingredientName", "%"+ingredientName+"%").getResultList();
+        try{
+            return em.createNamedQuery("findIngredientsByName").setParameter("ingredientName", "%"+ingredientName+"%").getResultList();
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        } 
     }
 }

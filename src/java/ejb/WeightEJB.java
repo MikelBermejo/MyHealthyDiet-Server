@@ -31,7 +31,11 @@ public class WeightEJB implements WeightInterface{
      * @param entity 
      */
     public void createWeight(Weight entity) throws CreateException {
-        em.persist(entity);
+        try {
+            em.persist(entity);
+        }catch(Exception e){
+            throw new CreateException(e.getMessage());
+        }
     }
     
     /**
@@ -39,10 +43,14 @@ public class WeightEJB implements WeightInterface{
      * @param entity 
      */
     public void editWeight(Weight entity) throws UpdateException {
-        if (!em.contains(entity)) {
-                em.merge(entity);
-            }
-            em.flush();
+        try{
+            if (!em.contains(entity)) {
+                   em.merge(entity);
+                }
+                em.flush();
+        }catch(Exception e){
+            throw new UpdateException(e.getMessage());
+        }
     }
     
     /**
@@ -50,7 +58,11 @@ public class WeightEJB implements WeightInterface{
      * @param entity 
      */
     public void removeWeight(Weight entity) throws DeleteException {
-        em.remove(em.merge(entity));
+        try{
+            em.remove(em.merge(entity));   
+        }catch(Exception e){
+            throw new DeleteException(e.getMessage());
+        }    
     }
     
     /**
@@ -59,7 +71,11 @@ public class WeightEJB implements WeightInterface{
      * @return 
      */
     public Weight findWeight(Object id) throws ReadException{
-        return em.find(Weight.class, id);
+        try{
+            return em.find(Weight.class, id);
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        }  
     }
     
     /**
@@ -67,6 +83,10 @@ public class WeightEJB implements WeightInterface{
      * @return 
      */
     public List<Weight> findAllWeights() throws ReadException {
-        return em.createNamedQuery("findAllWeights").getResultList();
+        try{
+            return em.createNamedQuery("findAllWeights").getResultList();
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        } 
     }
 }
