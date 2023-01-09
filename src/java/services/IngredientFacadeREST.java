@@ -44,7 +44,7 @@ public class IngredientFacadeREST {
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("/ingredient/{id}")
     public void remove(@PathParam("id") Integer id) {
         ejb.removeIngredient(ejb.findIngredient(id));
     }
