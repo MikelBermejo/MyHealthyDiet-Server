@@ -264,11 +264,19 @@ public class Diet implements Serializable {
     }
     
     
+    /**
+     * Get the tips list for this diet.
+     * @return the tips list for this diet.
+     */
     public List<Tip> getTips() {
         return tips;
     }
     
     
+    /**
+     * Set the tips list of this diet.
+     * @param tips the tips list to set of this diet.
+     */
     public void setTips(List<Tip> tips) {
         this.tips = tips;
     }

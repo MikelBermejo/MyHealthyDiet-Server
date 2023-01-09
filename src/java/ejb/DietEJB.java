@@ -2,6 +2,10 @@ package ejb;
 
 import entities.Diet;
 import entities.GoalEnum;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,10 +27,11 @@ public class DietEJB implements DietInterface {
      * @param diet The Diet entity that contains the new data.
      */
     @Override
-    public void createDiet(Diet diet) {
+    public void createDiet(Diet diet) throws CreateException{
         try {
             em.persist(diet);
         } catch (Exception e) {
+            throw new CreateException(e.getMessage());
         }
     }
 
@@ -36,13 +41,14 @@ public class DietEJB implements DietInterface {
      * @param diet The Diet entity that contains the modified data.
      */
     @Override
-    public void updateDiet(Diet diet) {
+    public void updateDiet(Diet diet) throws UpdateException{
         try {
             if (!em.contains(diet)) {
                 em.merge(diet);
             }
             em.flush();
         } catch (Exception e) {
+            throw new UpdateException(e.getMessage());
         }
     }
 
@@ -52,10 +58,11 @@ public class DietEJB implements DietInterface {
      * @param diet The Diet entity that contains the data to remove.
      */
     @Override
-    public void removeDiet(Diet diet) {
+    public void removeDiet(Diet diet) throws DeleteException{
         try {
             em.remove(em.merge(diet));
         } catch (Exception e) {
+            throw new DeleteException(e.getMessage());
         }
     }
     
@@ -65,12 +72,12 @@ public class DietEJB implements DietInterface {
      * @return A list of diets containing diet data.
      */
     @Override
-    public List<Diet> findAllDiets() {
+    public List<Diet> findAllDiets() throws ReadException{
         List<Diet> diets = null;
         try{
         diets = em.createNamedQuery("findAllDiets").getResultList();
         }catch(Exception e){
-            
+            throw new ReadException(e.getMessage());
         }
         return diets;
     }
@@ -82,12 +89,12 @@ public class DietEJB implements DietInterface {
      * @return A diet entity containing diet data.
      */
     @Override
-    public Diet findDietById(Integer id) {
+    public Diet findDietById(Integer id) throws ReadException{
         Diet diet = null;
         try{
         diet = em.find(Diet.class, id);
         }catch(Exception e){
-            
+            throw new ReadException(e.getMessage());
         }
         return diet;
     }
@@ -99,12 +106,12 @@ public class DietEJB implements DietInterface {
      * @return A list of diets containing diet data.
      */
     @Override
-    public List<Diet> findDietByName(String text) {
+    public List<Diet> findDietByName(String text) throws ReadException {
         List<Diet> diets = null;
         try{
         diets = em.createNamedQuery("findDietByName").setParameter("text", "%" + text + "%").getResultList();
         }catch(Exception e){
-            
+            throw new ReadException(e.getMessage());
         }
         return diets;
     }
@@ -116,12 +123,12 @@ public class DietEJB implements DietInterface {
      * @return A list of diets containing diet data.
      */
     @Override
-    public List<Diet> findDietByGoal(GoalEnum goal) {
+    public List<Diet> findDietByGoal(GoalEnum goal) throws ReadException {
         List<Diet> diets = null;
         try{
         diets = em.createNamedQuery("findDietByGoal").setParameter("goal", goal).getResultList();
         }catch(Exception e){
-            
+            throw new ReadException(e.getMessage());
         }
         return diets;
     }

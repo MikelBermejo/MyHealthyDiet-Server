@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
             name="findClientBySearch",query="SELECT u FROM User u WHERE privilege=1 AND (login LIKE :usrValue OR email LIKE :usrValue OR fullName LIKE :usrValue)"
     ),
     @NamedQuery(
-            name="findClientByStatus",query="SELECT u FROM User u WHERE privilege=1 AND satus=:usrStatus"
+            name="findClientByStatus",query="SELECT u FROM User u WHERE privilege=1 AND status=:usrStatus"
     ),
     
 })
@@ -55,8 +55,8 @@ public class Client extends User{
     /**
      * @associates <{entities.Weight}>
      */
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    //@JoinColumn(name = "user_id")
     private List<Weight> weights;
 
 
@@ -111,9 +111,7 @@ public class Client extends User{
     public void setWeights(List<Weight> weights) {
         this.weights = weights;
     }
-
-
-    @XmlTransient
+    
     public List<Weight> getWeights() {
         return weights;
     }

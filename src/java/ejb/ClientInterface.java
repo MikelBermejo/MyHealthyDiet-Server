@@ -7,6 +7,10 @@ package ejb;
 
 import entities.Client;
 import entities.StatusEnum;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
 
 /**
@@ -15,18 +19,18 @@ import java.util.List;
  */
 public interface ClientInterface {
     
-    public void createClient(Client client);
+    public void createClient(Client client) throws CreateException;
     
-    public void updateClient(Client client);
+    public void updateClient(Client client) throws UpdateException;
     
-    public void removeClient(Client client);
+    public void removeClient(Client client) throws DeleteException;
     
-    public List<Client> findAllClient();
+    public List<Client> findAllClient() throws ReadException;
     
-    public Client findClientById(Integer id);
+    public Client findClientById(Integer id) throws ReadException;
     
-    public List<Client> findClientBySearch(String value);
+    public List<Client> findClientBySearch(String value) throws ReadException;
     
-    public List<Client> findClientByStatus(StatusEnum status);
+    public List<Client> findClientByStatus(StatusEnum status) throws ReadException;
     
 }
