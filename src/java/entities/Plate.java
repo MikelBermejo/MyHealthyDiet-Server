@@ -95,7 +95,7 @@ public class Plate implements Serializable {
     /**
      * List of the ingredients the plate has.
      */
-    @ManyToMany(mappedBy = "plates", cascade=ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "plates", cascade = ALL, fetch = FetchType.EAGER)
     private List<Ingredient> ingredients;
     
     /**
@@ -103,7 +103,6 @@ public class Plate implements Serializable {
      */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(schema="myhealthydietdb", name = "dietplate")
-    @XmlTransient
     private List<Diet> diets;
 
     public Plate(String plateName, Float calories, Float carbohydrates, Float lipids, Float proteins,
