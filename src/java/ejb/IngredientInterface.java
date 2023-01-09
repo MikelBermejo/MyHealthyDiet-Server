@@ -6,6 +6,10 @@
 package ejb;
 
 import entities.Ingredient;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
 import java.util.Set;
 import javax.ejb.Local;
@@ -17,15 +21,15 @@ import javax.ejb.Local;
 @Local
 public interface IngredientInterface {
     
-    public void createIngredient(Ingredient entity);
+    public void createIngredient(Ingredient entity) throws CreateException;
 
-    public void editIngredient(Ingredient entity);
+    public void editIngredient(Ingredient entity) throws UpdateException;
 
-    public void removeIngredient(Ingredient entity);
+    public void removeIngredient(Ingredient entity) throws DeleteException;
 
-    public Ingredient findIngredient(Object id);
+    public Ingredient findIngredient(Object id) throws ReadException;
 
-    public List<Ingredient> findAllIngredients();
+    public List<Ingredient> findAllIngredients() throws ReadException;
     
-    public List<Ingredient> findIngredientsByName(String ingredientName);
+    public List<Ingredient> findIngredientsByName(String ingredientName) throws ReadException;
 }

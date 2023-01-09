@@ -6,6 +6,10 @@
 package ejb;
 
 import entities.Ingredient;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,7 +30,7 @@ public class IngredientEJB implements IngredientInterface{
      * 
      * @param entity 
      */
-    public void createIngredient(Ingredient entity) {
+    public void createIngredient(Ingredient entity) throws CreateException {
         em.persist(entity);
     }
 
@@ -34,7 +38,7 @@ public class IngredientEJB implements IngredientInterface{
      * 
      * @param entity 
      */
-    public void editIngredient(Ingredient entity) {
+    public void editIngredient(Ingredient entity) throws UpdateException {
        if(!em.contains(entity)) {
                 em.merge(entity);
         }
@@ -45,7 +49,7 @@ public class IngredientEJB implements IngredientInterface{
      * 
      * @param entity 
      */
-    public void removeIngredient(Ingredient entity) {
+    public void removeIngredient(Ingredient entity) throws DeleteException {
         em.remove(em.merge(entity));
     }
 
@@ -54,7 +58,7 @@ public class IngredientEJB implements IngredientInterface{
      * @param id
      * @return 
      */
-    public Ingredient findIngredient(Object id) {
+    public Ingredient findIngredient(Object id) throws ReadException {
         return em.find(Ingredient.class, id);
     }
 
@@ -62,7 +66,7 @@ public class IngredientEJB implements IngredientInterface{
      * 
      * @return 
      */
-    public List<Ingredient> findAllIngredients() {
+    public List<Ingredient> findAllIngredients() throws ReadException {
         return em.createNamedQuery("findAllIngredients").getResultList();
     }
     /**
@@ -70,7 +74,7 @@ public class IngredientEJB implements IngredientInterface{
      * @param ingredientName
      * @return 
      */
-    public List<Ingredient> findIngredientsByName(String ingredientName){
+    public List<Ingredient> findIngredientsByName(String ingredientName) throws ReadException {
         return em.createNamedQuery("findIngredientsByName").setParameter("ingredientName", "%"+ingredientName+"%").getResultList();
     }
 }

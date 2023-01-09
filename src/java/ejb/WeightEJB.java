@@ -7,6 +7,10 @@ package ejb;
 
 
 import entities.Weight;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,7 +30,7 @@ public class WeightEJB implements WeightInterface{
      * 
      * @param entity 
      */
-    public void createWeight(Weight entity) {
+    public void createWeight(Weight entity) throws CreateException {
         em.persist(entity);
     }
     
@@ -34,7 +38,7 @@ public class WeightEJB implements WeightInterface{
      * 
      * @param entity 
      */
-    public void editWeight(Weight entity) {
+    public void editWeight(Weight entity) throws UpdateException {
         if (!em.contains(entity)) {
                 em.merge(entity);
             }
@@ -45,7 +49,7 @@ public class WeightEJB implements WeightInterface{
      * 
      * @param entity 
      */
-    public void removeWeight(Weight entity) {
+    public void removeWeight(Weight entity) throws DeleteException {
         em.remove(em.merge(entity));
     }
     
@@ -54,7 +58,7 @@ public class WeightEJB implements WeightInterface{
      * @param id
      * @return 
      */
-    public Weight findWeight(Object id) {
+    public Weight findWeight(Object id) throws ReadException{
         return em.find(Weight.class, id);
     }
     
@@ -62,7 +66,7 @@ public class WeightEJB implements WeightInterface{
      * 
      * @return 
      */
-    public List<Weight> findAllWeights() {
+    public List<Weight> findAllWeights() throws ReadException {
         return em.createNamedQuery("findAllWeights").getResultList();
     }
 }
