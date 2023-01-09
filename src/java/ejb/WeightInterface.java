@@ -6,6 +6,10 @@
 package ejb;
 
 import entities.Weight;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -16,13 +20,13 @@ import javax.ejb.Local;
 @Local
 public interface WeightInterface {
     
-    public void createWeight(Weight entity);
+    public void createWeight(Weight entity) throws CreateException;
 
-    public void editWeight(Weight entity);
+    public void editWeight(Weight entity) throws UpdateException;
 
-    public void removeWeight(Weight entity);
+    public void removeWeight(Weight entity) throws DeleteException;
 
-    public Weight findWeight(Object id);
+    public Weight findWeight(Object id) throws ReadException;
 
-    public List<Weight> findAllWeights();
+    public List<Weight> findAllWeights() throws ReadException;
 }

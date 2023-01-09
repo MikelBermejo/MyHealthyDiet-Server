@@ -6,6 +6,10 @@
 package ejb;
 
 import entities.Ingredient;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,27 +30,39 @@ public class IngredientEJB implements IngredientInterface{
      * 
      * @param entity 
      */
-    public void createIngredient(Ingredient entity) {
-        em.persist(entity);
+    public void createIngredient(Ingredient entity) throws CreateException {
+        try{
+            em.persist(entity);
+        }catch(Exception e){
+            throw new CreateException(e.getMessage());
+        }   
     }
 
     /**
      * 
      * @param entity 
      */
-    public void editIngredient(Ingredient entity) {
-       if(!em.contains(entity)) {
-                em.merge(entity);
-        }
-            em.flush();
+    public void editIngredient(Ingredient entity) throws UpdateException {
+        try{
+            if(!em.contains(entity)) {
+                     em.merge(entity);
+             }
+                 em.flush();
+        }catch(Exception e){
+            throw new UpdateException(e.getMessage());
+        } 
     }
 
     /**
      * 
      * @param entity 
      */
-    public void removeIngredient(Ingredient entity) {
-        em.remove(em.merge(entity));
+    public void removeIngredient(Ingredient entity) throws DeleteException {
+        try{
+            em.remove(em.merge(entity));
+        }catch(Exception e){
+            throw new DeleteException(e.getMessage());
+        } 
     }
 
     /**
@@ -54,23 +70,35 @@ public class IngredientEJB implements IngredientInterface{
      * @param id
      * @return 
      */
-    public Ingredient findIngredient(Object id) {
-        return em.find(Ingredient.class, id);
+    public Ingredient findIngredient(Object id) throws ReadException {
+        try{
+            return em.find(Ingredient.class, id);
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        } 
     }
 
     /**
      * 
      * @return 
      */
-    public List<Ingredient> findAllIngredients() {
-        return em.createNamedQuery("findAllIngredients").getResultList();
+    public List<Ingredient> findAllIngredients() throws ReadException {
+        try{
+            return em.createNamedQuery("findAllIngredients").getResultList();
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        } 
     }
     /**
      * 
      * @param ingredientName
      * @return 
      */
-    public List<Ingredient> findIngredientsByName(String ingredientName){
-        return em.createNamedQuery("findIngredientsByName").setParameter("ingredientName", "%"+ingredientName+"%").getResultList();
+    public List<Ingredient> findIngredientsByName(String ingredientName) throws ReadException {
+        try{
+            return em.createNamedQuery("findIngredientsByName").setParameter("ingredientName", "%"+ingredientName+"%").getResultList();
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        } 
     }
 }
