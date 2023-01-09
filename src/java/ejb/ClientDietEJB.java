@@ -65,14 +65,14 @@ public class ClientDietEJB implements ClientDietInterface {
 
     /**
      * This method obtains a list of diets of a client from the DB.
-     * @param client_id The client_id of the client.
+     * @param user_id The user_id of the client.
      * @return A list of clients containing client diets data.
      */
     @Override
-    public List<ClientDiet> findAllClientDiets(Integer client_id) throws ReadException{
+    public List<ClientDiet> findAllClientDiets(Integer user_id) throws ReadException{
         List<ClientDiet> diets = null;
         try{
-        diets = em.createNamedQuery("findAllClientDiets").setParameter("client_id", client_id).getResultList();
+        diets = em.createNamedQuery("findAllClientDiets").setParameter("user_id", user_id).getResultList();
         }catch(Exception e){
             throw new ReadException(e.getMessage());
         }
@@ -98,14 +98,14 @@ public class ClientDietEJB implements ClientDietInterface {
     
     /**
      * This method obtains a list of diets of a client which are not active from the DB.
-     * @param client_id The client_id of the client.
+     * @param user_id The user_id of the client.
      * @return A list of diets containing client diets data.
      */
     @Override
-    public List<ClientDiet> findClientDietsRelation(Integer client_id) throws ReadException{
+    public List<ClientDiet> findClientDietsRelation(Integer user_id) throws ReadException{
         List<ClientDiet> diets = null;
         try{
-        diets = em.createNamedQuery("findClientDietsRelation").setParameter("client_id", client_id).getResultList();
+        diets = em.createNamedQuery("findClientDietsRelation").setParameter("user_id", user_id).getResultList();
         }catch(Exception e){
             throw new ReadException(e.getMessage());
         }
@@ -114,14 +114,14 @@ public class ClientDietEJB implements ClientDietInterface {
     
     /**
      * This method obtains a list of diets of a client which are active from the DB.
-     * @param client_id The client_id of the client.
+     * @param user_id The user_id of the client.
      * @return A list of diets containing client diets data.
      */
     @Override
-    public List<ClientDiet> findClientDietRelationIsActive(Integer client_id) throws ReadException{
+    public List<ClientDiet> findClientDietRelationIsActive(Integer user_id) throws ReadException{
         List<ClientDiet> diets = null;
         try{
-        diets = em.createNamedQuery("findClientDietRelationIsActive").setParameter("client_id", client_id).getResultList();
+        diets = em.createNamedQuery("findClientDietRelationIsActive").setParameter("user_id", user_id).getResultList();
         }catch(Exception e){
             throw new ReadException(e.getMessage());
         }

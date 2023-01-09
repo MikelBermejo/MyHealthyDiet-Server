@@ -42,11 +42,11 @@ public interface ClientDietInterface {
     
     /**
      * This method obtains a list of diets of a client from the DB.
-     * @param client_id The client_id of the client.
+     * @param user_id The user_id of the client.
      * @return A list of clients containing client diets data.
      * @throws exceptions.ReadException
      */
-    public List<ClientDiet> findAllClientDiets (Integer client_id) throws ReadException;
+    public List<ClientDiet> findAllClientDiets (Integer user_id) throws ReadException;
     
     
     /**
@@ -59,19 +59,19 @@ public interface ClientDietInterface {
     
     /**
      * This method obtains a list of diets of a client which are not active from the DB.
-     * @param client_id The client_id of the client.
+     * @param user_id The user_id of the client.
      * @return A list of diets containing client diets data.
      * @throws exceptions.ReadException
      */
-    public List<ClientDiet> findClientDietsRelation (Integer client_id) throws ReadException;
+    public List<ClientDiet> findClientDietsRelation (Integer user_id) throws ReadException;
     
     
     /**
      * This method obtains a list of diets of a client which are active from the DB.
-     * @param client_id The client_id of the client.
+     * @param user_id The user_id of the client.
      * @return A list of diets containing client diets data.
      * @throws exceptions.ReadException
      */
-    public List<ClientDiet> findClientDietRelationIsActive (Integer client_id) throws ReadException;
+    public List<ClientDiet> findClientDietRelationIsActive (Integer user_id) throws ReadException;
        
 }

@@ -68,10 +68,10 @@ public class ClientDietFacadeREST {
     }
 
     @DELETE
-    @Path("findClientDietsRelation/{client_id}")
-    public void remove(@PathParam("client_id") Integer client_id) {
+    @Path("findClientDietsRelation/{user_id}")
+    public void remove(@PathParam("user_id") Integer user_id) {
         try {
-            ejb.removeClientDiet(ejb.findClientDietsRelation(client_id));
+            ejb.removeClientDiet(ejb.findClientDietsRelation(user_id));
         } catch (DeleteException | ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
         }
@@ -84,11 +84,11 @@ public class ClientDietFacadeREST {
      * @return A list of diets.
      */
     @GET
-    @Path("findAllClientDiets/{client_id}")
+    @Path("findAllClientDiets/{user_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<ClientDiet> find(@PathParam("client_id") Integer client_id) {
+    public List<ClientDiet> find(@PathParam("user_id") Integer user_id) {
         try {
-            return ejb.findAllClientDiets(client_id);
+            return ejb.findAllClientDiets(user_id);
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
         }
@@ -101,11 +101,11 @@ public class ClientDietFacadeREST {
      * @return A list of diets.
      */
     @GET
-    @Path("findClientDietsRelation/{client_id}")
+    @Path("findClientDietsRelation/{user_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<ClientDiet> findClientDietsRelation(@PathParam("client_id") Integer client_id) {
+    public List<ClientDiet> findClientDietsRelation(@PathParam("user_id") Integer user_id) {
         try {
-            return ejb.findClientDietsRelation(client_id);
+            return ejb.findClientDietsRelation(user_id);
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
         }
@@ -130,11 +130,11 @@ public class ClientDietFacadeREST {
      * @return A list of diets.
      */
     @GET
-    @Path("findClientDietRelationIsActive/{client_id}")
+    @Path("findClientDietRelationIsActive/{user_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<ClientDiet> findClientDietRelationIsActive(@PathParam("client_id") Integer client_id) {
+    public List<ClientDiet> findClientDietRelationIsActive(@PathParam("user_id") Integer user_id) {
         try {
-            return ejb.findClientDietRelationIsActive(client_id);
+            return ejb.findClientDietRelationIsActive(user_id);
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
         }

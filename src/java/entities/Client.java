@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
             name="findClientBySearch",query="SELECT u FROM User u WHERE privilege=1 AND (login LIKE :usrValue OR email LIKE :usrValue OR fullName LIKE :usrValue)"
     ),
     @NamedQuery(
-            name="findClientByStatus",query="SELECT u FROM User u WHERE privilege=1 AND satus=:usrStatus"
+            name="findClientByStatus",query="SELECT u FROM User u WHERE privilege=1 AND status=:usrStatus"
     ),
     
 })
