@@ -33,4 +33,6 @@ public interface ClientInterface {
     
     public List<Client> findClientByStatus(StatusEnum status) throws ReadException;
     
+    public Client findClientByLogin(String login) throws ReadException;
+    
 }

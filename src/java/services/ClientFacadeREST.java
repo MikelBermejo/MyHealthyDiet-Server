@@ -164,6 +164,16 @@ public class ClientFacadeREST {
         }
     }
     
-    
-    
+    @GET
+    @Path("/login/{usrLogin}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Client findClientByLogin(@PathParam("usrLogin") String usrLogin){
+       try {
+           LOGGER.log(Level.INFO, "Finding client by login");
+           return ejb.findClientByLogin(usrLogin);
+       } catch (ReadException ex) {
+           LOGGER.severe(ex.getMessage());
+           throw new InternalServerErrorException(ex.getMessage()); 
+       }
+    }
 }

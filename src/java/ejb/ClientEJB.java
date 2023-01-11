@@ -165,4 +165,25 @@ public class ClientEJB implements ClientInterface {
         return clients;
     }
 
+    /**
+     * This method finds a single client using login
+     * 
+     * @param login the login or username of the client
+     * @return The client with that login 
+     * @throws ReadException Exception thrown when any error ocurrs during the
+     * query
+     */
+    @Override
+    public Client findClientByLogin(String login) throws ReadException {
+        Client client;
+        
+        try {
+            client = (Client) em.createNamedQuery("findClientByLogin").setParameter("usrLogin", login).getSingleResult();
+        } catch (Exception e){
+            throw new ReadException(e.getMessage());
+        }
+        
+        return client;
+    }
+
 }
