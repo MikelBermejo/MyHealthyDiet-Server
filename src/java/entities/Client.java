@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(
             name="findClientByStatus",query="SELECT u FROM User u WHERE privilege=1 AND status=:usrStatus"
     ),
+    @NamedQuery(
+            name="findClientByLogin", query="SELECT u FROM User u WHERE privilege=1 AND login=:usrLogin"
+    ),
     
 })
 @Entity
