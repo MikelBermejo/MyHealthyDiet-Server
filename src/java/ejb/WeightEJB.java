@@ -7,6 +7,10 @@ package ejb;
 
 
 import entities.Weight;
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.ReadException;
+import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,27 +30,39 @@ public class WeightEJB implements WeightInterface{
      * 
      * @param entity 
      */
-    public void createWeight(Weight entity) {
-        em.persist(entity);
+    public void createWeight(Weight entity) throws CreateException {
+        try {
+            em.persist(entity);
+        }catch(Exception e){
+            throw new CreateException(e.getMessage());
+        }
     }
     
     /**
      * 
      * @param entity 
      */
-    public void editWeight(Weight entity) {
-        if (!em.contains(entity)) {
-                em.merge(entity);
-            }
-            em.flush();
+    public void editWeight(Weight entity) throws UpdateException {
+        try{
+            if (!em.contains(entity)) {
+                   em.merge(entity);
+                }
+                em.flush();
+        }catch(Exception e){
+            throw new UpdateException(e.getMessage());
+        }
     }
     
     /**
      * 
      * @param entity 
      */
-    public void removeWeight(Weight entity) {
-        em.remove(em.merge(entity));
+    public void removeWeight(Weight entity) throws DeleteException {
+        try{
+            em.remove(em.merge(entity));   
+        }catch(Exception e){
+            throw new DeleteException(e.getMessage());
+        }    
     }
     
     /**
@@ -54,15 +70,23 @@ public class WeightEJB implements WeightInterface{
      * @param id
      * @return 
      */
-    public Weight findWeight(Object id) {
-        return em.find(Weight.class, id);
+    public Weight findWeight(Object id) throws ReadException{
+        try{
+            return em.find(Weight.class, id);
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        }  
     }
     
     /**
      * 
      * @return 
      */
-    public List<Weight> findAllWeights() {
-        return em.createNamedQuery("findAllWeights").getResultList();
+    public List<Weight> findAllWeights() throws ReadException {
+        try{
+            return em.createNamedQuery("findAllWeights").getResultList();
+        }catch(Exception e){
+            throw new ReadException(e.getMessage());
+        } 
     }
 }

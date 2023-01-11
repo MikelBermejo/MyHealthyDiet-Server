@@ -20,16 +20,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(
             name = "findAllClientDiets",
-            query = "SELECT cd.diet FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id"
+            query = "SELECT cd.diet FROM ClientDiet cd WHERE cd.clientDietId.user_id = :user_id"
     ),@NamedQuery(
             name = "findAll_C_D",
             query = "SELECT cd FROM ClientDiet cd"
     ),@NamedQuery(
             name = "findClientDietsRelation",
-            query = "SELECT cd FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id AND cd.isActive = false"
+            query = "SELECT cd.diet FROM ClientDiet cd WHERE cd.clientDietId.user_id = :user_id AND cd.isActive = false"
     ),@NamedQuery(
-            name = "findClientDietsRelationActive",
-            query = "SELECT cd FROM ClientDiet cd WHERE cd.clientDietId.client_id = :client_id AND cd.isActive = true"
+            name = "findClientDietRelationIsActive",
+            query = "SELECT cd.diet FROM ClientDiet cd WHERE cd.clientDietId.user_id = :user_id AND cd.isActive = true"
     )
 })
 @XmlRootElement
@@ -54,7 +54,7 @@ public class ClientDiet implements Serializable {
     /**
      * Id of a client.
      */
-    @MapsId("client_id")
+    @MapsId("user_id")
     @ManyToOne
     private Client client;
 

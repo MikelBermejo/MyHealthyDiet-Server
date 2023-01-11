@@ -65,7 +65,7 @@ public class Ingredient implements Serializable {
      * List to join plate with ingredient
      */
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(schema="myhealthydietdb", name = "PlateIngredient")
+    @JoinTable(schema="myhealthydietdb", name = "plateingredient")
     @XmlTransient
     private List<Plate> plates;
     
