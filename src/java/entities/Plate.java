@@ -91,7 +91,7 @@ public class Plate implements Serializable {
      */
 
     private Boolean isVegetarian;
-
+    
     /**
      * List of the ingredients the plate has.
      */
@@ -104,9 +104,14 @@ public class Plate implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(schema="myhealthydietdb", name = "dietplate")
     private List<Diet> diets;
+    
+    /**
+     * Image of the plate.
+     */
+    private byte[] plateImg;
 
     public Plate(String plateName, Float calories, Float carbohydrates, Float lipids, Float proteins,
-            MealEnum mealType, List<Ingredient> ingredients, Boolean isVegetarian, List<Diet> diets) {
+            MealEnum mealType, List<Ingredient> ingredients, Boolean isVegetarian, List<Diet> diets, byte[] plateImg) {
         this.plateName = plateName;
         this.calories = calories;
         this.carbohydrates = carbohydrates;
@@ -116,6 +121,7 @@ public class Plate implements Serializable {
         this.ingredients = ingredients;
         this.isVegetarian = isVegetarian;
         this.diets = diets;
+        this.plateImg = plateImg;
     }
 
     public Plate() {
@@ -165,7 +171,6 @@ public class Plate implements Serializable {
         this.isVegetarian = isVegetarian;
     }
 
-
     @XmlTransient
     public List<Diet> getDiets() {
         return diets;
@@ -203,6 +208,14 @@ public class Plate implements Serializable {
         return ingredients;
     }
 
+    public byte[] getPlateImg() {
+        return plateImg;
+    }
+
+    public void setPlateImg(byte[] plateImg) {
+        this.plateImg = plateImg;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
