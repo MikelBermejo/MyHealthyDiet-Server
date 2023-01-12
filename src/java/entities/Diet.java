@@ -18,8 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Julen Entity that saves the information about a Diet.
+ *@author Julen
+ * Entity that saves the information about a Diet.
  */
 @Entity
 @Table(name = "diet", schema = "myhealthydietdb")

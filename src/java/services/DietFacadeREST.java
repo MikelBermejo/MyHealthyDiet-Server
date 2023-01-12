@@ -1,5 +1,6 @@
 package services;
 
+import java.util.logging.Logger;
 import ejb.DietInterface;
 import entities.Diet;
 import entities.GoalEnum;
@@ -8,6 +9,7 @@ import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
 import java.util.List;
+import java.util.logging.Level;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -32,6 +34,8 @@ public class DietFacadeREST {
      */
     @EJB
     private DietInterface ejb;
+    
+    private static final Logger LOGGER=Logger.getLogger(TipFacadeREST.class.getName());
 
     
     /**
@@ -42,6 +46,7 @@ public class DietFacadeREST {
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public void create(Diet diet) {
         try {
+            LOGGER.log(Level.INFO, "Creating diet {0}", diet.getDiet_id());
             ejb.createDiet(diet);
         } catch (CreateException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -57,6 +62,7 @@ public class DietFacadeREST {
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public void edit(Diet diet) {
         try {
+            LOGGER.log(Level.INFO, "Updating diet {0}", diet.getDiet_id());
             ejb.updateDiet(diet);
         } catch (UpdateException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -72,6 +78,7 @@ public class DietFacadeREST {
     @Path("findDietById/{id}")
     public void remove(@PathParam("id") Integer id) {
         try {
+            LOGGER.log(Level.INFO, "Removing diet {0}", id);
             ejb.removeDiet(ejb.findDietById(id));
         } catch (ReadException|DeleteException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -87,6 +94,7 @@ public class DietFacadeREST {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public List<Diet> findAllDiets() {
         try {
+            LOGGER.log(Level.INFO, "Finding all diets");
             return ejb.findAllDiets();
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -104,6 +112,7 @@ public class DietFacadeREST {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Diet findById(@PathParam("id") Integer id) {
         try {
+            LOGGER.log(Level.INFO, "Finding client by id");
             return ejb.findDietById(id);
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -121,6 +130,7 @@ public class DietFacadeREST {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public List<Diet> findAllDietsByName(@PathParam("name") String name) {
         try {
+            LOGGER.log(Level.INFO, "Finding client by name");
             return ejb.findDietByName(name);
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -138,6 +148,8 @@ public class DietFacadeREST {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public List<Diet> findAllDietsByGoal(@PathParam("goal") GoalEnum goal) {
         try {
+            
+            LOGGER.log(Level.INFO, "Finding client by goal");
             return ejb.findDietByGoal(goal);
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
