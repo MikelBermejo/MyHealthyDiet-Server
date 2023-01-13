@@ -28,6 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(
             name ="findAllWeights", query="SELECT w FROM Weight w ORDER BY w.date ASC"
+    ),
+    @NamedQuery(
+            name ="findAllWeightsByClient", query="SELECT w FROM Weight w JOIN w.client c JOIN c.weights w Where c.user_id=:id ORDER BY w.date ASC"
     )
 })
 @Entity

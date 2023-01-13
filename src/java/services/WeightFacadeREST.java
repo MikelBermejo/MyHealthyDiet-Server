@@ -92,4 +92,14 @@ public class WeightFacadeREST {
         }
     }
     
+    @GET
+    @Path("(id)")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Weight> findAllWeightsByClient(@PathParam("id") Integer id) {
+        try {
+            return ejb.findAllWeightsByClient(id);
+        } catch (ReadException e) {
+            throw new InternalServerErrorException(e.getMessage()); 
+        }
+    }
 }
