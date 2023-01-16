@@ -138,24 +138,6 @@ public class PlateFacadeREST {
     }
     
     /**
-     * Get method that obtains plates by ingredient
-     * @param ingredient_id The id of the ingredient that the plates we want to find contain
-     * @return The plates we want to obtain
-     */
-    @GET
-    @Path("findByIngredient/{ingredients.ingredient_id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Plate> findPlatesByIngredient(@PathParam("ingredients.ingredient_id") Integer ingredient_id) {
-        try {
-            LOGGER.log(Level.INFO,"Obtaining plates by ingredient id: {0}", ingredient_id);
-            return ejb.findPlatesByIngredient(ingredient_id);
-        } catch (ReadException ex) {
-            LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage());
-        }
-    }
-    
-    /**
      * Get method that obtains the plates depending on the time of day they belong to (by mealType)
      * @param mealType The meal type of the plates that we want to find
      * @return The plates we want to obtain
