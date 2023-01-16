@@ -89,4 +89,13 @@ public class WeightEJB implements WeightInterface{
             throw new ReadException(e.getMessage());
         } 
     }
+
+    @Override
+    public List<Weight> findAllWeightsByClient(Object id) throws ReadException {
+        try{
+            return em.createNamedQuery("findAllWeightsByClient").setParameter("id", "%"+id+"%").getResultList();
+        }catch (Exception e){
+            throw new ReadException(e.getMessage());
+        }
+    }
 }

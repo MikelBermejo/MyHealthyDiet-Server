@@ -29,4 +29,6 @@ public interface WeightInterface {
     public Weight findWeight(Object id) throws ReadException;
 
     public List<Weight> findAllWeights() throws ReadException;
+    
+    public List<Weight> findAllWeightsByClient(Object id) throws ReadException;
 }
