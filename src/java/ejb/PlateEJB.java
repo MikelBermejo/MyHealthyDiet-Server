@@ -119,21 +119,6 @@ public class PlateEJB implements PlateInterface{
     }
     
     /**
-     * Method that gets plates by ingredient
-     * @param ingredient_id The id of the ingredient that the plates we want to find contain
-     * @return The plates we want to obtain
-     * @throws ReadException Thrown when an exception occurs while reading the plates
-     */
-    @Override
-    public List<Plate> findPlatesByIngredient(Integer ingredient_id) throws ReadException {
-        try {
-            return em.createNamedQuery("findPlatesByIngredient").setParameter("idIngredient", ingredient_id).getResultList();
-        } catch (Exception e) {
-            throw new ReadException(e.getMessage());
-        }
-    }
-    
-    /**
      * Method that obtains the plates depending on the time of day they belong to (by mealType)
      * @param mealType The meal type of the plates that we want to find
      * @return The plates we want to obtain

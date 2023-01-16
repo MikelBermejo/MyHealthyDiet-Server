@@ -21,7 +21,6 @@ public interface PlateInterface {
     public Plate findPlate(Integer plate_id) throws ReadException;
     public List<Plate> findAllPlates() throws ReadException;
     public List<Plate> findPlatesByName(String PlateName) throws ReadException;
-    public List<Plate> findPlatesByIngredient(Integer ingredient_id) throws ReadException;
     public List<Plate> findPlatesByMealType(MealEnum mealType) throws ReadException;
     public List<Plate> findPlatesIfVegetarian() throws ReadException;
 }
