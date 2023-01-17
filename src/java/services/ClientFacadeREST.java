@@ -44,10 +44,11 @@ public class ClientFacadeREST {
     @EJB
     private ClientInterface ejb;
 
-    private Logger LOGGER=Logger.getLogger(TipFacadeREST.class.getName());
+    private Logger LOGGER = Logger.getLogger(TipFacadeREST.class.getName());
 
     /**
      * POST method to create a client
+     *
      * @param entity the Client object containing the data
      */
     @POST
@@ -58,12 +59,13 @@ public class ClientFacadeREST {
             ejb.createClient(entity);
         } catch (CreateException ex) {
             LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage()); 
+            throw new InternalServerErrorException(ex.getMessage());
         }
     }
 
     /**
      * PUT method to update a client
+     *
      * @param entity the Client object containing all the new data
      */
     @PUT
@@ -74,12 +76,26 @@ public class ClientFacadeREST {
             ejb.updateClient(entity);
         } catch (UpdateException ex) {
             LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage()); 
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+    }
+
+    @PUT
+    @Path("updatePassword/{email}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void editPassword(@PathParam("email") String email) {
+        try {
+            //LOGGER.log(Level.INFO, "Updating client {0}", findClientById(email).getUser_id());
+            ejb.recoverPassword(findClientBySearch(email));
+        } catch (UpdateException ex) {
+            LOGGER.severe(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
         }
     }
 
     /**
      * DELETE method to remove a client
+     *
      * @param id the id of the tip
      */
     @DELETE
@@ -90,13 +106,14 @@ public class ClientFacadeREST {
             ejb.removeClient(ejb.findClientById(id));
         } catch (ReadException | DeleteException ex) {
             LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage()); 
-        } 
+            throw new InternalServerErrorException(ex.getMessage());
+        }
     }
 
     /**
      * GET method to find a client by its id
-     * @param id The id of the client 
+     *
+     * @param id The id of the client
      * @return A client object
      */
     @GET
@@ -108,14 +125,15 @@ public class ClientFacadeREST {
             return ejb.findClientById(id);
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage()); 
+            throw new InternalServerErrorException(ex.getMessage());
         }
     }
-    
+
     /**
      * GET method to find cliebnts by their status
-     * @param status the status 
-     * @return A list of Client object 
+     *
+     * @param status the status
+     * @return A list of Client object
      */
     @GET
     @Path("/status/{status}")
@@ -126,12 +144,13 @@ public class ClientFacadeREST {
             return ejb.findClientByStatus(status);
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage()); 
+            throw new InternalServerErrorException(ex.getMessage());
         }
     }
-    
+
     /**
      * GET method to find some client
+     *
      * @param usrValue A string used to finds client
      * @return A list of Client objects
      */
@@ -144,12 +163,13 @@ public class ClientFacadeREST {
             return ejb.findClientBySearch(usrValue);
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage()); 
+            throw new InternalServerErrorException(ex.getMessage());
         }
     }
 
     /**
      * GET method to find all the clients
+     *
      * @return A list of Client objects
      */
     @GET
@@ -160,20 +180,20 @@ public class ClientFacadeREST {
             return ejb.findAllClient();
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage()); 
+            throw new InternalServerErrorException(ex.getMessage());
         }
     }
-    
+
     @GET
     @Path("/login/{usrLogin}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Client findClientByLogin(@PathParam("usrLogin") String usrLogin){
-       try {
-           LOGGER.log(Level.INFO, "Finding client by login");
-           return ejb.findClientByLogin(usrLogin);
-       } catch (ReadException ex) {
-           LOGGER.severe(ex.getMessage());
-           throw new InternalServerErrorException(ex.getMessage()); 
-       }
+    public Client findClientByLogin(@PathParam("usrLogin") String usrLogin) {
+        try {
+            LOGGER.log(Level.INFO, "Finding client by login");
+            return ejb.findClientByLogin(usrLogin);
+        } catch (ReadException ex) {
+            LOGGER.severe(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
     }
 }

@@ -5,6 +5,7 @@
  */
 package ejb;
 
+import emailService.MyHealthyDietEmailService;
 import entities.Client;
 import entities.StatusEnum;
 import exceptions.CreateException;
@@ -167,23 +168,36 @@ public class ClientEJB implements ClientInterface {
 
     /**
      * This method finds a single client using login
-     * 
+     *
      * @param login the login or username of the client
-     * @return The client with that login 
+     * @return The client with that login
      * @throws ReadException Exception thrown when any error ocurrs during the
      * query
      */
     @Override
     public Client findClientByLogin(String login) throws ReadException {
         Client client;
-        
+
         try {
             client = (Client) em.createNamedQuery("findClientByLogin").setParameter("usrLogin", login).getSingleResult();
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ReadException(e.getMessage());
         }
-        
+
         return client;
+    }
+
+    @Override
+    public void recoverPassword(List<Client> clients) throws UpdateException {
+
+        try {
+            MyHealthyDietEmailService emailService = new MyHealthyDietEmailService();
+            StringBuilder password = emailService.generateRandomPassword();
+            updateClient(clients.get(0));
+            emailService.sendEmail(clients.get(0).getEmail(), password);
+        } catch (Exception e) {
+            throw new UpdateException(e.getMessage());
+        }
     }
 
 }
