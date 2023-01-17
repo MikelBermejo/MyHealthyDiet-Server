@@ -7,6 +7,7 @@ package ejb;
 
 import entities.Client;
 import entities.StatusEnum;
+import entities.User;
 import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.ReadException;
@@ -35,6 +36,6 @@ public interface ClientInterface {
     
     public Client findClientByLogin(String login) throws ReadException;
     
-    public void recoverPassword(List<Client> clients) throws UpdateException;
+    public void recoverPassword(User user) throws UpdateException;
     
 }

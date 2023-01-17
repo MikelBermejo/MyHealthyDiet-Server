@@ -8,11 +8,14 @@ package ejb;
 import emailService.MyHealthyDietEmailService;
 import entities.Client;
 import entities.StatusEnum;
+import entities.User;
 import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -186,18 +189,13 @@ public class ClientEJB implements ClientInterface {
 
         return client;
     }
-
+    
     @Override
-    public void recoverPassword(List<Client> clients) throws UpdateException {
-
-        try {
-            MyHealthyDietEmailService emailService = new MyHealthyDietEmailService();
-            StringBuilder password = emailService.generateRandomPassword();
-            updateClient(clients.get(0));
-            emailService.sendEmail(clients.get(0).getEmail(), password);
-        } catch (Exception e) {
-            throw new UpdateException(e.getMessage());
+    public void recoverPassword(User user) throws UpdateException {
+        user.setPassword(MyHealthyDietEmailService.generateRandomPassword().toString());
+        if (!em.contains(user)) {
+            em.merge(user);
         }
+        em.flush();
     }
-
 }

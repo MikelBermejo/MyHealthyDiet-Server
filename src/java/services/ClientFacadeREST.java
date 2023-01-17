@@ -7,6 +7,7 @@ package services;
 
 import ejb.ClientInterface;
 import ejb.TipInterface;
+import emailService.MyHealthyDietEmailService;
 import entities.Client;
 import entities.StatusEnum;
 import exceptions.CreateException;
@@ -79,14 +80,14 @@ public class ClientFacadeREST {
             throw new InternalServerErrorException(ex.getMessage());
         }
     }
-
+    
     @PUT
-    @Path("updatePassword/{email}")
+    @Path("/recoverPassword/")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void editPassword(@PathParam("email") String email) {
+    public void recoverPassword(Client entity) {
         try {
-            //LOGGER.log(Level.INFO, "Updating client {0}", findClientById(email).getUser_id());
-            ejb.recoverPassword(findClientBySearch(email));
+            LOGGER.log(Level.INFO, "Updating client {0}", entity.getUser_id());
+            ejb.recoverPassword(entity);
         } catch (UpdateException ex) {
             LOGGER.severe(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
