@@ -18,8 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *@author Julen
- * Entity that saves the information about a Diet.
+ * @author Julen Entity that saves the information about a Diet.
  */
 @Entity
 @Table(name = "diet", schema = "myhealthydietdb")
@@ -74,15 +73,20 @@ public class Diet implements Serializable {
     private Float lipids;
 
     /**
+     * Carbohydrates of the diet.
+     */
+    private Float carbohydrates;
+
+    /**
      * GoalType of the diet (INCREASE,DECREASE,MAINTAIN).
      */
     @Enumerated(EnumType.ORDINAL)
     private GoalEnum type;
 
     /**
-     * Carbohydrates of the diet.
+     * Img of the diet.
      */
-    private Float carbohydrates;
+    private byte[] dietImg;
 
     //RELATIONS
     /**
@@ -101,7 +105,7 @@ public class Diet implements Serializable {
 
     //CONSTRUCTORS
     public Diet(Integer diet_id, String dietName, String description, Float calories, Float proteins, Float lipids,
-            GoalEnum type, Float carbohydrates, List<Plate> plates, List<Tip> tips) {
+            GoalEnum type, Float carbohydrates, List<Plate> plates, List<Tip> tips, byte[] dietImg) {
         this.diet_id = diet_id;
         this.dietName = dietName;
         this.description = description;
@@ -112,26 +116,25 @@ public class Diet implements Serializable {
         this.carbohydrates = carbohydrates;
         this.plates = plates;
         this.tips = tips;
+        this.dietImg = dietImg;
     }
 
     public Diet() {
     }
 
-    
     //GETTERS AND SETTERS
-
-
     /**
      * Set the diet ID for this diet.
+     *
      * @param diet_id the diet ID to set.
      */
     public void setDiet_id(Integer diet_id) {
         this.diet_id = diet_id;
     }
 
-    
     /**
      * Get the diet ID for this diet.
+     *
      * @return the diet ID for this diet.
      */
     public Integer getDiet_id() {
@@ -140,163 +143,182 @@ public class Diet implements Serializable {
 
     /**
      * Set the name of this diet.
+     *
      * @param dietName the name to set of this diet.
      */
     public void setDietName(String dietName) {
         this.dietName = dietName;
     }
 
-    
     /**
      * Get the name of this diet.
+     *
      * @return the name for this diet.
      */
     public String getDietName() {
         return dietName;
     }
 
-    
     /**
      * Set the description for this diet.
+     *
      * @param description the description to set of this diet.
      */
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
+
     /**
      * Get the description for this diet.
+     *
      * @return the description for this diet.
      */
     public String getDescription() {
         return description;
     }
 
-    
     /**
      * Set the calories count for this diet.
+     *
      * @param calories the calories count to set of this diet.
      */
     public void setCalories(Float calories) {
         this.calories = calories;
     }
-    
-    
+
     /**
      * Get the calories count for this diet.
+     *
      * @return the calories count for this diet.
      */
     public Float getCalories() {
         return calories;
     }
 
-    
     /**
      * Set the proteins count for this diet.
+     *
      * @param proteins the proteins count to set of this diet.
      */
     public void setProteins(Float proteins) {
         this.proteins = proteins;
     }
-    
-    
+
     /**
      * Get the proteins count for this diet.
+     *
      * @return the proteins count for this diet.
      */
     public Float getProteins() {
         return proteins;
     }
 
-    
     /**
      * Set the lipids count for this diet.
+     *
      * @param lipids the lipids count to set of this diet.
      */
     public void setLipids(Float lipids) {
         this.lipids = lipids;
     }
-    
-    
+
     /**
      * Get the lipids count for this diet.
+     *
      * @return the lipids count for this diet.
      */
     public Float getLipids() {
         return lipids;
     }
 
-    
     /**
      * Set the goal type for this diet.
+     *
      * @param type the goal type to set for this diet.
      */
     public void setType(GoalEnum type) {
         this.type = type;
     }
-    
-    
+
     /**
      * Get the goal type for this diet.
+     *
      * @return the goal type for this diet.
      */
     public GoalEnum getType() {
         return type;
     }
 
-    
     /**
      * Set the carbohydrates count of this diet.
+     *
      * @param carbohydrates the carbohydrates count to set of this diet.
      */
     public void setCarbohydrates(Float carbohydrates) {
         this.carbohydrates = carbohydrates;
     }
-    
-    
+
     /**
      * Get the carbohydrates count for this diet.
+     *
      * @return the carbohydrates count for this diet.
      */
     public Float getCarbohydrates() {
         return carbohydrates;
     }
-    
-    
+
     /**
      * Get the tips list for this diet.
+     *
      * @return the tips list for this diet.
      */
     public List<Tip> getTips() {
         return tips;
     }
-    
-    
+
     /**
      * Set the tips list of this diet.
+     *
      * @param tips the tips list to set of this diet.
      */
     public void setTips(List<Tip> tips) {
         this.tips = tips;
     }
 
-    
     /**
      * Set the list of plates for this diet.
+     *
      * @param plates the list of plates to set for this.
      */
     public void setPlates(List<Plate> plates) {
         this.plates = plates;
     }
-    
+
     /**
      * Get the list of plates for this diet.
+     *
      * @return the list of plates for this diet.
      */
     @XmlTransient
     public List<Plate> getPlates() {
         return plates;
+    }
+
+    /**
+     * Get the image of the diet.
+     * @return the image for this diet.
+     */
+    public byte[] getDietImg() {
+        return dietImg;
+    }
+    
+    /**
+     * Set the image for this diet.
+     *
+     * @param dietImg the image for this diet.
+     */
+    public void setDietImg(byte[] dietImg) {
+        this.dietImg = dietImg;
     }
 
     @Override

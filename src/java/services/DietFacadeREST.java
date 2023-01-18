@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author JulenB
  */
-@Path("entities.diet")
+@Path("diet")
 public class DietFacadeREST {
 
     /**
