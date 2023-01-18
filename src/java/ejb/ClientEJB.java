@@ -15,6 +15,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import cryptography.HashMD5;
 
 /**
  * This is the stateless EJB that implements the ClientInterface
@@ -40,6 +41,7 @@ public class ClientEJB implements ClientInterface {
     @Override
     public void createClient(Client client) throws CreateException {
         try {
+            client.setPassword(HashMD5.hashText(client.getPassword()));
             em.persist(client);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());

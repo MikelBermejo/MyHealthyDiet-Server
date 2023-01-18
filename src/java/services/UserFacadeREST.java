@@ -39,14 +39,17 @@ public class UserFacadeREST {
     @EJB
     private UserInterface ejb;
 
-    private Logger LOGGER=Logger.getLogger(TipFacadeREST.class.getName());
+    private Logger LOGGER = Logger.getLogger(TipFacadeREST.class.getName());
 
+    // These methods will not be necessary as the only thing you do with a user is Log In
+    /*
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(User entity) {
         
     }
 
+    
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -72,9 +75,10 @@ public class UserFacadeREST {
     public List<User> findAll() {
         return null;
     }
-    
+     */
     /**
      * GET method to get a User object
+     *
      * @param login the login of the user
      * @param password the password of the user
      * @return A User object
@@ -87,8 +91,8 @@ public class UserFacadeREST {
             return ejb.signIn(login, password);
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage());  
+            throw new InternalServerErrorException(ex.getMessage());
         }
     }
-    
+
 }
