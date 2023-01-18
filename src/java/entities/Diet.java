@@ -84,7 +84,7 @@ public class Diet implements Serializable {
     private GoalEnum type;
 
     /**
-     * Carbohydrates of the diet.
+     * Img of the diet.
      */
     private byte[] dietImg;
 
