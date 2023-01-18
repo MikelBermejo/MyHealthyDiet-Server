@@ -59,6 +59,7 @@ public class ClientEJB implements ClientInterface {
     public void updateClient(Client client) throws UpdateException {
         try {
             if (!em.contains(client)) {
+                client.setPassword(HashMD5.hashText(client.getPassword()));
                 em.merge(client);
             }
             em.flush();
