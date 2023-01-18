@@ -105,7 +105,7 @@ public class Diet implements Serializable {
 
     //CONSTRUCTORS
     public Diet(Integer diet_id, String dietName, String description, Float calories, Float proteins, Float lipids,
-            GoalEnum type, Float carbohydrates, List<Plate> plates, List<Tip> tips) {
+            GoalEnum type, Float carbohydrates, List<Plate> plates, List<Tip> tips, byte[] dietImg) {
         this.diet_id = diet_id;
         this.dietName = dietName;
         this.description = description;
@@ -116,6 +116,7 @@ public class Diet implements Serializable {
         this.carbohydrates = carbohydrates;
         this.plates = plates;
         this.tips = tips;
+        this.dietImg = dietImg;
     }
 
     public Diet() {
