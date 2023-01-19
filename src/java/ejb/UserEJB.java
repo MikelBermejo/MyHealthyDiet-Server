@@ -39,7 +39,7 @@ public class UserEJB implements UserInterface {
         User user;
 
         try {
-            user = (User) em.createNamedQuery("signIn").setParameter("loginUsr", login).setParameter("passUsr", password).getSingleResult();
+            user = (User) em.createNamedQuery("signIn").setParameter("loginUsr", login).setParameter("passUsr", HashMD5.hashText(Password())).getSingleResult();
         } catch (Exception e) {
             throw new ReadException(e.getMessage());
         }
