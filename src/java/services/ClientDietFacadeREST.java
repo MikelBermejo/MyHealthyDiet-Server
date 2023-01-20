@@ -54,6 +54,7 @@ public class ClientDietFacadeREST {
             LOGGER.log(Level.INFO, "Creating clientDiet {0}", clientDiet.getClientDietId());
             ejb.insertClientDiet(clientDiet);
         } catch (CreateException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -69,6 +70,7 @@ public class ClientDietFacadeREST {
             LOGGER.log(Level.INFO, "Updating clientDiet {0}", clientDiet.getClientDietId());
             ejb.updateClientDiet(clientDiet);
         } catch (UpdateException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -80,6 +82,7 @@ public class ClientDietFacadeREST {
             LOGGER.log(Level.INFO, "Removing clientDiet {0}", user_id);
             ejb.removeClientDiet(ejb.findClientDietsRelation(user_id));
         } catch (DeleteException | ReadException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -98,6 +101,7 @@ public class ClientDietFacadeREST {
             LOGGER.log(Level.INFO, "Finding all clientDiets", user_id);
             return ejb.findAllClientDiets(user_id);
         } catch (ReadException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -116,6 +120,7 @@ public class ClientDietFacadeREST {
             LOGGER.log(Level.INFO, "Finding all clientDiets that are not active", user_id);
             return ejb.findClientDietsRelation(user_id);
         } catch (ReadException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -129,6 +134,7 @@ public class ClientDietFacadeREST {
             LOGGER.log(Level.INFO, "Finding all clientsDiets");
             return ejb.findAll_C_D();
         } catch (ReadException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -147,6 +153,7 @@ public class ClientDietFacadeREST {
             LOGGER.log(Level.INFO, "Finding all clientDiets that are active", user_id);
             return ejb.findClientDietRelationIsActive(user_id);
         } catch (ReadException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }

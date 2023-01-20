@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
  * @author HaizeaF
  * RESTful Service of the plates
  */
-@Path("entities.plate")
+@Path("plate")
 public class PlateFacadeREST {
     
     /**
@@ -35,7 +35,7 @@ public class PlateFacadeREST {
     @EJB
     private PlateInterface ejb;
     
-    private Logger LOGGER=Logger.getLogger(PlateFacadeREST.class.getName());
+    private static final Logger LOGGER=Logger.getLogger(PlateFacadeREST.class.getName());
     
     /**
      * Post method that creates a new plate

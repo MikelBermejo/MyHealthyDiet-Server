@@ -5,6 +5,8 @@
  */
 package ejb;
 
+import cryptography.HashMD5;
+import files.MyHealthyDietEmailService;
 import entities.Client;
 import entities.StatusEnum;
 import exceptions.CreateException;
@@ -167,23 +169,36 @@ public class ClientEJB implements ClientInterface {
 
     /**
      * This method finds a single client using login
-     * 
+     *
      * @param login the login or username of the client
-     * @return The client with that login 
+     * @return The client with that login
      * @throws ReadException Exception thrown when any error ocurrs during the
      * query
      */
     @Override
     public Client findClientByLogin(String login) throws ReadException {
         Client client;
-        
+
         try {
             client = (Client) em.createNamedQuery("findClientByLogin").setParameter("usrLogin", login).getSingleResult();
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ReadException(e.getMessage());
         }
-        
+
         return client;
+    }
+
+    @Override
+    public void recoverPassword(Client client) throws UpdateException {
+        try {
+            MyHealthyDietEmailService emailService = new MyHealthyDietEmailService();
+            String password = emailService.generateRandomPassword().toString();
+            emailService.sendEmail(client.getEmail(), password);
+            client.setPassword(HashMD5.hashText(password));
+            updateClient(client);
+        } catch (Exception e) {
+            throw new UpdateException(e.getMessage());
+        }
     }
 
 }

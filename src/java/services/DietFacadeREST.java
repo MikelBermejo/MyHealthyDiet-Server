@@ -49,6 +49,7 @@ public class DietFacadeREST {
             LOGGER.log(Level.INFO, "Creating diet {0}", diet.getDiet_id());
             ejb.createDiet(diet);
         } catch (CreateException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -65,6 +66,7 @@ public class DietFacadeREST {
             LOGGER.log(Level.INFO, "Updating diet {0}", diet.getDiet_id());
             ejb.updateDiet(diet);
         } catch (UpdateException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -81,6 +83,7 @@ public class DietFacadeREST {
             LOGGER.log(Level.INFO, "Removing diet {0}", id);
             ejb.removeDiet(ejb.findDietById(id));
         } catch (ReadException|DeleteException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -97,6 +100,7 @@ public class DietFacadeREST {
             LOGGER.log(Level.INFO, "Finding all diets");
             return ejb.findAllDiets();
         } catch (ReadException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -115,6 +119,7 @@ public class DietFacadeREST {
             LOGGER.log(Level.INFO, "Finding client by id");
             return ejb.findDietById(id);
         } catch (ReadException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -133,6 +138,7 @@ public class DietFacadeREST {
             LOGGER.log(Level.INFO, "Finding client by name");
             return ejb.findDietByName(name);
         } catch (ReadException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
@@ -152,6 +158,7 @@ public class DietFacadeREST {
             LOGGER.log(Level.INFO, "Finding client by goal");
             return ejb.findDietByGoal(goal);
         } catch (ReadException e) {
+            LOGGER.severe(e.getMessage());
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
