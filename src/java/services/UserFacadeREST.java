@@ -30,7 +30,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Sendoa
  */
-@Path("entities.user")
+@Path("user")
 public class UserFacadeREST {
 
     /**
