@@ -35,6 +35,6 @@ public interface ClientInterface {
     
     public Client findClientByLogin(String login) throws ReadException;
     
-    public void recoverPassword(List<Client> clients) throws UpdateException;
+    public void recoverPassword(Client client) throws UpdateException;
     
 }

@@ -5,7 +5,8 @@
  */
 package ejb;
 
-import emailService.MyHealthyDietEmailService;
+import cryptography.HashMD5;
+import files.MyHealthyDietEmailService;
 import entities.Client;
 import entities.StatusEnum;
 import exceptions.CreateException;
@@ -188,13 +189,13 @@ public class ClientEJB implements ClientInterface {
     }
 
     @Override
-    public void recoverPassword(List<Client> clients) throws UpdateException {
-
+    public void recoverPassword(Client client) throws UpdateException {
         try {
             MyHealthyDietEmailService emailService = new MyHealthyDietEmailService();
-            StringBuilder password = emailService.generateRandomPassword();
-            updateClient(clients.get(0));
-            emailService.sendEmail(clients.get(0).getEmail(), password);
+            String password = emailService.generateRandomPassword().toString();
+            emailService.sendEmail(client.getEmail(), password);
+            client.setPassword(HashMD5.hashText(password));
+            updateClient(client);
         } catch (Exception e) {
             throw new UpdateException(e.getMessage());
         }

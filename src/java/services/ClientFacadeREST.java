@@ -81,12 +81,12 @@ public class ClientFacadeREST {
     }
 
     @PUT
-    @Path("updatePassword/{email}")
+    @Path("updatePassword/")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void editPassword(@PathParam("email") String email) {
+    public void editPassword(Client entity) {
         try {
             //LOGGER.log(Level.INFO, "Updating client {0}", findClientById(email).getUser_id());
-            ejb.recoverPassword(findClientBySearch(email));
+            ejb.recoverPassword(entity);
         } catch (UpdateException ex) {
             LOGGER.severe(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
