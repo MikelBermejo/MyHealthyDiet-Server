@@ -32,7 +32,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Sendoa
  */
-@Path("entities.tip")
+@Path("tip")
 public class TipFacadeREST {
 
     /**
