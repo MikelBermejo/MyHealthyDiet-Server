@@ -48,6 +48,7 @@ public class DietFacadeREST {
     public void create(Diet diet) {
         try {
             LOGGER.log(Level.INFO, "Creating diet {0}", diet.getDiet_id());
+            diet.setDiet_id(null);
             ejb.createDiet(diet);
         } catch (CreateException e) {
             LOGGER.severe(e.getMessage());
