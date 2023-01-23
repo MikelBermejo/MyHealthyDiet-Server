@@ -27,7 +27,7 @@ public class WeightEJB implements WeightInterface{
     private EntityManager em;
 
     /**
-     * 
+     * Method that creates a weight.
      * @param entity 
      */
     public void createWeight(Weight entity) throws CreateException {
@@ -39,7 +39,7 @@ public class WeightEJB implements WeightInterface{
     }
     
     /**
-     * 
+     * Method to edit a weight.
      * @param entity 
      */
     public void editWeight(Weight entity) throws UpdateException {
@@ -54,7 +54,7 @@ public class WeightEJB implements WeightInterface{
     }
     
     /**
-     * 
+     * Method to remove a weight.
      * @param entity 
      */
     public void removeWeight(Weight entity) throws DeleteException {
@@ -66,7 +66,7 @@ public class WeightEJB implements WeightInterface{
     }
     
     /**
-     * 
+     * Method to search a weight by id.
      * @param id
      * @return 
      */
@@ -79,7 +79,7 @@ public class WeightEJB implements WeightInterface{
     }
     
     /**
-     * 
+     * Method to show all the weights.
      * @return 
      */
     public List<Weight> findAllWeights() throws ReadException {
@@ -89,7 +89,13 @@ public class WeightEJB implements WeightInterface{
             throw new ReadException(e.getMessage());
         } 
     }
-
+    
+    /**
+     * Method that shows all the weight of a client.
+     * @param id
+     * @return
+     * @throws ReadException 
+     */
     @Override
     public List<Weight> findAllWeightsByClient(Object id) throws ReadException {
         try{

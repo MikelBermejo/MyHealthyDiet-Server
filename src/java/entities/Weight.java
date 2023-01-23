@@ -44,25 +44,37 @@ public class Weight implements Serializable {
     private Integer weight_id;
     
     /**
-     * Weight of the client in kg
+     * Weight of the client in kg.
      */
     private Float weight;
     
     /**
-     * Date that the client saved his weight
+     * Date that the client saved his weight.
      */
     @Temporal(TemporalType.TIMESTAMP)    
     private Date date;
     
+    /**
+     * Client relation with Weight.
+     */
     @ManyToOne
     private Client client;
-
+    
+    /**
+     * Constructor with params.
+     * @param weight
+     * @param date
+     * @param weight_id 
+     */
     public Weight(Float weight, Date date, Integer weight_id) {
         this.weight_id = weight_id;
         this.weight = weight;
         this.date = date;
     }
-
+    
+    /**
+     * Empty Constructor.
+     */
     public Weight() {
 
     }
