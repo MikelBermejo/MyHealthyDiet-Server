@@ -1,13 +1,10 @@
 package files;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.security.SecureRandom;
 import java.util.Properties;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
@@ -18,7 +15,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * 
  * @author Julen B
  * A Email service that sends an email to a user.
  */
@@ -31,7 +27,7 @@ public class MyHealthyDietEmailService {
     /**
      * Method that sends a email to the user.
      * @param receiver user that request it.
-     * @param password
+     * @param password the generated password.
      */
 
     public void sendEmail(String receiver, String password) {
@@ -100,7 +96,7 @@ public class MyHealthyDietEmailService {
     }
     
     /**
-     * 
+     * Method that generates a random password for the account recovery.
      * @return password thats generated randomly
      */
     public static StringBuilder generateRandomPassword() {
