@@ -188,6 +188,14 @@ public class ClientEJB implements ClientInterface {
         return client;
     }
 
+    /**
+     * This method generates a new password for the user and then sends it to
+     * the client via email
+     *
+     * @param client The client who is going to have its password reset
+     * @throws UpdateException Exception thrown when any error ocurrs during the
+     * update
+     */
     @Override
     public void recoverPassword(Client client) throws UpdateException {
         try {

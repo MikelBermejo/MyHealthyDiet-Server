@@ -44,7 +44,7 @@ public class ClientFacadeREST {
     @EJB
     private ClientInterface ejb;
 
-    private Logger LOGGER = Logger.getLogger(TipFacadeREST.class.getName());
+    private Logger LOGGER = Logger.getLogger(ClientFacadeREST.class.getName());
 
     /**
      * POST method to create a client
@@ -80,12 +80,18 @@ public class ClientFacadeREST {
         }
     }
 
+    /**
+     * PUT method to update a client's password
+     *
+     * @param entity the Client object that's going to have their password
+     * changed
+     */
     @PUT
-    @Path("updatePassword/")
+    @Path("updatePassword")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void editPassword(Client entity) {
         try {
-            //LOGGER.log(Level.INFO, "Updating client {0}", findClientById(email).getUser_id());
+            LOGGER.log(Level.INFO, "Updating client {0}", entity.getUser_id());
             ejb.recoverPassword(entity);
         } catch (UpdateException ex) {
             LOGGER.severe(ex.getMessage());

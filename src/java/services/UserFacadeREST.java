@@ -27,10 +27,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
+ * Most of the methods of this RESTfull won't do anything as the only thing you
+ * do with a user is a GET to check the login, the rest of the methods are there
+ * just because otherwise the entity doesn't appear in RESTfull test webpage
  *
  * @author Sendoa
  */
-@Path("entities.user")
+@Path("user")
 public class UserFacadeREST {
 
     /**
@@ -39,25 +42,25 @@ public class UserFacadeREST {
     @EJB
     private UserInterface ejb;
 
-    private Logger LOGGER=Logger.getLogger(TipFacadeREST.class.getName());
+    private Logger LOGGER = Logger.getLogger(UserFacadeREST.class.getName());
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(User entity) {
-        
+
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, User entity) {
-        
+
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        
+
     }
 
     @GET
@@ -72,9 +75,10 @@ public class UserFacadeREST {
     public List<User> findAll() {
         return null;
     }
-    
+
     /**
      * GET method to get a User object
+     *
      * @param login the login of the user
      * @param password the password of the user
      * @return A User object
@@ -87,8 +91,8 @@ public class UserFacadeREST {
             return ejb.signIn(login, password);
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
-            throw new InternalServerErrorException(ex.getMessage());  
+            throw new InternalServerErrorException(ex.getMessage());
         }
     }
-    
+
 }
