@@ -34,6 +34,7 @@ import javax.ws.rs.core.MediaType;
 @Path("entities.ingredient")
 public class IngredientFacadeREST {
 
+    private Logger LOGGER=Logger.getLogger(IngredientFacadeREST.class.getName());
     
     @EJB
     private IngredientInterface ejb;
@@ -45,6 +46,7 @@ public class IngredientFacadeREST {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Ingredient entity) {
         try{
+            LOGGER.log(Level.INFO, "Creating ingredient {0}", entity.getIngredient_id());
             ejb.createIngredient(entity);
         } catch (CreateException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -58,6 +60,7 @@ public class IngredientFacadeREST {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(Ingredient entity) {
         try {
+            LOGGER.log(Level.INFO, "Updating ingredient {0}", entity.getIngredient_id());
             ejb.editIngredient(entity);
         } catch (UpdateException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -72,6 +75,7 @@ public class IngredientFacadeREST {
     @Path("/ingredient/{id}")
     public void remove(@PathParam("id") Integer id) {
         try {
+            LOGGER.log(Level.INFO, "Removing ingredient {0}", id);
             ejb.removeIngredient(ejb.findIngredient(id));  
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -90,6 +94,7 @@ public class IngredientFacadeREST {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Ingredient find(@PathParam("id") Integer id) {
         try {
+            LOGGER.log(Level.INFO, "Finding ingredient {0}", id);
             return ejb.findIngredient(id);
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -104,6 +109,7 @@ public class IngredientFacadeREST {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Ingredient> findAll() {
         try {
+            LOGGER.log(Level.INFO, "Finding all ingredients");
             return ejb.findAllIngredients();
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
@@ -119,7 +125,8 @@ public class IngredientFacadeREST {
     @Path("{ingredientName}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public List<Ingredient> findIngredientsByName(@PathParam("ingredientName") String ingredientName) {
-        try {    
+        try {
+            LOGGER.log(Level.INFO, "Finding ingredient {0}", ingredientName);
             return ejb.findIngredientsByName(ingredientName);
         } catch (ReadException e) {
             throw new InternalServerErrorException(e.getMessage()); 
