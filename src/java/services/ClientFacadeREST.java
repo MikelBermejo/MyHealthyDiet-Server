@@ -35,7 +35,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Sendoa
  */
-@Path("entities.client")
+@Path("client")
 public class ClientFacadeREST {
 
     /**

@@ -15,7 +15,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Julen Entity that saves the information about a Diet.
@@ -299,7 +298,6 @@ public class Diet implements Serializable {
      *
      * @return the list of plates for this diet.
      */
-    @XmlTransient
     public List<Plate> getPlates() {
         return plates;
     }
