@@ -46,6 +46,7 @@ public class PlateFacadeREST {
     public void create(Plate entity) {
         try {
             LOGGER.log(Level.INFO,"Creating plate");
+            entity.setPlate_id(null);
             ejb.createPlate(entity);
         } catch (CreateException ex) {
             LOGGER.severe(ex.getMessage());
