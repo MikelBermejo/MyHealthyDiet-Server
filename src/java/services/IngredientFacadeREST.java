@@ -47,6 +47,7 @@ public class IngredientFacadeREST {
     public void create(Ingredient entity) {
         try{
             LOGGER.log(Level.INFO, "Creating ingredient {0}", entity.getIngredient_id());
+            entity.setIngredient_id(null);
             ejb.createIngredient(entity);
         } catch (CreateException e) {
             throw new InternalServerErrorException(e.getMessage()); 
