@@ -56,6 +56,7 @@ public class ClientFacadeREST {
     public void create(Client entity) {
         try {
             LOGGER.log(Level.INFO, "Creating client {0}", entity.getUser_id());
+            entity.setUser_id(null);
             ejb.createClient(entity);
         } catch (CreateException ex) {
             LOGGER.severe(ex.getMessage());
