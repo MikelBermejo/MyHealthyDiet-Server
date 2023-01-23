@@ -107,7 +107,10 @@ public class Plate implements Serializable {
      * Image of the plate.
      */
     private byte[] plateImg;
-
+    
+    /**
+     * Constructor with parameters.
+     */
     public Plate(String plateName, Float calories, Float carbohydrates, Float lipids, Float proteins,
             MealEnum mealType, List<Ingredient> ingredients, Boolean isVegetarian, List<Diet> diets, byte[] plateImg) {
         this.plateName = plateName;
@@ -122,6 +125,9 @@ public class Plate implements Serializable {
         this.plateImg = plateImg;
     }
 
+    /**
+     * Empty constructor.
+     */
     public Plate() {
     }
 

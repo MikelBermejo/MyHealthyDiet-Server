@@ -24,13 +24,13 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * @author HaizeaF
- * RESTful Service of the plates
+ * RESTful Service of the plates.
  */
 @Path("plate")
 public class PlateFacadeREST {
     
     /**
-     * EJB that implements the PlateInterface
+     * EJB that implements the PlateInterface.
      */
     @EJB
     private PlateInterface ejb;
@@ -38,14 +38,14 @@ public class PlateFacadeREST {
     private static final Logger LOGGER=Logger.getLogger(PlateFacadeREST.class.getName());
     
     /**
-     * Post method that creates a new plate
-     * @param entity The plate we want to create
+     * Post method that creates a new plate.
+     * @param entity The plate we want to create.
      */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Plate entity) {
         try {
-            LOGGER.log(Level.INFO,"Creating plate {0}", entity.getPlate_id());
+            LOGGER.log(Level.INFO,"Creating plate");
             ejb.createPlate(entity);
         } catch (CreateException ex) {
             LOGGER.severe(ex.getMessage());
@@ -54,8 +54,8 @@ public class PlateFacadeREST {
     }
     
     /**
-     * Put method that updates the data of a plate
-     * @param entity The plate we want to update
+     * Put method that updates the data of a plate.
+     * @param entity The plate we want to update.
      */
     @PUT
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -70,8 +70,8 @@ public class PlateFacadeREST {
     }
     
     /**
-     * Delete method that deletes a plate
-     * @param id The id of the plate we want to delete
+     * Delete method that deletes a plate.
+     * @param id The id of the plate we want to delete.
      */
     @DELETE
     @Path("{id}")
@@ -86,9 +86,9 @@ public class PlateFacadeREST {
     }
     
     /**
-     * Get method that obtains a plate by id
-     * @param id The id of the plate we want to find
-     * @return The plate we want to obtain
+     * Get method that obtains a plate by id.
+     * @param id The id of the plate we want to find.
+     * @return The plate we want to obtain.
      */
     @GET
     @Path("{id}")
@@ -104,8 +104,8 @@ public class PlateFacadeREST {
     }
 
     /**
-     * Get method that obtains all the plates
-     * @return All the plates
+     * Get method that obtains all the plates.
+     * @return All the plates.
      */
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -120,9 +120,9 @@ public class PlateFacadeREST {
     }
     
     /**
-     * Get method that obtains the plates whose names contain specific characters
-     * @param name The characters that must contain the names of the plates that we want to find
-     * @return The plates we want to obtain
+     * Get method that obtains the plates whose names contain specific characters.
+     * @param name The characters that must contain the names of the plates that we want to find.
+     * @return The plates we want to obtain.
      */
     @GET
     @Path("findByName/{plateName}")
@@ -138,9 +138,9 @@ public class PlateFacadeREST {
     }
     
     /**
-     * Get method that obtains the plates depending on the time of day they belong to (by mealType)
-     * @param mealType The meal type of the plates that we want to find
-     * @return The plates we want to obtain
+     * Get method that obtains the plates depending on the time of day they belong to (by mealType).
+     * @param mealType The meal type of the plates that we want to find.
+     * @return The plates we want to obtain.
      */
     @GET
     @Path("findByMealType/{mealType}")
@@ -156,8 +156,8 @@ public class PlateFacadeREST {
     }
     
     /**
-     * Get method that obtains all the vegetarian plates
-     * @return All the vegetarian plates
+     * Get method that obtains all the vegetarian plates.
+     * @return All the vegetarian plates.
      */
     @GET
     @Path("findVegetarians")
