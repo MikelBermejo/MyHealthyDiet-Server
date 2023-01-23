@@ -30,6 +30,7 @@ import javax.ws.rs.core.MediaType;
 /**
  *
  * @author JulenB
+ * RESTful Service of the clientdiets
  */
 @Path("clientdiet")
 public class ClientDietFacadeREST {
@@ -74,7 +75,11 @@ public class ClientDietFacadeREST {
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
-
+    
+    /**
+     * DELETE method to remove clientDiet relations: uses remove method.
+     * @param user_id  The clientDiet user_id.
+     */
     @DELETE
     @Path("findClientDietsRelation/{user_id}")
     public void remove(@PathParam("user_id") Integer user_id) {
@@ -126,7 +131,10 @@ public class ClientDietFacadeREST {
     }
     
     
-    
+    /**
+     * GET method for getting a list of clients and diets: uses findAll_C_D method.
+     * @return A list of diets and clients.
+     */
     @GET
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public List<ClientDiet> findAll_C_D() {

@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -92,7 +93,7 @@ public class Diet implements Serializable {
      * @associates <{entities.Plate}>
      */
     //List with plates that we want to get it fast.
-    @ManyToMany(mappedBy = "diets", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "diets", fetch = FetchType.EAGER, cascade = ALL)
     private List<Plate> plates;
 
     /**

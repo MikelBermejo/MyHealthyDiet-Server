@@ -22,9 +22,10 @@ public class ClientDietEJB implements ClientDietInterface {
     private EntityManager em;
 
     /**
-     * This method obtains a list of diets of a client from the DB using.
+     * This method creates a clientDiet from the DB.
      *
      * @param clientDiet The clientDiet entity that contains the new data.
+     * @throws CreateException Thrown when an exception occurs while creating a clientdiet
      */
     @Override
     public void insertClientDiet(ClientDiet clientDiet) throws CreateException {
@@ -47,6 +48,7 @@ public class ClientDietEJB implements ClientDietInterface {
      * This method updates a clientDiet from the DB.
      *
      * @param clientDiet The clientDiet entity that contains the modified data.
+     * @throws UpdateException Thrown when an exception occurs while updating a clientdiet
      */
     @Override
     public void updateClientDiet(ClientDiet clientDiet) throws UpdateException {
@@ -59,7 +61,13 @@ public class ClientDietEJB implements ClientDietInterface {
             throw new UpdateException(e.getMessage());
         }
     }
-
+    
+    /**
+     * This method removes a clientDiet from the DB.
+     *
+     * @param clientDiets The clientDiets list that contains the data to remove.
+     * @throws DeleteException Thrown when an exception occurs while removing a clientdiet
+     */
     @Override
     public void removeClientDiet(List<ClientDiet> clientDiets) throws DeleteException {
         try {
@@ -76,6 +84,7 @@ public class ClientDietEJB implements ClientDietInterface {
      *
      * @param user_id The user_id of the client.
      * @return A list of clients containing client diets data.
+     * @throws ReadException Thrown when an exception occurs while reading a clientdiet.
      */
     @Override
     public List<ClientDiet> findAllClientDiets(Integer user_id) throws ReadException {
@@ -92,6 +101,7 @@ public class ClientDietEJB implements ClientDietInterface {
      * This method obtains a list of all diets and all clients from the DB.
      *
      * @return A list of all diets and all clients.
+     * @throws ReadException Thrown when an exception occurs while reading a clientdiet.
      */
     @Override
     public List<ClientDiet> findAll_C_D() throws ReadException {
@@ -110,6 +120,7 @@ public class ClientDietEJB implements ClientDietInterface {
      *
      * @param user_id The user_id of the client.
      * @return A list of diets containing client diets data.
+     * @throws ReadException Thrown when an exception occurs while reading a clientdiet.
      */
     @Override
     public List<ClientDiet> findClientDietsRelation(Integer user_id) throws ReadException {
@@ -128,6 +139,7 @@ public class ClientDietEJB implements ClientDietInterface {
      *
      * @param user_id The user_id of the client.
      * @return A list of diets containing client diets data.
+     * @throws ReadException Thrown when an exception occurs while reading a clientdiet.
      */
     @Override
     public List<ClientDiet> findClientDietRelationIsActive(Integer user_id) throws ReadException {

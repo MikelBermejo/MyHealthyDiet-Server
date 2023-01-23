@@ -32,7 +32,7 @@ public interface ClientDietInterface {
     public void updateClientDiet (ClientDiet clientDiet) throws UpdateException;
     
     
-    /**REVISAR
+    /**
      * This method removes a clientDiet from the DB.
      * @param clientDiets The list 
      * @throws exceptions.DeleteException 
