@@ -23,7 +23,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * 
- * @author haize
+ * @author HaizeaF
  * This class generates a file with the email credentials encrypted symmetrically and decrypts it.
  */
 public class Symmetric {
