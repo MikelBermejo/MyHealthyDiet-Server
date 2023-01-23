@@ -48,6 +48,7 @@ public class WeightFacadeREST {
     public void createWeight(Weight entity) {
         try {
             LOGGER.log(Level.INFO, "Creating weight {0}", entity.getWeight_id());
+            entity.setWeight_id(null);
             ejb.createWeight(entity);
         } catch (CreateException e) {
             throw new InternalServerErrorException(e.getMessage()); 
