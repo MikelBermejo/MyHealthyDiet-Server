@@ -31,7 +31,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Mikel
  */
-@Path("entities.weight")
+@Path("weight")
 public class WeightFacadeREST {
     
     private Logger LOGGER=Logger.getLogger(WeightFacadeREST.class.getName());
