@@ -36,7 +36,11 @@ public class WeightFacadeREST {
 
     @EJB
     private WeightInterface ejb;
-
+    
+    /**
+     * Create Restfull method.S
+     * @param entity 
+     */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void createWeight(Weight entity) {
@@ -46,7 +50,11 @@ public class WeightFacadeREST {
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
-
+    
+    /**
+     * Edit Restfull method.
+     * @param entity 
+     */
     @PUT
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void editWeight(Weight entity) {
@@ -56,7 +64,11 @@ public class WeightFacadeREST {
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
-
+    
+    /**
+     * Delete Restfull method.
+     * @param id 
+     */
     @DELETE
     @Path("{id}")
     public void removeWeight(@PathParam("id") Integer id) {
@@ -70,7 +82,12 @@ public class WeightFacadeREST {
             throw new InternalServerErrorException(ex.getMessage()); 
         }
     }
-
+    
+    /**
+     * Find Restfull method.
+     * @param id
+     * @return 
+     */
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -81,7 +98,11 @@ public class WeightFacadeREST {
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
-
+    
+    /**
+     * FindAll Restfull method.
+     * @return 
+     */
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Weight> findAllWeights() {
@@ -92,6 +113,11 @@ public class WeightFacadeREST {
         }
     }
     
+    /**
+     * FindAllInClient Restfull method.
+     * @param id
+     * @return 
+     */
     @GET
     @Path("(id)")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

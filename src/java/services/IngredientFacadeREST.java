@@ -37,7 +37,10 @@ public class IngredientFacadeREST {
     
     @EJB
     private IngredientInterface ejb;
-
+    /**
+     * Create Restfull method.
+     * @param entity 
+     */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Ingredient entity) {
@@ -47,7 +50,10 @@ public class IngredientFacadeREST {
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
-
+    /**
+     * Edit Restfull method.
+     * @param entity 
+     */
     @PUT
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(Ingredient entity) {
@@ -57,7 +63,11 @@ public class IngredientFacadeREST {
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
-
+    
+    /**
+     * Delete Restfull method.
+     * @param id 
+     */
     @DELETE
     @Path("/ingredient/{id}")
     public void remove(@PathParam("id") Integer id) {
@@ -69,7 +79,12 @@ public class IngredientFacadeREST {
             throw new InternalServerErrorException(ex.getMessage()); 
         }
     }
-
+    
+    /**
+     * Find Restfull method.
+     * @param id
+     * @return 
+     */
     @GET
     @Path("/ingredient/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -80,7 +95,11 @@ public class IngredientFacadeREST {
             throw new InternalServerErrorException(e.getMessage()); 
         }
     }
-
+    
+    /**
+     * Find all Restfull method.
+     * @return 
+     */
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Ingredient> findAll() {
@@ -91,6 +110,11 @@ public class IngredientFacadeREST {
         }
     }
     
+    /**
+     * findByName Restfull method.
+     * @param ingredientName
+     * @return 
+     */
     @GET
     @Path("{ingredientName}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})

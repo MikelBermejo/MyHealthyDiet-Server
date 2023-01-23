@@ -42,27 +42,25 @@ public class Ingredient implements Serializable {
     private static final long serialVersionUID = 1L;
     
     /**
-     * Id of the entity Ingredient
+     * Id of the entity Ingredient.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
         private Integer ingredient_id;
     
     /**
-     * Name of the ingredient
+     * Name of the ingredient.
      */
-
     private String ingredientName;
     
     /**
-     * Enumeration for the type of food
+     * Enumeration for the type of food.
      */
-
     @Enumerated(EnumType.ORDINAL)
     private FoodTypeEnum foodType;
     
     /**
-     * List to join plate with ingredient
+     * List to join plate with ingredient.
      */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(schema="myhealthydietdb", name = "plateingredient")
@@ -70,13 +68,24 @@ public class Ingredient implements Serializable {
     private List<Plate> plates;
     
     /**
-     * Boolean that shows if it is in season or if is not
+     * Boolean that shows if it is in season or if is not.
      */
-
     private Boolean isInSeason;
     
+    /**
+     * Float that shows the percentage of water that an ingredient has.
+     */
     private Float waterIndex;
-
+    
+    /**
+     * Constructor with parameters
+     * @param ingredient_id
+     * @param ingredientName
+     * @param foodType
+     * @param plates
+     * @param isInSeason
+     * @param waterIndex 
+     */
     public Ingredient(Integer ingredient_id, String ingredientName, FoodTypeEnum foodType, List<Plate> plates, Boolean isInSeason, Float waterIndex) {
         this.ingredient_id = ingredient_id;
         this.ingredientName = ingredientName;
@@ -86,6 +95,9 @@ public class Ingredient implements Serializable {
         this.waterIndex = waterIndex;
     }
     
+    /**
+     * Empty Constructor
+     */
     public Ingredient() {
     }
 
@@ -120,8 +132,6 @@ public class Ingredient implements Serializable {
     public void setWaterIndex(Float waterIndex) {
         this.waterIndex = waterIndex;
     }
-    
-    
 
     @XmlTransient
     public List<Plate> getPlates() {
@@ -139,9 +149,11 @@ public class Ingredient implements Serializable {
     public void setIsInSeason(Boolean isInSeason) {
         this.isInSeason = isInSeason;
     }
-    
-    
 
+    /**
+     * hasCode of the Ingredient
+     * @return 
+     */
     @Override
     public int hashCode() {
         int hash = 0;
