@@ -44,7 +44,7 @@ public class ClientFacadeREST {
     @EJB
     private ClientInterface ejb;
 
-    private Logger LOGGER = Logger.getLogger(TipFacadeREST.class.getName());
+    private Logger LOGGER = Logger.getLogger(ClientFacadeREST.class.getName());
 
     /**
      * POST method to create a client

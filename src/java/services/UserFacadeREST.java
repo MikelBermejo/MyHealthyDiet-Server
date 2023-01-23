@@ -42,7 +42,7 @@ public class UserFacadeREST {
     @EJB
     private UserInterface ejb;
 
-    private Logger LOGGER = Logger.getLogger(TipFacadeREST.class.getName());
+    private Logger LOGGER = Logger.getLogger(UserFacadeREST.class.getName());
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
