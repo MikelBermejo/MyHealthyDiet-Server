@@ -25,6 +25,7 @@ import javax.ws.rs.core.MediaType;
 /**
  *
  * @author JulenB
+ * RESTful Service of the diets.
  */
 @Path("diet")
 public class DietFacadeREST {

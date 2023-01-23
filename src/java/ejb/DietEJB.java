@@ -25,6 +25,7 @@ public class DietEJB implements DietInterface {
     /**
      * This method creates a new diet in the DB.
      * @param diet The Diet entity that contains the new data.
+     * @throws CreateException Thrown when an exception occurs while creating a diet.
      */
     @Override
     public void createDiet(Diet diet) throws CreateException{
@@ -39,6 +40,7 @@ public class DietEJB implements DietInterface {
     /**
      * This method updates an diet data in the DB.
      * @param diet The Diet entity that contains the modified data.
+     * @throws UpdateException Thrown when an exception occurs while updating a diet.
      */
     @Override
     public void updateDiet(Diet diet) throws UpdateException{
@@ -56,6 +58,7 @@ public class DietEJB implements DietInterface {
     /**
      * This method removes a diet from the DB.
      * @param diet The Diet entity that contains the data to remove.
+     * @throws DeleteException Thrown when an exception occurs while removing a diet.
      */
     @Override
     public void removeDiet(Diet diet) throws DeleteException{
@@ -70,6 +73,7 @@ public class DietEJB implements DietInterface {
     /**
      * This method gets a list with all diets in the DB. 
      * @return A list of diets containing diet data.
+     * @throws ReadException Thrown when an exception occurs while reading a diet.
      */
     @Override
     public List<Diet> findAllDiets() throws ReadException{
@@ -87,6 +91,7 @@ public class DietEJB implements DietInterface {
      * This method obtains a diet from the DB using its name.
      * @param id A id used for the JPQL query
      * @return A diet entity containing diet data.
+     * @throws ReadException Thrown when an exception occurs while reading a diet.
      */
     @Override
     public Diet findDietById(Integer id) throws ReadException{
@@ -104,6 +109,7 @@ public class DietEJB implements DietInterface {
      * This method obtains a list of diets from the DB using its name.
      * @param text A text used for the JPQL query
      * @return A list of diets containing diet data.
+     * @throws ReadException Thrown when an exception occurs while reading a diet.
      */
     @Override
     public List<Diet> findDietByName(String text) throws ReadException {
@@ -121,6 +127,7 @@ public class DietEJB implements DietInterface {
      * This method obtains a list of diets from the DB using its goal.
      * @param goal A goal used for the JPQL query
      * @return A list of diets containing diet data.
+     * @throws ReadException Thrown when an exception occurs while reading a diet.
      */
     @Override
     public List<Diet> findDietByGoal(GoalEnum goal) throws ReadException {
