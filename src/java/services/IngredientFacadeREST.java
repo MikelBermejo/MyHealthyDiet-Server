@@ -31,7 +31,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Mikel
  */
-@Path("entities.ingredient")
+@Path("ingredient")
 public class IngredientFacadeREST {
 
     private Logger LOGGER=Logger.getLogger(IngredientFacadeREST.class.getName());
