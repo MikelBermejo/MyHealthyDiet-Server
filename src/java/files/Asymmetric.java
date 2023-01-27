@@ -31,7 +31,7 @@ public class Asymmetric {
     public byte[] decrypt(byte[] mensaje) {
         byte[] decodedMessage = null;
         try {
-            byte fileKey[] = fileReader("./MyHealthyDiet-Server/src/java/files/Private.key");
+            byte fileKey[] = fileReader(getClass().getResource("Private.key").getPath());
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(fileKey);
             PrivateKey privateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
