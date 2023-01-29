@@ -21,7 +21,7 @@ import javax.persistence.PersistenceContext;
 /**
  * This is the stateless EJB that implements the ClientInterface
  *
- * @author 2dam
+ * @author Sendoa
  */
 @Stateless
 public class ClientEJB implements ClientInterface {
