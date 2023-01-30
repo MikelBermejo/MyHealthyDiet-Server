@@ -34,7 +34,7 @@ public class MyHealthyDietEmailService {
      * @param password
      */
 
-    public void sendEmail(String receiver, String password) {
+    public void sendEmail(String receiver, String password, String body) {
         try {
             Properties properties = new Properties();
             InputStream input = new ByteArrayInputStream(sym.decryptText("abcd*1234"));
@@ -47,23 +47,6 @@ public class MyHealthyDietEmailService {
         
     
         String subject = "Password Recovery for Your Account";
-        String body = "Dear customer,\n"
-                                + "\n"
-                                + "We have received a request to reset the password for your account.\n"
-                                + "\n"
-                                + "To reset your password. Use this password the next time you log in into the app.\n"
-                                + "\n"
-                                + password
-                                + "\n"
-                                + "\n"
-                                + "If you did not initiate this request, please contact our customer service team immediately at myhealthydiet.jhms@gmail.com. We take the security of your account very seriously and will assist you in resolving any unauthorized access to your account.\n"
-                                + "\n"
-                                + "Thank you for choosing MyHealthyDiet for your needs. We appreciate your business and look forward to helping you with any future needs.\n"
-                                + "\n"
-                                + "Sincerely,\n"
-                                + "The MyHealthyDiet Team\n"
-                                + "\n"
-                                + "Please note that this is an automated message and replies to this email will not be read. If you have any further questions, please contact customer service.";
        
         
         Properties prop = System.getProperties();

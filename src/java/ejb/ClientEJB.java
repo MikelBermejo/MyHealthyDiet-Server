@@ -61,6 +61,18 @@ public class ClientEJB implements ClientInterface {
     public void updateClient(Client client) throws UpdateException {
         try {
             if (!em.contains(client)) {
+                MyHealthyDietEmailService emailService = new MyHealthyDietEmailService();
+                String body = "Dear " + client.getFullName() + ",\n"
+                        + "\n"
+                        + "We hope this message finds you well. We have received a request to change the password for your account on our app. If you did not request this, please let us know immediately.\n"
+                        + "\n"
+                        + "If you have any issues or questions, please don't hesitate to reach out to our support team via myhealthydiet.jhms@gmail.com.\n"
+                        + "\n"
+                        + "Best regards,\n"
+                        + "The MyHealthyDiet Team\n"
+                        + "\n"
+                        + "Please note that this is an automated message and replies to this email will not be read. If you have any further questions, please contact customer service.";
+                emailService.sendEmail(client.getEmail(), null, body);
                 byte[] passwordBytes = new Asymmetric().decrypt(DatatypeConverter.parseHexBinary(client.getPassword()));
                 client.setPassword(HashMD5.hashText(new String(passwordBytes)));
                 em.merge(client);
@@ -197,7 +209,24 @@ public class ClientEJB implements ClientInterface {
         try {
             MyHealthyDietEmailService emailService = new MyHealthyDietEmailService();
             String password = emailService.generateRandomPassword().toString();
-            emailService.sendEmail(client.getEmail(), password);
+            String body = "Dear customer,\n"
+                    + "\n"
+                    + "We have received a request to reset the password for your account.\n"
+                    + "\n"
+                    + "To reset your password. Use this password the next time you log in into the app.\n"
+                    + "\n"
+                    + password
+                    + "\n"
+                    + "\n"
+                    + "If you did not initiate this request, please contact our customer service team immediately at myhealthydiet.jhms@gmail.com. We take the security of your account very seriously and will assist you in resolving any unauthorized access to your account.\n"
+                    + "\n"
+                    + "Thank you for choosing MyHealthyDiet for your needs. We appreciate your business and look forward to helping you with any future needs.\n"
+                    + "\n"
+                    + "Sincerely,\n"
+                    + "The MyHealthyDiet Team\n"
+                    + "\n"
+                    + "Please note that this is an automated message and replies to this email will not be read. If you have any further questions, please contact customer service.";
+            emailService.sendEmail(client.getEmail(), password, body);
             client.setPassword(HashMD5.hashText(password));
             updateClient(client);
         } catch (Exception e) {
