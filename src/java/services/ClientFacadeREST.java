@@ -122,7 +122,9 @@ public class ClientFacadeREST {
     public Client findClientById(@PathParam("id") Integer id) {
         try {
             LOGGER.log(Level.INFO, "Finding client by id");
-            return ejb.findClientById(id);
+            Client client = ejb.findClientById(id);
+            client.setPassword(null);
+            return client;
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
