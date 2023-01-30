@@ -13,10 +13,12 @@ import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.ReadException;
 import exceptions.UpdateException;
+import files.Asymmetric;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * This is the stateless EJB that implements the ClientInterface
@@ -59,6 +61,8 @@ public class ClientEJB implements ClientInterface {
     public void updateClient(Client client) throws UpdateException {
         try {
             if (!em.contains(client)) {
+                byte[] passwordBytes = new Asymmetric().decrypt(DatatypeConverter.parseHexBinary(client.getPassword()));
+                client.setPassword(HashMD5.hashText(new String(passwordBytes)));
                 em.merge(client);
             }
             em.flush();
