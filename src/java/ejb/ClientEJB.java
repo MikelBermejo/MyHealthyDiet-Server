@@ -44,6 +44,8 @@ public class ClientEJB implements ClientInterface {
     @Override
     public void createClient(Client client) throws CreateException {
         try {
+            byte[] passwordBytes = new Asymmetric().decrypt(DatatypeConverter.parseHexBinary(client.getPassword()));
+            client.setPassword(HashMD5.hashText(new String(passwordBytes)));
             em.persist(client);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());
@@ -51,14 +53,14 @@ public class ClientEJB implements ClientInterface {
     }
 
     /**
-     * This method updates a client
+     * This method updates a clients password
      *
      * @param client The client entity containing all the new data
      * @throws UpdateException Exception thrown when any error ocurrs during the
      * update
      */
     @Override
-    public void updateClient(Client client) throws UpdateException {
+    public void updateClientPassword(Client client) throws UpdateException {
         try {
             if (!em.contains(client)) {
                 MyHealthyDietEmailService emailService = new MyHealthyDietEmailService();
@@ -75,6 +77,26 @@ public class ClientEJB implements ClientInterface {
                 emailService.sendEmail(client.getEmail(), null, body);
                 byte[] passwordBytes = new Asymmetric().decrypt(DatatypeConverter.parseHexBinary(client.getPassword()));
                 client.setPassword(HashMD5.hashText(new String(passwordBytes)));
+                em.merge(client);
+            }
+            em.flush();
+        } catch (Exception e) {
+            throw new UpdateException(e.getMessage());
+        }
+    }
+    
+    /**
+     * This method updates a clients password
+     *
+     * @param client The client entity containing all the new data
+     * @throws UpdateException Exception thrown when any error ocurrs during the
+     * update
+     */
+    @Override
+    public void updateClient(Client client) throws UpdateException {
+        try {
+            client.setPassword(findClientById(client.getUser_id()).getPassword());
+            if (!em.contains(client)) {
                 em.merge(client);
             }
             em.flush();

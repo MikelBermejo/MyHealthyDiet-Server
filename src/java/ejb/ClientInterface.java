@@ -21,6 +21,8 @@ public interface ClientInterface {
     
     public void createClient(Client client) throws CreateException;
     
+    public void updateClientPassword(Client client) throws UpdateException;
+    
     public void updateClient(Client client) throws UpdateException;
     
     public void removeClient(Client client) throws DeleteException;

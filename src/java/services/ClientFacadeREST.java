@@ -85,7 +85,7 @@ public class ClientFacadeREST {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void editPassword(Client entity) {
         try {
-            //LOGGER.log(Level.INFO, "Updating client {0}", findClientById(email).getUser_id());
+            LOGGER.log(Level.INFO, "Updating client {0}", entity.getUser_id());
             ejb.recoverPassword(entity);
         } catch (UpdateException ex) {
             LOGGER.severe(ex.getMessage());
