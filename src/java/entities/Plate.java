@@ -2,7 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
-import static javax.persistence.CascadeType.ALL;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -87,25 +88,25 @@ public class Plate implements Serializable {
     /**
      * Defines if the plate is vegetarian or not.
      */
-
     private Boolean isVegetarian;
     
     /**
      * List of the ingredients the plate has.
      */
-    @ManyToMany(mappedBy = "plates", cascade = ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "plates", fetch = FetchType.EAGER)
     private List<Ingredient> ingredients;
     
     /**
      * List of the diets the plate is on.
      */
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(schema="myhealthydietdb", name = "dietplate")
     private List<Diet> diets;
     
     /**
      * Image of the plate.
      */
+    @Lob
     private byte[] plateImg;
     
     /**
