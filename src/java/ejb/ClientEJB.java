@@ -46,6 +46,8 @@ public class ClientEJB implements ClientInterface {
         try {
             byte[] passwordBytes = new Asymmetric().decrypt(DatatypeConverter.parseHexBinary(client.getPassword()));
             client.setPassword(HashMD5.hashText(new String(passwordBytes)));
+            //if (!em.contains(client.getWeights()))
+                //em.merge(client.getWeights());
             em.persist(client);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());
@@ -84,7 +86,7 @@ public class ClientEJB implements ClientInterface {
             throw new UpdateException(e.getMessage());
         }
     }
-    
+
     /**
      * This method updates a clients password
      *
