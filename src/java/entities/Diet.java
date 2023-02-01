@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -86,6 +87,7 @@ public class Diet implements Serializable {
     /**
      * Img of the diet.
      */
+    @Lob
     private byte[] dietImg;
 
     //RELATIONS
