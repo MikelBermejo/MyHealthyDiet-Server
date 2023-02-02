@@ -29,6 +29,8 @@ public interface ClientInterface {
     
     public List<Client> findAllClient() throws ReadException;
     
+    public Client findClientByEmail(String email) throws ReadException;
+    
     public Client findClientById(Integer id) throws ReadException;
     
     public List<Client> findClientBySearch(String value) throws ReadException;
