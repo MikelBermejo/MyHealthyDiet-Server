@@ -46,8 +46,7 @@ public class ClientEJB implements ClientInterface {
         try {
             byte[] passwordBytes = new Asymmetric().decrypt(DatatypeConverter.parseHexBinary(client.getPassword()));
             client.setPassword(HashMD5.hashText(new String(passwordBytes)));
-            //if (!em.contains(client.getWeights()))
-                //em.merge(client.getWeights());
+            client.setUser_id(null);
             em.persist(client);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());
