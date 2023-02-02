@@ -229,6 +229,27 @@ public class ClientEJB implements ClientInterface {
     }
 
     /**
+     * This method finds a single client using email
+     *
+     * @param email the email of the client
+     * @return The client with that email
+     * @throws ReadException Exception thrown when any error ocurrs during the
+     * query
+     */
+    @Override
+    public Client findClientByEmail(String email) throws ReadException {
+        Client client;
+
+        try {
+            client = (Client) em.createNamedQuery("findClientByEmail").setParameter("usrEmail", email).getSingleResult();
+        } catch (Exception e) {
+            throw new ReadException(e.getMessage());
+        }
+
+        return client;
+    }
+
+    /**
      * This method generates a new password for the user and then sends it to
      * the client via email
      *
@@ -239,29 +260,32 @@ public class ClientEJB implements ClientInterface {
     @Override
     public void recoverPassword(Client client) throws UpdateException {
         try {
-            MyHealthyDietEmailService emailService = new MyHealthyDietEmailService();
-            String password = emailService.generateRandomPassword().toString();
-            String body = "Dear customer,\n"
-                    + "\n"
-                    + "We have received a request to reset the password for your account.\n"
-                    + "\n"
-                    + "To reset your password. Use this password the next time you log in into the app.\n"
-                    + "\n"
-                    + password
-                    + "\n"
-                    + "\n"
-                    + "If you did not initiate this request, please contact our customer service team immediately at myhealthydiet.jhms@gmail.com. We take the security of your account very seriously and will assist you in resolving any unauthorized access to your account.\n"
-                    + "\n"
-                    + "Thank you for choosing MyHealthyDiet for your needs. We appreciate your business and look forward to helping you with any future needs.\n"
-                    + "\n"
-                    + "Sincerely,\n"
-                    + "The MyHealthyDiet Team\n"
-                    + "\n"
-                    + "Please note that this is an automated message and replies to this email will not be read. If you have any further questions, please contact customer service.";
-            String subject = "Password Recovery for Your Account";
-            emailService.sendEmail(client.getEmail(), password, body, subject);
-            client.setPassword(HashMD5.hashText(password));
-            updateClient(client);
+            if (!em.contains(client)) {
+                MyHealthyDietEmailService emailService = new MyHealthyDietEmailService();
+                String password = emailService.generateRandomPassword().toString();
+                String body = "Dear customer,\n"
+                        + "\n"
+                        + "We have received a request to reset the password for your account.\n"
+                        + "\n"
+                        + "To reset your password. Use this password the next time you log in into the app.\n"
+                        + "\n"
+                        + password
+                        + "\n"
+                        + "\n"
+                        + "If you did not initiate this request, please contact our customer service team immediately at myhealthydiet.jhms@gmail.com. We take the security of your account very seriously and will assist you in resolving any unauthorized access to your account.\n"
+                        + "\n"
+                        + "Thank you for choosing MyHealthyDiet for your needs. We appreciate your business and look forward to helping you with any future needs.\n"
+                        + "\n"
+                        + "Sincerely,\n"
+                        + "The MyHealthyDiet Team\n"
+                        + "\n"
+                        + "Please note that this is an automated message and replies to this email will not be read. If you have any further questions, please contact customer service.";
+                String subject = "Password Recovery for Your Account";
+                emailService.sendEmail(client.getEmail(), password, body, subject);
+                client.setPassword(HashMD5.hashText(password));
+                em.merge(client);
+            }
+            em.flush();
         } catch (Exception e) {
             throw new UpdateException(e.getMessage());
         }

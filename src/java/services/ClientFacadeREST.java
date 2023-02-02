@@ -237,4 +237,19 @@ public class ClientFacadeREST {
             throw new InternalServerErrorException(ex.getMessage());
         }
     }
+    
+    @GET
+    @Path("/email/{usrEmail}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Client findClientByEmail(@PathParam("usrEmail") String usrEmail) {
+        try {
+            LOGGER.log(Level.INFO, "Finding client by login");
+            Client client = ejb.findClientByEmail(usrEmail);
+            client.setPassword(null);
+            return client;
+        } catch (ReadException ex) {
+            LOGGER.severe(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+    }
 }
