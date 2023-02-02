@@ -28,7 +28,7 @@ public class IngredientEJB implements IngredientInterface{
     
     /**
      * Method that creates an Ingredient.
-     * @param entity 
+     * @param entity Ingredient to create.
      */
     public void createIngredient(Ingredient entity) throws CreateException {
         try{
@@ -40,7 +40,7 @@ public class IngredientEJB implements IngredientInterface{
 
     /**
      * Method to edit an Ingredient.
-     * @param entity 
+     * @param entity Ingredient to edit.
      */
     public void editIngredient(Ingredient entity) throws UpdateException {
         try{
@@ -55,7 +55,7 @@ public class IngredientEJB implements IngredientInterface{
 
     /**
      * Method to remove an Ingredient.
-     * @param entity 
+     * @param entity Ingredient to remove.
      */
     public void removeIngredient(Ingredient entity) throws DeleteException {
         try{
@@ -67,8 +67,8 @@ public class IngredientEJB implements IngredientInterface{
 
     /**
      * Method to search an Ingredient by id.
-     * @param id
-     * @return 
+     * @param id id of the ingredient to find.
+     * @return ingredient finded.
      */
     public Ingredient findIngredient(Object id) throws ReadException {
         try{
@@ -80,7 +80,7 @@ public class IngredientEJB implements IngredientInterface{
 
     /**
      * Method to show all the Ingredients.
-     * @return 
+     * @return list of the ingredients finded.
      */
     public List<Ingredient> findAllIngredients() throws ReadException {
         try{
@@ -91,8 +91,8 @@ public class IngredientEJB implements IngredientInterface{
     }
     /**
      * Method to search an Ingredient by name.
-     * @param ingredientName
-     * @return 
+     * @param ingredientName name of the ingredients to search.
+     * @return List of the ingredient finded
      */
     public List<Ingredient> findIngredientsByName(String ingredientName) throws ReadException {
         try{

@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
+ * Class Ingredient entity.
  * @author Mikel
  */
 @NamedQueries({
@@ -152,7 +152,7 @@ public class Ingredient implements Serializable {
 
     /**
      * hasCode of the Ingredient
-     * @return 
+     * @return integer if hashed
      */
     @Override
     public int hashCode() {
@@ -160,7 +160,11 @@ public class Ingredient implements Serializable {
         hash += (ingredient_id != null ? ingredient_id.hashCode() : 0);
         return hash;
     }
-
+    /**
+     * Compare method
+     * @param object ingredient to compare
+     * @return boolean that depends on the result.
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -173,7 +177,11 @@ public class Ingredient implements Serializable {
         }
         return true;
     }
-
+    
+    /**
+     * to String of the ingredient.
+     * @return ingredient data in a String.
+     */
     @Override
     public String toString() {
         return super.toString();
