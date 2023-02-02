@@ -65,7 +65,7 @@ public class ClientFacadeREST {
     }
 
     /**
-     * PUT method to update a client
+     * PUT method to update a client except its password
      *
      * @param entity the Client object containing all the new data
      */
@@ -82,15 +82,33 @@ public class ClientFacadeREST {
     }
 
     /**
-     * PUT method to update a client's password
+     * PUT method to update a clients password
+     * 
+     * @param entity 
+     */
+    @PUT
+    @Path("editPassword")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void editPassword(Client entity) {
+        try {
+            LOGGER.log(Level.INFO, "Updating client {0}", entity.getUser_id());
+            ejb.updateClientPassword(entity);
+        } catch(UpdateException ex) {
+            LOGGER.severe(ex.getMessage());
+            throw new InternalServerErrorException(ex.getMessage());
+        }
+    }
+    
+    /**
+     * PUT method to recover a clients password
      *
      * @param entity the Client object that's going to have their password
      * changed
      */
     @PUT
-    @Path("updatePassword")
+    @Path("recoverPassword")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void editPassword(Client entity) {
+    public void recoverPassword(Client entity) {
         try {
             LOGGER.log(Level.INFO, "Updating client {0}", entity.getUser_id());
             ejb.recoverPassword(entity);
