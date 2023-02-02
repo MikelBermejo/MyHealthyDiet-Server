@@ -34,7 +34,7 @@ public class MyHealthyDietEmailService {
      * @param password
      */
 
-    public void sendEmail(String receiver, String password, String body) {
+    public void sendEmail(String receiver, String password, String body, String subject) {
         try {
             Properties properties = new Properties();
             InputStream input = new ByteArrayInputStream(sym.decryptText("abcd*1234"));
@@ -44,9 +44,6 @@ public class MyHealthyDietEmailService {
         } catch (IOException ex) {
             Logger.getLogger(MyHealthyDietEmailService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    
-        String subject = "Password Recovery for Your Account";
        
         
         Properties prop = System.getProperties();

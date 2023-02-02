@@ -75,7 +75,8 @@ public class ClientEJB implements ClientInterface {
                         + "The MyHealthyDiet Team\n"
                         + "\n"
                         + "Please note that this is an automated message and replies to this email will not be read. If you have any further questions, please contact customer service.";
-                emailService.sendEmail(client.getEmail(), null, body);
+                String subject = "Password Changed";
+                emailService.sendEmail(client.getEmail(), null, body, subject);
                 byte[] passwordBytes = new Asymmetric().decrypt(DatatypeConverter.parseHexBinary(client.getPassword()));
                 client.setPassword(HashMD5.hashText(new String(passwordBytes)));
                 em.merge(client);
@@ -249,7 +250,8 @@ public class ClientEJB implements ClientInterface {
                     + "The MyHealthyDiet Team\n"
                     + "\n"
                     + "Please note that this is an automated message and replies to this email will not be read. If you have any further questions, please contact customer service.";
-            emailService.sendEmail(client.getEmail(), password, body);
+            String subject = "Password Recovery for Your Account";
+            emailService.sendEmail(client.getEmail(), password, body, subject);
             client.setPassword(HashMD5.hashText(password));
             updateClient(client);
         } catch (Exception e) {
