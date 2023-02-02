@@ -129,7 +129,9 @@ public class ClientFacadeREST {
     public Client findClientById(@PathParam("id") Integer id) {
         try {
             LOGGER.log(Level.INFO, "Finding client by id");
-            return ejb.findClientById(id);
+            Client client = ejb.findClientById(id);
+            client.setPassword(null);
+            return client;
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
@@ -148,7 +150,11 @@ public class ClientFacadeREST {
     public List<Client> findClientByStatus(@PathParam("status") StatusEnum status) {
         try {
             LOGGER.log(Level.INFO, "Finding client by status");
-            return ejb.findClientByStatus(status);
+            List<Client> clients = ejb.findClientByStatus(status);
+            for (Client client : clients){
+                client.setPassword(null);
+            }
+            return clients;
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
@@ -167,7 +173,11 @@ public class ClientFacadeREST {
     public List<Client> findClientBySearch(@PathParam("usrValue") String usrValue) {
         try {
             LOGGER.log(Level.INFO, "Finding client by search");
-            return ejb.findClientBySearch(usrValue);
+            List<Client> clients = ejb.findClientBySearch(usrValue);
+            for (Client client : clients){
+                client.setPassword(null);
+            }
+            return clients;
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
@@ -184,7 +194,11 @@ public class ClientFacadeREST {
     public List<Client> findAll() {
         try {
             LOGGER.log(Level.INFO, "Finding all clients");
-            return ejb.findAllClient();
+            List<Client> clients = ejb.findAllClient();
+            for (Client client : clients){
+                client.setPassword(null);
+            }
+            return clients;
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
@@ -197,7 +211,9 @@ public class ClientFacadeREST {
     public Client findClientByLogin(@PathParam("usrLogin") String usrLogin) {
         try {
             LOGGER.log(Level.INFO, "Finding client by login");
-            return ejb.findClientByLogin(usrLogin);
+            Client client = ejb.findClientByLogin(usrLogin);
+            client.setPassword(null);
+            return client;
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());

@@ -10,6 +10,9 @@ import exceptions.ReadException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import cryptography.HashMD5;
+import files.Asymmetric;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * This is the stateless EJB that implements the UserInterface
@@ -39,7 +42,8 @@ public class UserEJB implements UserInterface {
         User user;
 
         try {
-            user = (User) em.createNamedQuery("signIn").setParameter("loginUsr", login).setParameter("passUsr", password).getSingleResult();
+            byte[] passwordBytes = new Asymmetric().decrypt(DatatypeConverter.parseHexBinary(password));
+            user = (User) em.createNamedQuery("signIn").setParameter("loginUsr", login).setParameter("passUsr", HashMD5.hashText(new String(passwordBytes))).getSingleResult();
         } catch (Exception e) {
             throw new ReadException(e.getMessage());
         }

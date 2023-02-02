@@ -88,7 +88,9 @@ public class UserFacadeREST {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public User logIn(@PathParam("login") String login, @PathParam("password") String password) {
         try {
-            return ejb.signIn(login, password);
+            User user = ejb.signIn(login, password);
+            user.setPassword(null);
+            return user;
         } catch (ReadException ex) {
             LOGGER.severe(ex.getMessage());
             throw new InternalServerErrorException(ex.getMessage());
