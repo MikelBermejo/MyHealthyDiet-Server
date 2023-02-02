@@ -40,7 +40,7 @@ public class IngredientFacadeREST {
     private IngredientInterface ejb;
     /**
      * Create Restfull method.
-     * @param entity 
+     * @param entity ingredient to create.
      */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -55,7 +55,7 @@ public class IngredientFacadeREST {
     }
     /**
      * Edit Restfull method.
-     * @param entity 
+     * @param entity ingredient to edit.
      */
     @PUT
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -70,7 +70,7 @@ public class IngredientFacadeREST {
     
     /**
      * Delete Restfull method.
-     * @param id 
+     * @param id Id of the ingredient to be remove.
      */
     @DELETE
     @Path("/ingredient/{id}")
@@ -87,7 +87,7 @@ public class IngredientFacadeREST {
     
     /**
      * Find Restfull method.
-     * @param id
+     * @param id Id of the ingredient to be find.
      * @return 
      */
     @GET
@@ -104,7 +104,7 @@ public class IngredientFacadeREST {
     
     /**
      * Find all Restfull method.
-     * @return 
+     * @return List of all the ingredients.
      */
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -119,7 +119,7 @@ public class IngredientFacadeREST {
     
     /**
      * findByName Restfull method.
-     * @param ingredientName
+     * @param ingredientName name of the ingredient to search.
      * @return 
      */
     @GET
