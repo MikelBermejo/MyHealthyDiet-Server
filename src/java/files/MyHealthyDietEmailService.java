@@ -28,6 +28,8 @@ public class MyHealthyDietEmailService {
      * Method that sends a email to the user.
      * @param receiver user that request it.
      * @param password the generated password.
+     * @param body the message.
+     * @param subject the subject fo the email.
      */
 
     public void sendEmail(String receiver, String password, String body, String subject) {

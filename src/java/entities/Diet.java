@@ -92,16 +92,14 @@ public class Diet implements Serializable {
 
     //RELATIONS
     /**
-     * @associates <{entities.Plate}>
+     * List with plates that we want to get it fast.
      */
-    //List with plates that we want to get it fast.
     @ManyToMany(mappedBy = "diets", fetch = FetchType.EAGER, cascade = ALL)
     private List<Plate> plates;
 
     /**
-     * @associates <{entities.Tip}>
+     * List with tips in one diet.
      */
-    //List with tips in one diet.
     @OneToMany(mappedBy = "diet", fetch = FetchType.EAGER)
     private List<Tip> tips;
 
