@@ -58,9 +58,6 @@ public class Client extends User{
     private GenreEnum genre;
     @Enumerated(EnumType.ORDINAL)
     private GoalEnum goal;
-    /**
-     * @associates <{entities.Weight}>
-     */
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     //@JoinColumn(name = "user_id")
     private List<Weight> weights;
